@@ -1,15 +1,30 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Bell, ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
 const UserControls = () => {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    console.log("Logging out...");
+    router.push("/sign-in");
+  };
+
   return (
     <div className="flex items-center space-x-6">
       {/* Outlet Select */}
@@ -23,21 +38,32 @@ const UserControls = () => {
         </SelectContent>
       </Select>
 
-      {/* Bell */}
+      {/* Notification Bell */}
       <div className="relative">
         <Bell className="w-5 h-5 text-gray-600" />
         <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
       </div>
 
-      {/* Avatar */}
-      <div className="flex items-center space-x-2 cursor-pointer">
-        <Avatar className="h-8 w-8">
-          <AvatarImage src="/avatar.jpg" alt="Admin" />
-          <AvatarFallback>AU</AvatarFallback>
-        </Avatar>
-        <span className="text-sm font-medium text-gray-800">Admin User</span>
-        <ChevronDown className="w-4 h-4 text-gray-500" />
-      </div>
+      {/* Avatar + Dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div className="flex items-center space-x-2 cursor-pointer">
+            <Avatar className="h-8 w-8">
+              {/* <AvatarImage src="/avatar.jpg" alt="Admin" /> */}
+              <AvatarFallback>AU</AvatarFallback>
+            </Avatar>
+            <div className="flex items-center space-x-1">
+              <span className="text-sm font-medium text-gray-800">
+                Admin User
+              </span>
+              <ChevronDown className="w-4 h-4 text-gray-500" />
+            </div>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-32">
+          <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

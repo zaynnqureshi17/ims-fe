@@ -1,7 +1,8 @@
+import { BreadcrumbItem } from "@/components/breadcrumbs/breadcrumbs";
 import TopBar from "@/components/topbar";
 
 const SuffTopBar = () => {
-  const breadcrumbs = [{ label: "Dashboard" }];
+  const breadcrumbs : BreadcrumbItem[] = [{ label: "Dashboard" }];
 
   return <TopBar breadcrumbs={breadcrumbs} />;
 };

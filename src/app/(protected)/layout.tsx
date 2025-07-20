@@ -1,5 +1,5 @@
 "use client";
-
+import AppLoader from "@/components/common/AppLoader";
 import Sidebar from "@/components/sidebar";
 
 type ProtectedLayoutProps = {
@@ -15,7 +15,8 @@ const ProtectedLayout = ({ children }: ProtectedLayoutProps) => {
       </aside>
 
       {/* main content scrolls only */}
-      <main className="flex-1 overflow-y-auto h-full">
+      <main id="main-content" className="flex-1 overflow-y-auto h-full">
+        <AppLoader />
         {children}
       </main>
     </div>

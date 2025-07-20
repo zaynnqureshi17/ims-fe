@@ -3,13 +3,8 @@
 
 import React from "react";
 import Breadcrumbs from "../breadcrumbs";
+import { BreadcrumbItem } from "../breadcrumbs/breadcrumbs";
 import UserControls from "../userController/UserController";
-
-type BreadcrumbItem = {
-  label: string;
-  href?: string;
-  active?: boolean;
-};
 
 interface TopBarProps {
   breadcrumbs: BreadcrumbItem[];
