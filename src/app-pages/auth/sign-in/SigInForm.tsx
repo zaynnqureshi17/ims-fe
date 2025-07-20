@@ -1,14 +1,15 @@
 "use client";
-
 import AuthCardForm from "@/components/card/auth/AuthCardForm";
 import FormInputField from "@/components/form/FormInputField";
 import FormInputPassword from "@/components/form/FormInputPassword";
 import { Button } from "@/components/ui/button";
 import AuthWrapper from "@/components/wrapper/AuthWrapper";
+import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { AuthUrls } from "@/utils/urls/urls";
+import { LoaderCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation"; 
 
 interface SignInFormData {
   email: string;
@@ -16,41 +17,39 @@ interface SignInFormData {
 }
 
 const SignInForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = usePrefetchNavigate();
   const methods = useForm<SignInFormData>({
     mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
-    }});
+    },
+  });
   const { handleSubmit } = methods;
-  const router = useRouter(); 
 
-  const onSubmit = (data: SignInFormData) => {
+  const onSubmit = async (data: SignInFormData) => {
+    setIsLoading(true);
     const email = data.email;
+    let targetRoute = "";
 
-    // Optional: perform API sign-in logic here
-
-    //  Redirect based on email
-    switch (email) {
-      case "admin@example.com":
-        router.push("/admin/dashboard");
-        break;
-      case "finance@example.com":
-        router.push("/finance-manager/dashboard");
-        break;
-      case "outlet@example.com":
-        router.push("/outlet-manager/dashboard");
-        break;
-      case "staff@example.com":
-        router.push("/staff/dashboard");
-        break;
-      case "brand@example.com":
-        router.push("/brand-manager/dashboard");
-        break;
-      default:
-        console.warn("Unknown email. Please re-enter your credentials.");
-        break;
+    // Determine route based on email
+    if (email === "admin@example.com") {
+      targetRoute = "/admin/dashboard";
+    } else if (email === "finance@example.com") {
+      targetRoute = "/finance-manager/dashboard";
+    } else if (email === "outlet@example.com") {
+      targetRoute = "/outlet-manager/dashboard";
+    } else if (email === "staff@example.com") {
+      targetRoute = "/stuff/dashboard";
+    } else if (email === "brand@example.com") {
+      targetRoute = "/brand-manager/dashboard";
+    } else {
+      console.warn("Unknown email. Please re-enter your credentials.");
+      setIsLoading(false);
+      return;
     }
+    navigate(targetRoute);
   };
 
   return (
@@ -72,10 +71,18 @@ const SignInForm = () => {
 
               <Button
                 type="submit"
+                disabled={isLoading}
+                variant="secondary"
                 onClick={handleSubmit(onSubmit)}
-                className="w-full hover:bg-orange-400/70 bg-orange-400/80"
               >
-                Sign in
+                {isLoading ? (
+                  <>
+                    <LoaderCircle className="animate-spin w-4 h-4" />
+                    Signing in...
+                  </>
+                ) : (
+                  "Sign in"
+                )}
               </Button>
 
               <p className="text-sm text-muted-foreground text-center mt-4">

@@ -1,5 +1,4 @@
 "use client";
-
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Select,
@@ -8,21 +7,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { Bell, ChevronDown } from "lucide-react";
-import { useRouter } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { AuthUrls } from "@/utils/urls/urls";
 
 const UserControls = () => {
-  const router = useRouter();
+  const navigate = usePrefetchNavigate();
 
   const handleLogout = () => {
-    console.log("Logging out...");
-    router.push("/sign-in");
+    navigate(AuthUrls.signIn);
   };
 
   return (
