@@ -20,8 +20,8 @@ const filterFields = [
 
 const FinanceFilter: React.FC = () => {
   return (
-    <GridWrapper className="bg-white p-4 rounded-md grid gap-4 grid-cols-1 sm:grid-cols-3 ">
-      <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
+    <GridWrapper className="bg-white p-4 rounded-md grid gap-2 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 ">
+      <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-2">
         {filterFields.map((field) => (
           <SelectField
             key={field.label}
@@ -31,11 +31,11 @@ const FinanceFilter: React.FC = () => {
           />
         ))}
       </div>
-      <div className=" col-span-1 grid grid-cols-1 sm:grid-cols-3 ">
+      <div className="md:col-span-2 xl:col-span-1 flex flex-wrap gap-2">
         <div className="col-span-2">
           <DateRangePicker />
         </div>
-        <div className="col-span-1 place-content-end">
+        <div className="w-fit place-content-end place-items-end">
           <Button variant="secondary">Apply Filters</Button>
         </div>
       </div>

@@ -1,23 +1,35 @@
+import React from "react";
+import { useFormContext } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import React from "react";
-
 interface FormInputFieldProps {
+  name: string;
   label: string;
   placeholder: string;
   type: string;
-  rightIcon?: React.ReactNode; 
+  rightIcon?: React.ReactNode;
 }
 
-const FormInputField = ({ label, placeholder, type, rightIcon }: FormInputFieldProps) => {
+const FormInputField = ({
+  label,
+  placeholder,
+  type,
+  rightIcon,
+  name,
+  ...rest
+}: FormInputFieldProps) => {
+  const { register } = useFormContext();
+
   return (
     <div className="mb-4 w-full space-y-1">
       <Label className="mb-2">{label}</Label>
       <div className="relative">
         <Input
+        {...register(name)}
           type={type}
           placeholder={placeholder}
           className={rightIcon ? "pr-10" : ""}
+          {...rest}
         />
         {rightIcon && (
           <div className="absolute inset-y-0 right-3 flex items-center text-muted-foreground cursor-pointer">
