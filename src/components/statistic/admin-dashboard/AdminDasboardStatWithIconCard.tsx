@@ -1,15 +1,11 @@
 import { TypographyP } from "@/components/ui/text";
-import { ReactNode } from "react";
-import { cn } from "@/lib/utils"; // optional for merging classNames
+import Image from "next/image";
 
 interface AdminDasboardStatWithIconCardProps {
   title: string;
   value: string | number;
-  icon: ReactNode;
+  icon: string;
   shortDetails: string;
-
-  iconBgColor?: string; 
-  iconColor?: string;
   shortTextColor?: string;
 }
 
@@ -18,8 +14,6 @@ const AdminDasboardStatWithIconCard = ({
   value,
   icon,
   shortDetails,
-  iconBgColor = "bg-gray-100",
-  iconColor = "text-gray-600",
   shortTextColor = "text-gray-500",
 }: AdminDasboardStatWithIconCardProps) => {
   return (
@@ -28,9 +22,7 @@ const AdminDasboardStatWithIconCard = ({
 
       <div className="flex items-center justify-between mt-1">
         <p className="text-2xl font-bold text-gray-900">{value}</p>
-        <div className={cn("p-2 rounded-md", iconBgColor)}>
-          <span className={cn(iconColor)}>{icon}</span>
-        </div>
+        <Image src={icon} alt={title} width={48} height={48} />
       </div>
 
       <TypographyP className={shortTextColor} text={shortDetails} />

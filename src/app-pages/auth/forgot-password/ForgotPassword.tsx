@@ -46,6 +46,7 @@ const ForgotPassword = () => {
           }
         >
           <FormInputField
+            name="email"
             label="Email Address"
             placeholder="Enter your Email Address"
             type="email"

@@ -20,7 +20,7 @@ const Sidebar = ({ role }: SidebarProps) => {
   const roleRoutes = ProtectedRoutes[role] ?? {};
 
   return (
-    <aside className="w-60 bg-gray-800 text-gray-100 h-screen p-4 flex flex-col">
+    <aside className="w-60 bg-[#302253] text-gray-100 h-screen p-4 flex flex-col">
       {/* Logo from public/svg-logo/rhombus-logo.svg */}
       <div className="mb-6 ">
         <Image
@@ -32,7 +32,7 @@ const Sidebar = ({ role }: SidebarProps) => {
         />
       </div>
 
-      <nav className="flex-1 space-y-1 overflow-y-auto">
+      <nav className="flex-1 space-y-1 overflow-y-auto selectscroll">
         {Object.entries(roleRoutes).map(([key, route]) => (
           <SideBarNav key={key} item={route} />
         ))}

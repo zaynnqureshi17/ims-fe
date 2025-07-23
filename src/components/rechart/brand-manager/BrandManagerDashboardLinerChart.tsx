@@ -2,7 +2,6 @@
 
 import {
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -12,42 +11,45 @@ import {
 } from "recharts";
 
 const data = [
-  { day: "Mon", uv: 4000, pv: 2400 },
-  { day: "Tue", uv: 3000, pv: 1398 },
-  { day: "Wed", uv: 2000, pv: 9800 },
-  { day: "Thu", uv: 2780, pv: 3908 },
-  { day: "Fri", uv: 1890, pv: 4800 },
-  { day: "Sat", uv: 2390, pv: 3800 },
-  { day: "Sun", uv: 3490, pv: 4300 },
+  { day: "Mon", activity: 20 },
+  { day: "Tue", activity: 50 },
+  { day: "Wed", activity: 20 },
+  { day: "Thu", activity: 70 },
+  { day: "Fri", activity: 100 },
+  { day: "Sat", activity: 20 },
+  { day: "Sun", activity: 50 },
 ];
 
-const BrandManagerDashboardLinerChart = () => {
-  return (
-    <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-      <LineChart
-        data={data}
-        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-      >
-        {/* only horizontal dashed lines */}
-        <CartesianGrid vertical={false} strokeDasharray="3" />
+const BrandManagerDashboardLinerChart = () => (
+  <ResponsiveContainer width="100%" height={240} className="!p-0 m-0">
+    <LineChart data={data} margin={{ top: 10, right: 20, bottom: 20 }}>
+      <CartesianGrid vertical={false} strokeDasharray="" />
+      <XAxis
+        dataKey="day"
+        axisLine={false}
+        tickLine={false}
+        interval={0}
+        padding={{ left: 10, right: 10 }}
+      />
 
-        {/* now using our weekday key */}
-        <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
+      <YAxis
+        width={40}
+        axisLine={false}
+        tickLine={false}
+        ticks={[0, 25, 50, 75, 100]}
+      />
 
-        {/* your two series */}
-        <Line
-          strokeOpacity={2}
-          dataKey="pv"
-          stroke="#FB923C"
-          activeDot={{ r: 8 }}
-        />
-        <Line type="monotone" />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-};
+      <Tooltip />
+
+      <Line
+        dataKey="activity"
+        stroke="#F59E0B"
+        strokeWidth={2}
+        dot={{ r: 4, fill: "#F59E0B", strokeWidth: 0 }}
+        activeDot={{ r: 6 }}
+      />
+    </LineChart>
+  </ResponsiveContainer>
+);
 
 export default BrandManagerDashboardLinerChart;

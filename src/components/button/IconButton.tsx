@@ -15,7 +15,7 @@ const IconButton: React.FC<IconButtonProps> = ({
 }) => {
   return (
     <Button
-      className={`inline-flex items-center justify-center p-4 space-x-2 cursor-pointer hover:bg-accent/80  ${className}`}
+      className={`inline-flex items-center justify-center p-6 space-x-2 cursor-pointer hover:bg-accent/80  ${className}`}
       {...props}
     >
       {icon}

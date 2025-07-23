@@ -115,8 +115,30 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    letter-spacing: 0.5px;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  :root {
+    --scroll-bar-color: #302253;
+    --scroll-bar-bg-color: #302253;
+  }
+  .selectscroll {
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color); /* For Firefox */
+  }
+  .selectscroll::-webkit-scrollbar {
+    width: 1px;
+  }
+  .selectscroll::-webkit-scrollbar-track {
+    background: var(--scroll-bar-bg-color);
+  }
+  .selectscroll::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: 2px;
+    border: 1px solid var(--scroll-bar-bg-color);
   }
 }

@@ -1,3 +1,4 @@
+import { baseNavbarIconPath } from "../public-image-base-url";
 import { ProtectedUrls } from "../urls/urls";
 
 // --- Protected URLs for different roles ---
@@ -5,190 +6,283 @@ export const ProtectedRoutes = {
   //  --- Admin URLs ---
   admin: {
     dashboard: {
-      path: ProtectedUrls.admin.dashboard,
+      path: ProtectedUrls.admin.manageDashboard,
       title: "Dashboard",
-      icon: "dashboard-icon",
+      icon: `${baseNavbarIconPath}dashboard.svg`,
       activeRoute: "dashboard",
     },
+    manageCatalogue: {
+      path: ProtectedUrls.common.manageCatalogue,
+      title: "Catalogue",
+      icon: `${baseNavbarIconPath}catalogue.svg`,
+      activeRoute: "manageCatalogue",
+    },
+    manageStockCount: {
+      path: ProtectedUrls.common.manageStockCount,
+      title: "Stock Count",
+      icon: `${baseNavbarIconPath}stock-count.svg`,
+      activeRoute: "manageStockCount",
+    },
+    manageItemReceiving: {
+      path: ProtectedUrls.common.manageItemReceiving,
+      title: "Item Receiving",
+      icon: `${baseNavbarIconPath}item-receiving.svg`,
+      activeRoute: "manageItemReceiving",
+    },
     manageUsers: {
-      path: ProtectedUrls.admin.manageUsers,
+      path: ProtectedUrls.common.manageUsers,
       title: "Users",
-      icon: "users-icon",
+      icon: `${baseNavbarIconPath}users.svg`,
       activeRoute: "manageUsers",
     },
-    manageItems: {
-      path: ProtectedUrls.common.manageItems,
-      title: "Items",
-      icon: "items-icon",
-      activeRoute: "manageItems",
-    },
-    manageSuppliers: {
-      path: ProtectedUrls.common.manageSuppliers,
-      title: "Suppliers",
-      icon: "suppliers-icon",
-      activeRoute: "manageSuppliers",
-    },
+   
     manageBrands: {
       path: ProtectedUrls.admin.manageBrands,
       title: "Brands",
-      icon: "brands-icon",
+      icon: `${baseNavbarIconPath}brands.svg`,
       activeRoute: "manageBrands",
     },
     manageOutlets: {
-      path: ProtectedUrls.common.manageOutlets,
+      path: ProtectedUrls.admin.manageOutlets,
       title: "Outlets",
-      icon: "outlets-icon",
+      icon: `${baseNavbarIconPath}outlets.svg`,
       activeRoute: "manageOutlets",
     },
-    reports: {
-      path: ProtectedUrls.common.reports,
+    managePurchaseReport: {
+      path: ProtectedUrls.common.managePurchaseReport,
       title: "Reports",
-      icon: "reports-icon",
-      activeRoute: "reports",
+      icon: `${baseNavbarIconPath}reports.svg`,
+      activeRoute: "managePurchaseReport",
     },
     settings: {
-      path: ProtectedUrls.common.settings,
+      path: ProtectedUrls.common.manageSettings,
       title: "Settings",
-      icon: "settings-icon",
-      activeRoute: "settings",
+      icon: `${baseNavbarIconPath}settings.svg`,
+      activeRoute: "manageSettings",
     },
     manageWaste: {
       path: ProtectedUrls.common.manageWaste,
       title: "Waste",
-      icon: "waste-icon",
+      icon: `${baseNavbarIconPath}waste-restore.svg`,
       activeRoute: "manageWaste",
+    },
+    managePurchaseOrder: {
+      path: ProtectedUrls.common.managePurchaseOrder,
+      title: "Purchase Order",
+      icon: `${baseNavbarIconPath}cart.svg`,
+      activeRoute: "managePurchaseOrder",
+    },
+    manageRecipes: {
+      path: ProtectedUrls.common.manageRecipes,
+      title: "Recipes",
+      icon: `${baseNavbarIconPath}recipes.svg`,
+      activeRoute: "manageRecipes",
+    },
+    manageSettings: {
+      path: ProtectedUrls.admin.manageSettings,
+      title: "Settings",
+      icon: `${baseNavbarIconPath}settings.svg`,
+      activeRoute: "manageSettings",
     },
     manageTransfers: {
       path: ProtectedUrls.common.manageTransfers,
       title: "Transfer",
-      icon: "transfers-icon",
+      icon: `${baseNavbarIconPath}transfers.svg`,
       activeRoute: "manageTransfers",
+    },
+    manageProduction: {
+      path: ProtectedUrls.common.manageProduction,
+      title: "Production",
+      icon: `${baseNavbarIconPath}production.svg`,
+      activeRoute: "manageProduction",
+    },
+    salesReport: {
+      path: ProtectedUrls.common.manageSalesReport,
+      title: "Sales Report",
+      icon: `${baseNavbarIconPath}sales-report.svg`,
+      activeRoute: "salesReport",
+    },
+    manageTransfer: {
+      path: ProtectedUrls.common.manageTransfer,
+      title: "Transfer",
+      icon: `${baseNavbarIconPath}transfers.svg`,
+      activeRoute: "manageTransfer",
+    },
+    ingredients: {
+      path: ProtectedUrls.admin.manageIngredients,
+      title: "Ingredients",
+      icon: `${baseNavbarIconPath}ingredients.svg`,
+      activeRoute: "ingredients",
     },
   },
   //  --- Brand Manager URLs ---
   brandManager: {
     dashboard: {
-      path: ProtectedUrls.brandManager.dashboard,
+      path: ProtectedUrls.brandManager.manageDashboard,
       title: "Dashboard",
-      icon: "dashboard-icon",
+      icon: `${baseNavbarIconPath}dashboard.svg`,
       activeRoute: "dashboard",
     },
-    manageItems: {
-      path: ProtectedUrls.common.manageItems,
-      title: "Manage Items",
-      icon: "items-icon",
-      activeRoute: "manageItems",
+    manageItemReceiving: {
+      path: ProtectedUrls.common.manageItemReceiving,
+      title: "Item Receiving",
+      icon: `${baseNavbarIconPath}item-receiving.svg`,
+      activeRoute: "manageItemReceiving",
     },
-    manageSuppliers: {
-      path: ProtectedUrls.common.manageSuppliers,
-      title: "Manage Suppliers",
-      icon: "suppliers-icon",
-      activeRoute: "manageSuppliers",
+    manageCatalogue: {
+      path: ProtectedUrls.common.manageCatalogue,
+      title: "Catalogue",
+      icon: `${baseNavbarIconPath}catalogue.svg`,
+      activeRoute: "manageCatalogue",
     },
-    manageOutlets: {
-      path: ProtectedUrls.common.manageOutlets,
-      title: "Manage Outlets",
-      icon: "outlets-icon",
-      activeRoute: "manageOutlets",
+    managePurchaseOrder: {
+      path: ProtectedUrls.common.managePurchaseOrder,
+      title: "Purchase Order",
+      icon: `${baseNavbarIconPath}cart.svg`,
+      activeRoute: "managePurchaseOrder",
     },
-    reports: {
-      path: ProtectedUrls.common.reports,
-      title: "Reports",
-      icon: "reports-icon",
-      activeRoute: "reports",
+    manageUsers: {
+      path: ProtectedUrls.common.manageUsers,
+      title: "Users",
+      icon: `${baseNavbarIconPath}users.svg`,
+      activeRoute: "manageUsers",
     },
+
     manageWaste: {
       path: ProtectedUrls.common.manageWaste,
       title: "Waste",
-      icon: "waste-icon",
+      icon: `${baseNavbarIconPath}waste-restore.svg`,
       activeRoute: "manageWaste",
     },
+    managePurchaseReport: {
+      path: ProtectedUrls.common.managePurchaseReport,
+      title: "Reports",
+      icon: `${baseNavbarIconPath}reports.svg`,
+      activeRoute: "managePurchaseReport",
+    },
+
     manageTransfers: {
       path: ProtectedUrls.common.manageTransfers,
       title: "Transfer",
-      icon: "transfers-icon",
+      icon: `${baseNavbarIconPath}transfers.svg`,
       activeRoute: "manageTransfers",
+    },
+    manageTransfer: {
+      path: ProtectedUrls.common.manageTransfer,
+      title: "Transfer",
+      icon: `${baseNavbarIconPath}transfers.svg`,
+      activeRoute: "manageTransfer",
     },
   },
   //  --- Outlet Manager URLs ---
   outletManager: {
-    dashboard: {
-      path: ProtectedUrls.outletManager.dashboard,
+    manageDashboard: {
+      path: ProtectedUrls.outletManager.manageDashboard,
       title: "Dashboard",
-      icon: "dashboard-icon",
-      activeRoute: "dashboard",
-    },
-    manageInventory: {
-      path: ProtectedUrls.outletManager.manageInventory,
-      title: "Manage Inventory",
-      icon: "inventory-icon",
-      activeRoute: "manageInventory",
+      icon: `${baseNavbarIconPath}dashboard.svg`,
+      activeRoute: "manageDashboard",
     },
     manageTransfers: {
       path: ProtectedUrls.common.manageTransfers,
       title: "Transfer",
-      icon: "transfers-icon",
+      icon: `${baseNavbarIconPath}transfers.svg`,
       activeRoute: "manageTransfers",
+    },
+    manageCatalogue: {
+      path: ProtectedUrls.common.manageCatalogue,
+      title: "Catalogue",
+      icon: `${baseNavbarIconPath}catalogue.svg`,
+      activeRoute: "manageCatalogue",
+    },
+    manageStockCount: {
+      path: ProtectedUrls.common.manageStockCount,
+      title: "Stock Count",
+      icon: `${baseNavbarIconPath}stock-count.svg`,
+      activeRoute: "manageStockCount",
+    },
+    manageProduction: {
+      path: ProtectedUrls.common.manageProduction,
+      title: "Production",
+      icon: `${baseNavbarIconPath}production.svg`,
+      activeRoute: "manageProduction",
+    },
+    manageItemReceiving: {
+      path: ProtectedUrls.common.manageItemReceiving,
+      title: "Item Receiving",
+      icon: `${baseNavbarIconPath}item-receiving.svg`,
+      activeRoute: "manageItemReceiving",
     },
     manageWaste: {
       path: ProtectedUrls.common.manageWaste,
       title: "Waste",
-      icon: "waste-icon",
+      icon: `${baseNavbarIconPath}waste-restore.svg`,
       activeRoute: "manageWaste",
     },
-    createOrders: {
-      path: ProtectedUrls.outletManager.createOrders,
-      title: "Order",
-      icon: "orders-icon",
-      activeRoute: "createOrders",
+    managePurchaseOrder: {
+      path: ProtectedUrls.common.managePurchaseOrder,
+      title: "Purchase Order",
+      icon: `${baseNavbarIconPath}cart.svg`,
+      activeRoute: "managePurchaseOrder",
     },
-    reports: {
-      path: ProtectedUrls.common.reports,
+    managePurchaseReport: {
+      path: ProtectedUrls.common.managePurchaseReport,
       title: "Reports",
-      icon: "reports-icon",
-      activeRoute: "reports",
+      icon: `${baseNavbarIconPath}reports.svg`,
+      activeRoute: "managePurchaseReport",
     },
-    manageStaffMeals: {
-      path: ProtectedUrls.outletManager.manageStaffMeals,
-      title: "Staff Meals",
-      icon: "staff-meals-icon",
-      activeRoute: "manageStaffMeals",
+    manageTransfer: {
+      path: ProtectedUrls.common.manageTransfer,
+      title: "Transfer",
+      icon: `${baseNavbarIconPath}transfers.svg`,
+      activeRoute: "manageTransfer",
     },
   },
   //  --- Finance URLs ---
   finance: {
-    dashboard: {
-      path: ProtectedUrls.finance.dashboard,
+    manageDashboard: {
+      path: ProtectedUrls.finance.manageDashboard,
       title: "Dashboard",
-      icon: "dashboard-icon",
-      activeRoute: "dashboard",
+      icon: `${baseNavbarIconPath}dashboard.svg`,
+      activeRoute: "manageDashboard",
     },
-    financialReports: {
-      path: ProtectedUrls.finance.financialReports,
-      title: "Financial Reports",
-      icon: "financial-reports-icon",
-      activeRoute: "financialReports",
-    },
-    purchaseReport: {
-      path: ProtectedUrls.finance.purchaseReport,
+    managePurchaseReport: {
+      path: ProtectedUrls.common.managePurchaseReport,
       title: "Purchase Report",
-      icon: "purchase-report-icon",
-      activeRoute: "purchaseReport",
-    },
-    salesReport: {
-      path: ProtectedUrls.finance.salesReport,
-      title: "Sales Report",
-      icon: "sales-report-icon",
-      activeRoute: "salesReport",
+      icon: `${baseNavbarIconPath}reports.svg`,
+      activeRoute: "managePurchaseReport",
     },
   },
   //  --- Staff URLs ---
   staff: {
-    dashboard: {
-      path: ProtectedUrls.staff.dashboard,
+    manageDashboard: {
+      path: ProtectedUrls.staff.manageDashboard,
       title: "Dashboard",
-      icon: "dashboard-icon",
-      activeRoute: "dashboard",
+      icon: `${baseNavbarIconPath}dashboard.svg`,
+      activeRoute: "manageDashboard",
+    },
+    manageStockCount: {
+      path: ProtectedUrls.common.manageStockCount,
+      title: "Stock Count",
+      icon: `${baseNavbarIconPath}stock-count.svg`,
+      activeRoute: "manageStockCount",
+    },
+    managePurchaseOrder: {
+      path: ProtectedUrls.common.managePurchaseOrder,
+      title: "Purchase Order",
+      icon: "/side-bar-icon/cart.svg",
+      activeRoute: "managePurchaseOrder",
+    },
+    manageProduction: {
+      path: ProtectedUrls.common.manageProduction,
+      title: "Production",
+      icon: `${baseNavbarIconPath}production.svg`,
+      activeRoute: "manageProduction",
+    },
+    manageSalesReport: {
+      path: ProtectedUrls.common.manageSalesReport,
+      title: "Sales Report",
+      icon: `${baseNavbarIconPath}sales-report.svg`,
+      activeRoute: "manageSalesReport",
     },
   },
 };

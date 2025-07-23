@@ -1,83 +1,102 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
-import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+"use client";
 
-type TooltipPayload = ReadonlyArray<any>;
-
-type Coordinate = {
-  x: number;
-  y: number;
-};
-
-type PieSectorData = {
-  percent?: number;
-  name?: string | number;
-  midAngle?: number;
-  middleRadius?: number;
-  tooltipPosition?: Coordinate;
-  value?: number;
-  paddingAngle?: number;
-  dataKey?: string;
-  payload?: any;
-  tooltipPayload?: ReadonlyArray<TooltipPayload>;
-};
-
-type GeometrySector = {
-  cx: number;
-  cy: number;
-  innerRadius: number;
-  outerRadius: number;
-  startAngle: number;
-  endAngle: number;
-};
-
-type PieLabelProps = PieSectorData &
-  GeometrySector & {
-    tooltipPayload?: any;
-  };
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
+  { name: "RABBIT HOLE", value: 160 },
+  { name: "DANCING FISH", value: 240 },
+  { name: "TAP TAP", value: 240 },
+  { name: "PICARO", value: 360 },
 ];
 
+const COLORS = ["#FBBF24", "#FB923C", "#4B5563", "#291E48"];
 const RADIAN = Math.PI / 180;
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: PieLabelProps) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-(midAngle ?? 0) * RADIAN);
-  const y = cy + radius * Math.sin(-(midAngle ?? 0) * RADIAN);
+interface renderLabelLineProps {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  outerRadius: number;
+  index: number;
+}
+
+const renderLabelLine = ({
+  cx,
+  cy,
+  midAngle,
+  outerRadius,
+  index,
+}: renderLabelLineProps) => {
+  const sx = cx + outerRadius * Math.cos(-midAngle * RADIAN);
+  const sy = cy + outerRadius * Math.sin(-midAngle * RADIAN);
+  const mx = cx + (outerRadius + 10) * Math.cos(-midAngle * RADIAN);
+  const my = cy + (outerRadius + 10) * Math.sin(-midAngle * RADIAN);
+  const ex = mx + (midAngle > 90 && midAngle < 270 ? -20 : 20);
+  const ey = my;
 
   return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${((percent ?? 1) * 100).toFixed(0)}%`}
+    <path
+      d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+      stroke={COLORS[index]}
+      fill="none"
+    />
+  );
+};
+interface renderLabelprops {
+  cx: number;
+  cy: number;
+  midAngle: number;
+  outerRadius: number;
+  index: number;
+}
+const renderLabel = ({
+  cx,
+  cy,
+  midAngle,
+  outerRadius,
+  index,
+}: renderLabelprops) => {
+  const r = outerRadius + 30;
+  const x = cx + r * Math.cos(-midAngle * RADIAN);
+  const y = cy + r * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      className="text-gray-400 text-sm"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="middle"
+    >
+      {data[index].name}
     </text>
   );
 };
 
-const BrandManagerWastagePieChart = () => {
-  return (
-    <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-      <PieChart width={400} height={400}>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={renderCustomizedLabel}
-          outerRadius={80}
-          fill="#8884d8"
-          dataKey="value"
-        >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-      </PieChart>
-    </ResponsiveContainer>
-  );
-}
+const BrandManagerWastagePieChart = () => (
+  <ResponsiveContainer width="100%" height="100%" minHeight={240}>
+    <PieChart>
+      <Pie
+        data={data}
+        dataKey="value"
+        cx="50%"
+        cy="50%"
+        innerRadius={0}
+        outerRadius={80}
+        // paddingAngle={2}
+        // ← this adds the white divider between slices
+        stroke="#fff"
+        strokeWidth={2}
+        labelLine={renderLabelLine}
+        label={renderLabel as any}
+      >
+        {data.map((_, idx) => (
+          <Cell key={idx} fill={COLORS[idx]} />
+        ))}
+      </Pie>
+    </PieChart>
+  </ResponsiveContainer>
+);
+
 export default BrandManagerWastagePieChart;

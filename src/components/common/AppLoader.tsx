@@ -3,14 +3,14 @@ import NextTopLoader from "nextjs-toploader";
 const AppLoader = () => {
   return (
     <NextTopLoader
-      color="#291E48"
+      color="#FBAF3F"
       initialPosition={0.08}
       crawlSpeed={200}
       height={4}
       crawl={false}
       showSpinner={false}
       easing="ease"
-      speed={200}
+      speed={10}
       zIndex={1600}
       showAtBottom={false}
       

@@ -7,46 +7,49 @@ export const AuthUrls = {
 export const ProtectedUrls = {
   //  --- Admin URLs ---
   admin: {
-    dashboard: "/admin/dashboard",
-    manageUsers: "/users",
+    manageDashboard: "/admin/dashboard",
     manageBrands: "/brands",
+    manageSuppliers: "/suppliers",
+    manageSettings: "/settings",
+    manageOutlets: "/outlets",
+    manageIngredients: "/ingredients",
   },
 
   //  --- Brand Manager URLs ---
   brandManager: {
-    dashboard: "/brand-manager/dashboard",
+    manageDashboard: "/brand-manager/dashboard",
   },
 
   //  --- Outlet Manager URLs ---
   outletManager: {
-    dashboard: "/outlet-manager/dashboard",
-    manageInventory: "/inventory",
-    createOrders: "/create-orders",
-    manageStaffMeals: "/staff-meals",
+    manageDashboard: "/outlet-manager/dashboard",
   },
 
   //  --- Finance URLs ---
   finance: {
-    dashboard: "/dashboard",
-    financialReports: "/financial-reports",
-    purchaseReport: "/purchase-report",
-    salesReport: "/sales-report",
+    manageDashboard: "/dashboard",
   },
 
   //  --- Staff URLs ---
   staff: {
-    dashboard: "/stuff/dashboard",
+    manageDashboard: "/stuff/dashboard",
   },
 
   // --- Common URLs (shared across roles) ---
   common: {
-    manageItems: "/items",
-    manageSuppliers: "/suppliers",
-    reports: "/reports",
-    settings: "/settings",
-    production: "/production",
+    manageSalesReport: "/sales-report",
+    manageFinancialReports: "/financial-reports",
+    manageCatalogue: "/catalogue",
+    manageSettings: "/settings",
+    manageProduction: "/production",
+    manageStockCount: "/stock-count",
     manageTransfers: "/transfers",
-    manageOutlets: "/outlets",
-    manageWaste: "/waste", // newly added
+    manageWaste: "/waste",
+    managePurchaseOrder: "/purchase-order",
+    manageItemReceiving: "/item-receiving",
+    manageRecipes: "/recipes",
+    manageTransfer: "/transfers",
+    managePurchaseReport: "/report",
+    manageUsers: "/users",
   },
 };
