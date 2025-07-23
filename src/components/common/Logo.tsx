@@ -5,8 +5,8 @@ const Logo = () => {
     <Image
       src="/svg-logo/rhombus-logo.svg"
       alt="Rhombus Logo"
-      width={1000}
-      height={1000}
+      width={800}
+      height={800}
       className="block"
     />
   );
