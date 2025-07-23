@@ -12,7 +12,7 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ breadcrumbs }) => {
   return (
-    <div className="sticky top-0 z-20 flex justify-between items-center px-6 py-3 bg-white border-b w-full">
+    <div className="flex justify-between items-center px-6 py-3 bg-white border-b w-full">
       <Breadcrumbs items={breadcrumbs} />
       <UserControls />
     </div>

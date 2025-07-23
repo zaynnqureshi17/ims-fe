@@ -15,7 +15,7 @@ export const usePrefetchNavigate = () => {
         console.error("Navigation error:", error);
       }
     },
-    [router]
+    [router],
   );
 
   return prefetchAndNavigate;

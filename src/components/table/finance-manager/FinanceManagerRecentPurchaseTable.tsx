@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 
 export type RecentPurchaseProps = {
-  date: string ;
+  date: string;
   supplier: string;
   amount: number;
   status: string;
@@ -34,11 +34,9 @@ const FinanceManagerRecentPurchaseTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {recentPurchases.map((item,index) => (
+        {recentPurchases.map((item, index) => (
           <TableRow key={index}>
-            <TableCell className="font-medium">
-              {item.date}
-            </TableCell>
+            <TableCell className="font-medium">{item.date}</TableCell>
             <TableCell>{item.supplier}</TableCell>
             <TableCell className="text-left">{item.amount}</TableCell>
             <TableCell className="text-left">{item.status}</TableCell>
