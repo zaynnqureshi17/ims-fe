@@ -38,7 +38,7 @@ export function NavMain({ roleRoutes }: NavMainProps) {
           <Collapsible
             key={key}
             defaultOpen={isActive}
-            className={`group/collapsible flex gap-1 text-white ${state === "collapsed" ? "" : "hover:bg-orange-200/10 rounded-md"} `}
+            className={`group/collapsible flex justify-start items-center gap-1 text-white ${state === "collapsed" ? "" : "hover:bg-orange-200/10 rounded-md"} `}
           >
             <CollapsibleTrigger asChild className="w-auto px-2">
               <SidebarMenuButton
@@ -57,11 +57,11 @@ export function NavMain({ roleRoutes }: NavMainProps) {
             </CollapsibleTrigger>
 
             {state !== "collapsed" && (
-              <SidebarMenuItem>
-                <Link href={route.path}>
+              <Link href={route.path} className="w-full">
+                <SidebarMenuItem>
                   <span className="text-sm">{route.title}</span>
-                </Link>
-              </SidebarMenuItem>
+                </SidebarMenuItem>
+              </Link>
             )}
           </Collapsible>
         ))}

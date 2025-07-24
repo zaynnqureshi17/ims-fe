@@ -1,7 +1,7 @@
-import Brands from "@/app-pages/brands/Brands";
+import BrandView from "@/app-pages/brand-view/BrandView";
 
 const page = () => {
-  return <Brands />;
+  return <BrandView />;
 };
 
 export default page;
