@@ -1,7 +1,7 @@
-import BrandEdit from "@/app-pages/brand-edit/BrandEdit";
+import OutletEdit from "@/app-pages/outlet-edit/OutletEdit";
 
 const page = () => {
-  return <BrandEdit />;
+  return <OutletEdit />;
 };
 
 export default page;

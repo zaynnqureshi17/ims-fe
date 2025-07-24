@@ -7,6 +7,7 @@ interface FormInputFieldProps {
   label: string;
   placeholder: string;
   type: string;
+  className?: string;
   rightIcon?: React.ReactNode;
 }
 
@@ -16,12 +17,13 @@ const FormInputField = ({
   type,
   rightIcon,
   name,
+  className,
   ...rest
 }: FormInputFieldProps) => {
   const { register } = useFormContext();
 
   return (
-    <div className="mb-4 w-full space-y-3 ">
+    <div className={`mb-4 w-full space-y-3 ${className}`}>
       <Label className="">{label}</Label>
       <div className="relative">
         <Input

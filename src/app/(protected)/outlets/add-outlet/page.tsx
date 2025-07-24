@@ -1,7 +1,7 @@
-import BrandAdd from "@/app-pages/brand-add/BrandAdd";
+import OutletAdd from "@/app-pages/outlet-add/OutletAdd";
 
 const page = () => {
-  return <BrandAdd />;
+  return <OutletAdd />;
 };
 
 export default page;
