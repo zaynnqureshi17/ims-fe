@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import BrandsFilter from "./BrandsFilter";
 import BrandPageHeader from "./BrandsPageHeader";
 import BrandsStat from "./BrandsStat";
-import BrandsTable from "./BrandsTable";
+import BrandsTableCard from "./BrandsTableCard";
 import BrandsTopBar from "./BrandsTopBar";
 
 const Brands = () => {
@@ -14,7 +14,9 @@ const Brands = () => {
       <Suspense fallback={<div>Loading filters...</div>}>
         <BrandsFilter />
       </Suspense>
-      <BrandsTable />
+      <Suspense fallback={<div>Loading filters...</div>}>
+        <BrandsTableCard />
+      </Suspense>
     </ProtectedLayoutWrapper>
   );
 };

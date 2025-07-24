@@ -1,6 +1,7 @@
 import PageHeader from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import GridWrapper from "@/components/wrapper/GridWrapper";
+import { memo } from "react";
 
 const BrandsPageHeader = () => {
   return (
@@ -18,4 +19,4 @@ const BrandsPageHeader = () => {
   );
 };
 
-export default BrandsPageHeader;
+export default memo(BrandsPageHeader);

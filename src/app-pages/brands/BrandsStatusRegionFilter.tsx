@@ -38,7 +38,7 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
-          handleUpdateQuery(val, selectedRegion);
+          handleUpdateQuery(val, selectedRegion, collapsed);
         }}
       />
       <SelectField
@@ -47,7 +47,7 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
         value={selectedRegion}
         onValueChange={(val) => {
           setSelectedRegion(val);
-          handleUpdateQuery(selectedStatus, val);
+          handleUpdateQuery(selectedStatus, val, collapsed);
         }}
       />
       <div onClick={onToggleCollapse} className="cursor-pointer">
@@ -75,7 +75,6 @@ const allStatus = [
   { value: "all-status", label: "All Status" },
   { value: "active", label: "Active" },
   { value: "inactive", label: "Inactive" },
-  { value: "deleted", label: "Deleted" },
 ];
 
 const allRegions = [

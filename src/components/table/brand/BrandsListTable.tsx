@@ -36,7 +36,7 @@ const BrandsListTable = ({ brandData, headtable }: InterfaceRecentPurchase) => {
       </TableHeader>
       <TableBody>
         {brandData.map((item, index) => (
-          <TableRow key={index} className="hover:bg-white !py-4 my-4">
+          <TableRow key={index} className="hover:bg-white  my-4">
             <TableCell className="text-gray">{item.id}</TableCell>
             <TableCell>{item.brandName}</TableCell>
             <TableCell className="text-left text-gray">

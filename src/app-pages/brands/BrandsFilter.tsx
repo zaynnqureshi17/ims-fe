@@ -2,7 +2,7 @@
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import BrandsSearch from "./BrandsSearch";
 import BrandsStatusRegionFilter from "./BrandsStatusRegionFilter";
 
@@ -43,7 +43,7 @@ const BrandsFilter: React.FC = () => {
         status: status === "all-status" ? "" : status,
         region: region === "all-regions" ? "" : region,
         search,
-        collapsed,
+        collapsed: collapsed || "list",
       },
     });
   };
@@ -72,4 +72,4 @@ const BrandsFilter: React.FC = () => {
   );
 };
 
-export default BrandsFilter;
+export default memo(BrandsFilter);
