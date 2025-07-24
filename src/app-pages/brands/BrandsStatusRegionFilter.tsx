@@ -50,7 +50,7 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
           handleUpdateQuery(selectedStatus, val, collapsed);
         }}
       />
-      <div onClick={onToggleCollapse} className="cursor-pointer">
+      <div onClick={onToggleCollapse} className="cursor-pointer h-9 w-8">
         {collapsed == "list" ? (
           <IconBg
             icon={`${brandsIconPath}/collapsed-card.svg`}

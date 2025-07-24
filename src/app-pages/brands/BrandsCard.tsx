@@ -4,18 +4,19 @@ import BrandCardTable, {
 import IconBg from "@/components/common/IconBg";
 import GridWrapper from "@/components/wrapper/GridWrapper";
 
-const BrandsCard = () => {
+const BrandsCard = ({ onEdit }: { onEdit: (id: number) => void }) => {
   return (
     <GridWrapper className="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
       {BrandCardTableData.map((brand, index) => (
         <BrandCardTable
+          id={brand.id}
           key={index}
           title={brand.title}
           description={brand.description}
           outletsCount={brand.outletsCount}
           status={brand.status}
           logo={brand.logo}
-          onEdit={() => console.log("Edit clicked")}
+          onEdit={() => onEdit(brand.id)}
           onDelete={() => console.log("Delete clicked")}
         />
       ))}
@@ -27,6 +28,7 @@ export default BrandsCard;
 
 const BrandCardTableData: BrandCardTableProps[] = [
   {
+    id: 1,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,
@@ -42,6 +44,7 @@ const BrandCardTableData: BrandCardTableProps[] = [
     ),
   },
   {
+    id: 2,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,
@@ -57,6 +60,7 @@ const BrandCardTableData: BrandCardTableProps[] = [
     ),
   },
   {
+    id: 3,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,
@@ -72,6 +76,7 @@ const BrandCardTableData: BrandCardTableProps[] = [
     ),
   },
   {
+    id: 4,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,
@@ -87,6 +92,7 @@ const BrandCardTableData: BrandCardTableProps[] = [
     ),
   },
   {
+    id: 5,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,
@@ -102,6 +108,7 @@ const BrandCardTableData: BrandCardTableProps[] = [
     ),
   },
   {
+    id: 6,
     title: "Pizza Palace",
     description: "Premium pizza chain with authentic Italian recipes",
     outletsCount: 10,

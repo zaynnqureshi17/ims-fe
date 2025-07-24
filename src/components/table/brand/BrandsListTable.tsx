@@ -10,7 +10,7 @@ import {
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
 
 export type RecentPurchaseProps = {
-  id: string;
+  id: number;
   brandName: string;
   description: string;
   outlets: string;
@@ -21,9 +21,18 @@ export type RecentPurchaseProps = {
 interface InterfaceRecentPurchase {
   brandData: RecentPurchaseProps[];
   headtable?: string[];
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+  onView: (id: number) => void;
 }
 
-const BrandsListTable = ({ brandData, headtable }: InterfaceRecentPurchase) => {
+const BrandsListTable = ({
+  brandData,
+  headtable,
+  onEdit,
+  onDelete,
+  onView,
+}: InterfaceRecentPurchase) => {
   return (
     <Table>
       <TableHeader>
@@ -68,7 +77,7 @@ const BrandsListTable = ({ brandData, headtable }: InterfaceRecentPurchase) => {
                 width={16}
                 height={16}
                 className="!p-0 cursor-pointer"
-                onClick={() => console.log("Edit clicked")}
+                onClick={() => onEdit(item.id)}
               />
               <IconBg
                 icon={`${brandsActions}delete.svg`}
@@ -76,7 +85,7 @@ const BrandsListTable = ({ brandData, headtable }: InterfaceRecentPurchase) => {
                 width={16}
                 height={16}
                 className="!p-0 cursor-pointer"
-                onClick={() => console.log("Delete clicked")}
+                onClick={() => onDelete(item.id)}
               />
               <IconBg
                 icon={`${brandsActions}view.svg`}
@@ -84,7 +93,7 @@ const BrandsListTable = ({ brandData, headtable }: InterfaceRecentPurchase) => {
                 width={16}
                 height={16}
                 className="!p-0 cursor-pointer"
-                onClick={() => console.log("View clicked")}
+                onClick={() => onView(item.id)}
               />
             </TableCell>
           </TableRow>

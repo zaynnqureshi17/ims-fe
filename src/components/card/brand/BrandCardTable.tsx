@@ -9,6 +9,7 @@ import {
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
 
 export interface BrandCardTableProps {
+  id: number;
   title: string;
   description: string;
   outletsCount: number;
@@ -19,6 +20,7 @@ export interface BrandCardTableProps {
 }
 
 const BrandCardTable: React.FC<BrandCardTableProps> = ({
+  id,
   title,
   description,
   outletsCount,

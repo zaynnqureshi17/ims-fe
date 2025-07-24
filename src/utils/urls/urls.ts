@@ -9,6 +9,9 @@ export const ProtectedUrls = {
   admin: {
     manageDashboard: "/admin/dashboard",
     manageBrands: "/brands",
+    addBrand: "/brands/add-brand",
+    editBrand: "/brands/edit-brand/:id",
+    viewBrand: "/brands/view-brand/:id",
     manageSuppliers: "/suppliers",
     manageSettings: "/settings",
     manageOutlets: "/outlets",

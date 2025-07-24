@@ -21,14 +21,14 @@ const FormInputField = ({
   const { register } = useFormContext();
 
   return (
-    <div className="mb-4 w-full space-y-1">
-      <Label className="mb-2">{label}</Label>
+    <div className="mb-4 w-full space-y-3 ">
+      <Label className="">{label}</Label>
       <div className="relative">
         <Input
-        {...register(name)}
+          {...register(name)}
           type={type}
           placeholder={placeholder}
-          className={rightIcon ? "pr-10" : ""}
+          className={` bg-white ${rightIcon ? "pr-10" : ""}`}
           {...rest}
         />
         {rightIcon && (
