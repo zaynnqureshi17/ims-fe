@@ -76,6 +76,38 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  /* Primary Colors */
+  --primary-dark-indigo: #302253;
+  --primary-dark-grey: #4d4e4e;
+
+  /* Accent Colors */
+  --accent-orange: #fbaf3f;
+  --accent-orange-light: #fbaf3f4d;
+
+  /* green Colors */
+  --accent-green: #16a34a;
+  --accent-green-light: #dcfce7;
+
+  /* Supporting Colors */
+  --supporting-black: #000000;
+  --supporting-white: #ffffff;
+  --supporting-light-grey: #d4d4e4;
+
+  /* Gray Color for Pagination */
+  --pagination-gray: #dadada66;
+  --pagination-icon-gray: #a7a7a7;
+
+  /* — Blue icon */
+  --icon-bg-blue: #e0f2fe; /* light blue-100 */
+
+  /* — Purple icon */
+  --icon-bg-purple: #f5f3ff; /* purple-100 */
+
+  /* — Green icon */
+  --icon-bg-green: #dcfce7; /* green-100 */
+
+  /* — Yellow icon */
+  --icon-bg-yellow: #fef3c7; /* yellow-100 */
 }
 
 .dark {
@@ -122,6 +154,111 @@
   body {
     @apply bg-background text-foreground;
   }
+  /* 2) expose them as utility classes */
+  /* — primary */
+  .bg-primary-dark-indigo {
+    background-color: var(--primary-dark-indigo);
+  }
+  .text-primary-dark-indigo {
+    color: var(--primary-dark-indigo);
+  }
+
+  .bg-primary-dark-grey {
+    background-color: var(--primary-dark-grey);
+  }
+  .text-primary-dark-grey {
+    color: var(--primary-dark-grey);
+  }
+
+  /* — accent */
+  .bg-accent-orange {
+    background-color: var(--accent-orange);
+  }
+  .text-accent-orange {
+    color: var(--accent-orange);
+  }
+  /* — accent light */
+  .bg-accent-orange-light {
+    background-color: var(--accent-orange-light);
+  }
+  .text-accent-orange-light {
+    color: var(--accent-orange-light);
+  }
+
+  /* — accent green */
+  .bg-accent-green {
+    background-color: var(--accent-green);
+  }
+  .text-accent-green {
+    color: var(--accent-green);
+  }
+  /* — accent green light */
+  .bg-accent-green-light {
+    background-color: var(--accent-green-light);
+  }
+  .text-accent-green-light {
+    color: var(--accent-green-light);
+  }
+
+  /* — supporting */
+  .bg-supporting-black {
+    background-color: var(--supporting-black);
+  }
+  .text-supporting-black {
+    color: var(--supporting-black);
+  }
+
+  .bg-supporting-white {
+    background-color: var(--supporting-white);
+  }
+  .text-supporting-white {
+    color: var(--supporting-white);
+  }
+
+  .bg-supporting-light-grey {
+    background-color: var(--supporting-light-grey);
+  }
+  .text-supporting-light-grey {
+    color: var(--supporting-light-grey);
+  }
+  /* Icon utility classes */
+  /* — blue */
+  .bg-icon-blue {
+    background-color: var(--icon-bg-blue);
+  }
+
+  /* — purple */
+  .bg-icon-purple {
+    background-color: var(--icon-bg-purple);
+  }
+
+  /* — green */
+  .bg-icon-green {
+    background-color: var(--icon-bg-green);
+  }
+
+  /* — yellow */
+  .bg-icon-yellow {
+    background-color: var(--icon-bg-yellow);
+  }
+
+  .bg-pagination-gray {
+    background-color: var(--pagination-gray);
+  }
+  .text-pagination-gray {
+    color: var(--pagination-gray);
+  }
+  .bg-pagination-icon-gray {
+    background-color: var(--pagination-icon-gray);
+  }
+  .text-pagination-icon-gray {
+    color: var(--pagination-icon-gray);
+  }
+
+  .text-gray {
+    color: var(--pagination-icon-gray);
+  }
+
   :root {
     --scroll-bar-color: #302253;
     --scroll-bar-bg-color: #302253;

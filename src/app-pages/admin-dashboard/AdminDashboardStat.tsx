@@ -1,6 +1,6 @@
 import AdminDasboardLabelWithStat from "@/components/statistic/admin-dashboard/AdminDasboardStatWithIconCard";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import { baseAdminDashboardIconPath } from "@/utils/public-image-base-url";
+import { baseAdminDashboardIconPath } from "@/utils/PublicImageBaseUrl";
 
 const AdminDashboardStat = () => {
   return (

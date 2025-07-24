@@ -6,7 +6,7 @@ interface GridWrapperProps {
 }
 
 const GridWrapper = ({ children, className = "" }: GridWrapperProps) => {
-  return <div className={`my-4 ${className}`}>{children}</div>;
+  return <div className={`grid gap-6  ${className}`}>{children}</div>;
 };
 
 export default GridWrapper;

@@ -1,4 +1,4 @@
-import { baseNavbarIconPath } from "../public-image-base-url";
+import { baseNavbarIconPath } from "../PublicImageBaseUrl";
 import { ProtectedUrls } from "../urls/urls";
 
 // --- Protected URLs for different roles ---
@@ -35,7 +35,7 @@ export const ProtectedRoutes = {
       icon: `${baseNavbarIconPath}users.svg`,
       activeRoute: "manageUsers",
     },
-   
+
     manageBrands: {
       path: ProtectedUrls.admin.manageBrands,
       title: "Brands",

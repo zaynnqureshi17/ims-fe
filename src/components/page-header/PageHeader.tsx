@@ -1,5 +1,3 @@
-// components/PageHeader.tsx
-
 import { TypographyP } from "../ui/text";
 
 interface PageHeaderProps {
@@ -9,9 +7,9 @@ interface PageHeaderProps {
 
 const PageHeader = ({ heading, description }: PageHeaderProps) => {
   return (
-    <div className="mb-6">
+    <div>
       <h1 className="text-2xl font-medium text-gray-900">{heading}</h1>
-      {description && <TypographyP text={description} />}
+      {description && <TypographyP className="text-gray" text={description} />}
     </div>
   );
 };

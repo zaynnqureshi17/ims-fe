@@ -9,8 +9,8 @@ export const TypographyP = ({ text, className }: TypographyPProps) => {
   return (
     <p
       className={cn(
-        "leading-7 [&:not(:first-child)]:mt-2 text-base",
-        className
+        "leading-7 [&:not(:first-child)]:mt-2 text-base text-supporting-light-grey",
+        className,
       )}
     >
       {text}
