@@ -1,5 +1,7 @@
+import Outlets from "@/app-pages/outlets/Outlets";
+
 const page = () => {
-  return <div></div>;
+  return <Outlets />;
 };
 
 export default page;

@@ -1,5 +1,5 @@
 "use client";
-import BrandsListTable from "@/components/table/brand/BrandsListTable";
+import BrandsListTable from "@/components/table/brands/BrandsListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
 import { useState } from "react";
 
