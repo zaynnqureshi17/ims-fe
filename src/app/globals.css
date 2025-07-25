@@ -153,6 +153,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-primary), sans-serif;
   }
   /* 2) expose them as utility classes */
   /* — primary */
