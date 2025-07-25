@@ -1,7 +1,7 @@
-import BrandView from "@/app-pages/brand-view/BrandView";
+import OutletView from "@/app-pages/outlet-view/OutletView";
 
 const page = () => {
-  return <BrandView />;
+  return <OutletView />;
 };
 
 export default page;

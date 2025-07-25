@@ -19,7 +19,7 @@ const SectionWrapper = ({
           {title}
         </h2>
       </div>
-      <div className="px-6 py-4 flex flex-col gap-6">{children}</div>
+      <div className="px-6 py-4 flex flex-col gap-4">{children}</div>
     </div>
   );
 };
