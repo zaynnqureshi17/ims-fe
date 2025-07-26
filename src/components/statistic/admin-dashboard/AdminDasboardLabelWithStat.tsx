@@ -3,9 +3,12 @@ interface AdminDasboardLabelWithStatProps {
   value: string | number;
 }
 
-const AdminDasboardLabelWithStat = ({ label, value }: AdminDasboardLabelWithStatProps) => {
+const AdminDasboardLabelWithStat = ({
+  label,
+  value,
+}: AdminDasboardLabelWithStatProps) => {
   return (
-    <div className="flex justify-between items-center px-4 py-2">
+    <div className="flex justify-between items-center py-2">
       <span className="text-sm text-gray-600">{label}</span>
       <span className="font-bold text-gray-900">{value}</span>
     </div>

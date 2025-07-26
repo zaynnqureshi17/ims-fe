@@ -13,13 +13,13 @@ const SectionWrapper = ({
   className = "",
 }: SectionWrapperProps) => {
   return (
-    <div className={`bg-white rounded-md shadow-sm ${className}`}>
-      <div className="px-6 py-4">
+    <div className={`bg-white rounded-md shadow-sm px-6 py-4 ${className}`}>
+      <div className="mb-4">
         <h2 className="text-xl font-semibold text-gray-800 capitalize">
           {title}
         </h2>
       </div>
-      <div className="px-6 py-4 flex flex-col gap-4">{children}</div>
+      <div className=" flex flex-col gap-4">{children}</div>
     </div>
   );
 };

@@ -5,8 +5,12 @@ import { ClipboardList, Trash2, Utensils } from "lucide-react";
 
 const StuffQuickAction = () => {
   return (
-    <SectionWrapper title="Quick Actions" lineDrawn={false} className="!bg-accent !rounded-none !mb-0  !border-none !shadow-none">
-      <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !bg-accent !my-0 rounded-md">
+    <SectionWrapper
+      title="Quick Actions"
+      lineDrawn={false}
+      className="!bg-accent !rounded-none !mb-0  !px-0 !shadow-none "
+    >
+      <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !bg-accent !my-0 rounded-md ">
         {quickActions.map((action, idx) => (
           <QuickAction
             key={idx}
