@@ -18,7 +18,7 @@ const BrandsTableCard: React.FC = () => {
   }, [searchParams]);
 
   const handleEditBrand = (brandId: number) => {
-    navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
+    navigate(ProtectedUrls.admin.editBrand);
   };
 
   const handleDeleteBrand = () => {
@@ -27,7 +27,7 @@ const BrandsTableCard: React.FC = () => {
   };
 
   const handleViewBrand = (brandId: number) => {
-    navigate(ProtectedUrls.admin.viewBrand.replace(":id", brandId.toString()));
+    navigate(ProtectedUrls.admin.viewBrand);
   };
 
   if (collapsed === "grid") {

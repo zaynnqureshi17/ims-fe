@@ -10,7 +10,7 @@ import BrandViewSearch from "./BrandViewSearch";
 
 type queryParams = string;
 
-const BrandViewFilter: React.FC<{ id: string }> = ({ id }) => {
+const BrandViewFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const navigate = usePrefetchNavigate();
@@ -30,7 +30,7 @@ const BrandViewFilter: React.FC<{ id: string }> = ({ id }) => {
   const handleUpdateQuery = (status?: string, search?: string) => {
     updateQueryParams({
       router: router,
-      basePath: ProtectedUrls.admin.viewBrand.replace(":id", id),
+      basePath: ProtectedUrls.admin.viewBrand,
       queryParams: {
         status: status === "all-status" ? "" : status,
         search,
