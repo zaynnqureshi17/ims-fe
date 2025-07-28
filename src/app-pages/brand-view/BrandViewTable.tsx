@@ -7,9 +7,7 @@ const BrandViewTable = () => {
   const navigate = usePrefetchNavigate();
 
   const handleEditOutlet = (outletId: number) => {
-    navigate(
-      ProtectedUrls.admin.editOutlet.replace(":id", outletId.toString()),
-    );
+    navigate(ProtectedUrls.admin.editOutlet);
   };
 
   const handleDeleteOutlet = () => {
@@ -18,9 +16,7 @@ const BrandViewTable = () => {
   };
 
   const handleViewOutlet = (outletId: number) => {
-    navigate(
-      ProtectedUrls.admin.viewOutlet.replace(":id", outletId.toString()),
-    );
+    navigate(ProtectedUrls.admin.viewOutlet);
   };
   return (
     <BrandViewOutletTable
