@@ -1,4 +1,4 @@
-name:  Deploy Dev Static Next.js to VPS
+name: 🚧 Deploy Dev Static Next.js to VPS
 
 on:
   push:
@@ -6,32 +6,24 @@ on:
       - dev
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name:  Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name:  Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      - name:  Install dependencies
-        run: npm ci
-
-      - name: 🛠 Build & Export
+      - name: Install Dependencies & Build
         run: |
+          npm install
           npm run build
-          npx next export
+          npm run export
 
-      - name:  Deploy to VPS via SCP
+      - name: Upload to VPS
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
-          port: 22
-          source: "out/*"
+          source: "out"
           target: "/var/www/dev"
