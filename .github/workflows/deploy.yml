@@ -34,4 +34,4 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           source: "out/*"
-          target: "/var/www/dev/out"
+          target: "/var/www/dev"
