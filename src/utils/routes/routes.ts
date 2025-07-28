@@ -102,11 +102,11 @@ export const ProtectedRoutes = {
       icon: `${baseNavbarIconPath}sales-report.svg`,
       activeRoute: "salesReport",
     },
-    manageTransfer: {
-      path: ProtectedUrls.common.manageTransfer,
-      title: "Transfer",
-      icon: `${baseNavbarIconPath}transfers.svg`,
-      activeRoute: "manageTransfer",
+    manageSuppliers: {
+      path: ProtectedUrls.admin.manageSuppliers,
+      title: "Suppliers",
+      icon: `${baseNavbarIconPath}suppliers.svg`,
+      activeRoute: "manageSuppliers",
     },
     ingredients: {
       path: ProtectedUrls.admin.manageIngredients,

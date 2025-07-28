@@ -4,11 +4,11 @@ import BrandViewFilter from "./BrandViewFilter";
 import BrandViewTable from "./BrandViewTable";
 import BrandViewTopBar from "./BrandViewTopBar";
 
-const BrandView = () => {
+const BrandView = ({ id }: { id: string }) => {
   return (
     <ProtectedLayoutWrapper topBar={<BrandViewTopBar />}>
       <BrandDetailView />
-      <BrandViewFilter />
+      <BrandViewFilter id={id} />
       <BrandViewTable />
     </ProtectedLayoutWrapper>
   );

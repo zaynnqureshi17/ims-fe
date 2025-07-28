@@ -1,5 +1,7 @@
+import PendingPage from "@/components/common/PendingPage";
+
 const page = () => {
-  return <div></div>;
+  return <PendingPage />;
 };
 
 export default page;

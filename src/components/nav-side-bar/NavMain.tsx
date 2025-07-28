@@ -50,8 +50,8 @@ export function NavMain({ roleRoutes }: NavMainProps) {
                   className="transition-all duration-300 "
                   src={route.icon}
                   alt={route.title}
-                  width={16}
-                  height={16}
+                  width={24}
+                  height={24}
                 />
               </SidebarMenuButton>
             </CollapsibleTrigger>
