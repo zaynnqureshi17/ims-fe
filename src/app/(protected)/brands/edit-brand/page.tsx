@@ -1,7 +1,7 @@
 import BrandEdit from "@/app-pages/brand-edit/BrandEdit";
 
-const page = () => {
+const Page = () => {
   return <BrandEdit />;
 };
 
-export default page;
+export default Page;
