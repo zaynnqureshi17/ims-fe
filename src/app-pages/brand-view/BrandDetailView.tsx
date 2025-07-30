@@ -7,12 +7,7 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 const BrandDetailView = () => {
   const navigate = usePrefetchNavigate();
   const handleEditBrand = (brandId: number) => {
-    navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
-  };
-
-  const handleDeleteBrand = () => {
-    // TODO
-    console.log("Delete brand action triggered");
+    navigate(ProtectedUrls.admin.editBrand);
   };
 
   return (
@@ -34,7 +29,7 @@ const BrandDetailView = () => {
         />
       }
       onEdit={() => handleEditBrand(1)}
-      onDelete={() => handleDeleteBrand()}
+      onDelete={() => console.log("Delete brand action triggered")}
     />
   );
 };
