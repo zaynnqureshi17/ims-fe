@@ -1,8 +1,20 @@
 "use client";
 import BrandViewCard from "@/components/card/brand/BrandViewCard";
 import IconBg from "@/components/common/IconBg";
+import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { ProtectedUrls } from "@/utils/urls/urls";
 
 const BrandDetailView = () => {
+  const navigate = usePrefetchNavigate();
+  const handleEditBrand = (brandId: number) => {
+    navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
+  };
+
+  const handleDeleteBrand = () => {
+    // TODO
+    console.log("Delete brand action triggered");
+  };
+
   return (
     <BrandViewCard
       id={1}
@@ -21,8 +33,8 @@ const BrandDetailView = () => {
           className="bg-pagination-gray "
         />
       }
-      onEdit={() => console.log("Edit brand action triggered")}
-      onDelete={() => console.log("Delete brand action triggered")}
+      onEdit={() => handleEditBrand(1)}
+      onDelete={() => handleDeleteBrand()}
     />
   );
 };
