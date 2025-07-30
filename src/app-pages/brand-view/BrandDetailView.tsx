@@ -7,7 +7,7 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 const BrandDetailView = () => {
   const navigate = usePrefetchNavigate();
   const handleEditBrand = (brandId: number) => {
-    navigate(ProtectedUrls.admin.editBrand);
+    navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
   };
 
   return (

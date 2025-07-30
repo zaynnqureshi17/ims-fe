@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import Users from "@/app-pages/users/Users";
 
 const page = () => {
-  return <PendingPage />;
+  return <Users />;
 };
 
 export default page;

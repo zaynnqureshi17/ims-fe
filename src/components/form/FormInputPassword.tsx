@@ -1,14 +1,15 @@
 // components/FormInputPassword.tsx
-import React, { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Eye, EyeOff } from 'lucide-react'
-import { useFormContext } from 'react-hook-form'
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff } from "lucide-react";
+import { useFormContext } from "react-hook-form";
 
-interface FormInputPasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  name: string
-  label: string
-  placeholder?: string
+interface FormInputPasswordProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  name: string;
+  label: string;
+  placeholder?: string;
 }
 
 const FormInputPassword: React.FC<FormInputPasswordProps> = ({
@@ -17,18 +18,18 @@ const FormInputPassword: React.FC<FormInputPasswordProps> = ({
   placeholder,
   ...rest
 }) => {
-  const [showPassword, setShowPassword] = useState(false)
-            const { register } = useFormContext ();
+  const [showPassword, setShowPassword] = useState(false);
+  const { register } = useFormContext();
 
   return (
     <div className="space-y-1 relative mb-4">
       <Label>{label}</Label>
-      <div className="relative">
+      <div className="relative ">
         <Input
-        {...register(name)}
-          type={showPassword ? 'text' : 'password'}
+          {...register(name)}
+          type={showPassword ? "text" : "password"}
           placeholder={placeholder}
-          className="pr-10"
+          className="pr-10 bg-white "
           {...rest}
         />
         <button
@@ -36,11 +37,15 @@ const FormInputPassword: React.FC<FormInputPasswordProps> = ({
           onClick={() => setShowPassword(!showPassword)}
           className="absolute inset-y-0 right-2 flex items-center text-muted-foreground"
         >
-          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          {showPassword ? (
+            <EyeOff className="w-5 h-5" />
+          ) : (
+            <Eye className="w-5 h-5" />
+          )}
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FormInputPassword
+export default FormInputPassword;

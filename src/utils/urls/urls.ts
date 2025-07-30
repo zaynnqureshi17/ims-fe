@@ -16,6 +16,7 @@ export const ProtectedUrls = {
     addOutlet: "/outlets/add-outlet",
     editOutlet: "/outlets/edit-outlet/:id",
     viewOutlet: "/outlets/view-outlet/:id",
+
     manageSuppliers: "/suppliers",
     manageSettings: "/settings",
     manageIngredients: "/ingredients",
@@ -56,6 +57,10 @@ export const ProtectedUrls = {
     manageRecipes: "/recipes",
     manageTransfer: "/transfers",
     managePurchaseReport: "/reports",
+    // Users management
     manageUsers: "/users",
+    addUser: "/users/add-user",
+    editUser: "/users/edit-user/:id",
+    viewUser: "/users/view-user/:id",
   },
 };

@@ -26,7 +26,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   label,
 }) => (
   <div className="flex flex-col space-y-1.5">
-    {label && <label className=" text-sm ">{label}</label>}
+    {label && <label className=" text-sm capitalize ">{label}</label>}
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger className={className}>
         <SelectValue placeholder={placeholder} />
