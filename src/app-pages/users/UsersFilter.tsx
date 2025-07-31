@@ -41,8 +41,8 @@ const UsersFilter: React.FC = () => {
       router: router,
       basePath: ProtectedUrls.common.manageUsers,
       queryParams: {
-        role: role === "all-role" ? "" : role,
-        outlet: outlet === "all-outlet" ? "" : outlet,
+        role: role === "all-roles" ? "" : role,
+        outlet: outlet === "all-outlets" ? "" : outlet,
         department: department === "all-departments" ? "" : department,
         search: search || "",
       },
