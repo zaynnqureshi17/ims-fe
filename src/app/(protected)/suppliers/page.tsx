@@ -1,5 +1,7 @@
+import Suppliers from "@/app-pages/suppliers/Suppliers";
+
 const page = () => {
-  return <div></div>;
+  return <Suppliers />;
 };
 
 export default page;

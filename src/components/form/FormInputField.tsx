@@ -1,5 +1,5 @@
 import React from "react";
-import { useFormContext } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 interface FormInputFieldProps {
@@ -7,6 +7,7 @@ interface FormInputFieldProps {
   label: string;
   placeholder: string;
   type: string;
+  rules?: Record<string, any>;
   className?: string;
   rightIcon?: React.ReactNode;
 }
@@ -17,10 +18,16 @@ const FormInputField = ({
   type,
   rightIcon,
   name,
+  rules,
   className,
   ...rest
 }: FormInputFieldProps) => {
-  const { register } = useFormContext();
+  const { register, control } = useFormContext();
+  const { field, fieldState } = useController({
+    name,
+    control,
+    rules,
+  });
 
   return (
     <div className={`mb-4 w-full space-y-3 ${className}`}>

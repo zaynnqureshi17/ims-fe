@@ -1,4 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
+import StatusBadge from "@/components/common/StatusBadge";
 import {
   Table,
   TableBody,
@@ -10,33 +11,33 @@ import {
 import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
 import Image from "next/image";
 
-export type UsersDataProps = {
+export type SuppliersDataProps = {
   id: number;
   profile_picture?: string;
   name: string;
   email: string;
-  role: string;
-  outlet: string;
-  department: string;
-  created_date: string;
+  category: string;
+  PIC: string;
+  contact: string;
+  service_area: string[];
   status: string;
 };
 
-interface InterfaceUsers {
-  UsersData: UsersDataProps[];
+interface InterfaceSupplierTable {
+  UsersData: SuppliersDataProps[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
-const UsersListTable = ({
+const SupplierListTable = ({
   UsersData,
   headtable,
   onEdit,
   onDelete,
   onView,
-}: InterfaceUsers) => {
+}: InterfaceSupplierTable) => {
   return (
     <Table>
       <TableHeader>
@@ -66,26 +67,31 @@ const UsersListTable = ({
                 </div>
               </div>
             </TableCell>
-            <TableCell className="text-left text-gray">{item.role}</TableCell>
+            <TableCell className="text-left text-gray">
+              <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
+                {item.category}
+              </span>
+            </TableCell>
             <TableCell>
-              <div className="font-medium">{item.outlet}</div>
+              <div className="font-medium">{item.PIC}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.department}
+              {item.contact}
             </TableCell>
-            <TableCell className="text-left text-gray">
-              {item.created_date}
+            <TableCell>
+              {item.service_area.map((area) => {
+                return (
+                  <span
+                    key={area}
+                    className="mr-1 text-[#2563EB] bg-[#2563EB33] rounded-full p-1"
+                  >
+                    {area}
+                  </span>
+                );
+              })}
             </TableCell>
             <TableCell className="text-left">
-              <span
-                className={`font-semibold ${
-                  item.status === "Active"
-                    ? "text-accent-green bg-accent-green-light rounded-full px-2 py-0.5"
-                    : "text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5"
-                }`}
-              >
-                {item.status}
-              </span>
+              <StatusBadge status={item.status} />
             </TableCell>
             <TableCell>
               <ActionButtons
@@ -102,4 +108,4 @@ const UsersListTable = ({
   );
 };
 
-export default UsersListTable;
+export default SupplierListTable;

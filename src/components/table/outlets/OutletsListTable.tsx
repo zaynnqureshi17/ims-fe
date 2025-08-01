@@ -1,4 +1,4 @@
-import IconBg from "@/components/common/IconBg";
+import ActionButtons from "@/components/common/ActionButtons";
 import {
   Table,
   TableBody,
@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { brandsActions } from "@/utils/PublicImageBaseUrl";
 
 export type OutletDataProps = {
   id: number;
@@ -68,31 +67,13 @@ const OutletsListTable = ({
                 {item.status}
               </span>
             </TableCell>
-            <TableCell className="text-center flex justify-start items-center !py-4 gap-x-3">
-              <IconBg
-                icon={`${brandsActions}edit.svg`}
-                title="Edit"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onEdit(item.id)}
-              />
-              <IconBg
-                icon={`${brandsActions}delete.svg`}
-                title="Delete"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onDelete(item.id)}
-              />
-              <IconBg
-                icon={`${brandsActions}view.svg`}
-                title="View"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onView(item.id)}
-              />
+            <TableCell>
+              <ActionButtons
+                itemId={item.id}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onView={onView}
+              />{" "}
             </TableCell>
           </TableRow>
         ))}

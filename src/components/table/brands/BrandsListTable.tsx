@@ -1,3 +1,4 @@
+import ActionButtons from "@/components/common/ActionButtons";
 import IconBg from "@/components/common/IconBg";
 import {
   Table,
@@ -71,30 +72,12 @@ const BrandsListTable = ({
               </span>
             </TableCell>
             <TableCell className="text-center flex justify-start items-center !py-4 gap-x-3">
-              <IconBg
-                icon={`${brandsActions}edit.svg`}
-                title="Edit"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onEdit(item.id)}
-              />
-              <IconBg
-                icon={`${brandsActions}delete.svg`}
-                title="Delete"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onDelete(item.id)}
-              />
-              <IconBg
-                icon={`${brandsActions}view.svg`}
-                title="View"
-                width={16}
-                height={16}
-                className="!p-0 cursor-pointer"
-                onClick={() => onView(item.id)}
-              />
+              <ActionButtons
+                itemId={item.id}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onView={onView}
+              />{" "}
             </TableCell>
           </TableRow>
         ))}
