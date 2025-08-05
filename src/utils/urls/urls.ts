@@ -52,7 +52,12 @@ export const ProtectedUrls = {
     manageCatalogue: "/catalogue",
     manageSettings: "/settings",
     manageProduction: "/production",
+    //  Stock Count URLs
     manageStockCount: "/stock-count",
+    addStockCount: "/stock-count/add-stock-count",
+    editStockCount: "/stock-count/edit-stock-count/:id",
+    viewStockCount: "/stock-count/view-stock-count/:id",
+
     manageTransfers: "/transfers",
     manageWaste: "/waste",
     managePurchaseOrder: "/purchase-order",

@@ -1,0 +1,82 @@
+import ActionButtons from "@/components/common/ActionButtons";
+import StatusBadge from "@/components/common/StatusBadge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+export type InterfaceStockCountsDataProps = {
+  id: number;
+  storage_name?: string;
+  outlet: string;
+  department: string;
+  description: string;
+  status: string;
+};
+
+interface InterfaceStockCountTable {
+  StockCountData: InterfaceStockCountsDataProps[];
+  headtable?: string[];
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+  onView: (id: number) => void;
+}
+
+const StockCountListTable = ({
+  StockCountData,
+  headtable,
+  onEdit,
+  onDelete,
+  onView,
+}: InterfaceStockCountTable) => {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          {headtable &&
+            headtable.map((head, index) => (
+              <TableHead key={index}>{head}</TableHead>
+            ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {StockCountData.map((item, index) => (
+          <TableRow key={index} className="hover:bg-white  my-4">
+            <TableCell className="text-gray">{item.id}</TableCell>
+            <TableCell>
+              <span>{item.storage_name}</span>
+            </TableCell>
+            <TableCell className="text-left text-gray">
+              <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
+                {item.outlet}
+              </span>
+            </TableCell>
+            <TableCell>
+              <div className="font-medium">{item.department}</div>
+            </TableCell>
+            <TableCell className="text-left text-gray">
+              {item.description}
+            </TableCell>
+            <TableCell className="text-left">
+              <StatusBadge status={item.status} />
+            </TableCell>
+            <TableCell>
+              <ActionButtons
+                itemId={item.id}
+                onEdit={onEdit}
+                onDelete={onDelete}
+                onView={onView}
+              />{" "}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export default StockCountListTable;

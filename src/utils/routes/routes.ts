@@ -54,12 +54,6 @@ export const ProtectedRoutes = {
       icon: `${baseNavbarIconPath}reports.svg`,
       activeRoute: "managePurchaseReport",
     },
-    settings: {
-      path: ProtectedUrls.common.manageSettings,
-      title: "Settings",
-      icon: `${baseNavbarIconPath}settings.svg`,
-      activeRoute: "manageSettings",
-    },
     manageWaste: {
       path: ProtectedUrls.common.manageWaste,
       title: "Waste",
