@@ -9,29 +9,27 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export type OutletDataProps = {
+export type UOMDataProps = {
   id: number;
-  outlets: string;
-  location: string;
-  brand_name?: string;
-  created_date: string;
+  UOM: string;
+  category: string;
+  quantity: number;
+  base_UOM: string;
   status: string;
 };
 
 interface InterfaceOutlet {
-  outletData: OutletDataProps[];
+  UOMData: UOMDataProps[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
-  onView: (id: number) => void;
 }
 
-const OutletsListTable = ({
-  outletData,
+const UOMListTable = ({
+  UOMData,
   headtable,
   onEdit,
   onDelete,
-  onView,
 }: InterfaceOutlet) => {
   return (
     <Table>
@@ -44,28 +42,25 @@ const OutletsListTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {outletData.map((item, index) => (
+        {UOMData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
             <TableCell className="text-gray">{item.id}</TableCell>
-            <TableCell className="font-medium">{item.outlets}</TableCell>
-            <TableCell className="text-left text-gray">
-              {item.location}
-            </TableCell>
+            <TableCell className="">{item.UOM}</TableCell>
+            <TableCell className="text-left ">{item.category}</TableCell>
             <TableCell>
-              <div className="font-medium">{item.brand_name}</div>
+              <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
+                {item.quantity}
+              </span>
             </TableCell>
-            <TableCell className="text-left text-gray">
-              {item.created_date}
-            </TableCell>
+            <TableCell className="text-left">{item.base_UOM}</TableCell>
             <TableCell className="text-left">
               <StatusBadge status={item.status} />
             </TableCell>
-            <TableCell>
+            <TableCell className="">
               <ActionButtons
                 itemId={item.id}
                 onEdit={onEdit}
                 onDelete={onDelete}
-                onView={onView}
               />{" "}
             </TableCell>
           </TableRow>
@@ -75,4 +70,4 @@ const OutletsListTable = ({
   );
 };
 
-export default OutletsListTable;
+export default UOMListTable;

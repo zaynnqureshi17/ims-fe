@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import ItemReceiving from "@/app-pages/item-receiving/ItemReceiving";
 
 const page = () => {
-  return <PendingPage />;
+  return <ItemReceiving />;
 };
 
 export default page;

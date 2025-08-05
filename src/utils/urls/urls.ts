@@ -61,7 +61,12 @@ export const ProtectedUrls = {
     manageTransfers: "/transfers",
     manageWaste: "/waste",
     managePurchaseOrder: "/purchase-order",
+
     manageItemReceiving: "/item-receiving",
+    addItemReceiving: "/item-receiving/add-item-receiving",
+    editItemReceiving: "/item-receiving/edit-item-receiving/:id",
+    viewItemReceiving: "/item-receiving/view-item-receiving/:id",
+
     manageRecipes: "/recipes",
     manageTransfer: "/transfers",
     managePurchaseReport: "/reports",

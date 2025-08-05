@@ -9,25 +9,28 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-export type OutletDataProps = {
+export type ItemReceivingDataProps = {
   id: number;
-  outlets: string;
-  location: string;
-  brand_name?: string;
-  created_date: string;
+  item_name: string;
+  brand_name: string;
+  category_name: string;
+  sub_category_name: string;
+  supplier_name: string;
+  purchase_uom: string;
+  price: string;
   status: string;
 };
 
 interface InterfaceOutlet {
-  outletData: OutletDataProps[];
+  ItemReceivingData: ItemReceivingDataProps[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
-const OutletsListTable = ({
-  outletData,
+const ItemsReceivingListTable = ({
+  ItemReceivingData,
   headtable,
   onEdit,
   onDelete,
@@ -44,19 +47,24 @@ const OutletsListTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {outletData.map((item, index) => (
+        {ItemReceivingData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
             <TableCell className="text-gray">{item.id}</TableCell>
-            <TableCell className="font-medium">{item.outlets}</TableCell>
-            <TableCell className="text-left text-gray">
-              {item.location}
-            </TableCell>
+            <TableCell className="font-medium">{item.item_name}</TableCell>
+            <TableCell className="text-left">{item.brand_name}</TableCell>
             <TableCell>
-              <div className="font-medium">{item.brand_name}</div>
+              <div className="text-gray">{item.category_name}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.created_date}
+              {item.sub_category_name}
             </TableCell>
+            <TableCell className="text-left text-gray">
+              {item.supplier_name}
+            </TableCell>
+            <TableCell className="text-left text-gray">
+              {item.purchase_uom}
+            </TableCell>
+            <TableCell className="text-left text-gray">{item.price}</TableCell>
             <TableCell className="text-left">
               <StatusBadge status={item.status} />
             </TableCell>
@@ -75,4 +83,4 @@ const OutletsListTable = ({
   );
 };
 
-export default OutletsListTable;
+export default ItemsReceivingListTable;

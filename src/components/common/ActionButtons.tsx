@@ -15,31 +15,37 @@ const ActionButtons = ({
   itemId,
 }: ActionsButtonProps) => {
   return (
-    <div className="flex items-center gap-2">
-      <IconBg
-        icon={`${brandsActions}edit.svg`}
-        title="Edit"
-        width={16}
-        height={16}
-        className="!p-0 cursor-pointer"
-        onClick={() => onEdit?.(itemId)}
-      />
-      <IconBg
-        icon={`${brandsActions}delete.svg`}
-        title="Delete"
-        width={16}
-        height={16}
-        className="!p-0 cursor-pointer"
-        onClick={() => onDelete?.(itemId)}
-      />
-      <IconBg
-        icon={`${brandsActions}view.svg`}
-        title="View"
-        width={16}
-        height={16}
-        className="!p-0 cursor-pointer"
-        onClick={() => onView?.(itemId)}
-      />
+    <div className="flex  gap-2">
+      {onEdit && (
+        <IconBg
+          icon={`${brandsActions}edit.svg`}
+          title="Edit"
+          width={16}
+          height={16}
+          className="!p-0 cursor-pointer"
+          onClick={() => onEdit?.(itemId)}
+        />
+      )}
+      {onDelete && (
+        <IconBg
+          icon={`${brandsActions}delete.svg`}
+          title="Delete"
+          width={16}
+          height={16}
+          className="!p-0 cursor-pointer"
+          onClick={() => onDelete?.(itemId)}
+        />
+      )}
+      {onView && (
+        <IconBg
+          icon={`${brandsActions}view.svg`}
+          title="View"
+          width={16}
+          height={16}
+          className="!p-0 cursor-pointer"
+          onClick={() => onView?.(itemId)}
+        />
+      )}
     </div>
   );
 };
