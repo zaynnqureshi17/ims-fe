@@ -43,6 +43,5 @@ jobs:
           script: |
             cd /var/www/dev
             npm install --omit=dev
-            pm2 delete dev || true
-            pm2 start npm --name "dev" -- run start
+            pm2 restart dev || pm2 start npm --name "dev" -- run start
             pm2 save
