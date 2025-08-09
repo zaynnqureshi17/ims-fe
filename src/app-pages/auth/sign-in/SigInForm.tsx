@@ -31,6 +31,7 @@ const SignInForm = () => {
 
   const { handleSubmit } = methods;
   const handleSignIn = (data: SignInFormData) => {
+    console.log("SignIn Data:");
     signIn(
       { data },
       {

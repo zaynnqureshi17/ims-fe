@@ -16,6 +16,7 @@ const axiosInstance = axios.create({
     "Accept": "application/json", // Expect JSON response
   },
 });
+console.log("Axios Instance Config:", process.env.NEXT_PUBLIC_BASE_URL);
 
 export default axiosInstance;
 
