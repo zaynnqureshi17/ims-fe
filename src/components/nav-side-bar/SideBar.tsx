@@ -9,12 +9,12 @@ import {
 } from "@/components/ui/sidebar";
 import { ProtectedRoutes } from "@/utils/routes/routes";
 import SideBarLogo from "../common/SideBarLogo";
-type UserRole =
+export type UserRole =
   | "admin"
-  | "brandManager"
-  | "outletManager"
+  | "brand_manager"
+  | "outlet_manager"
   | "finance"
-  | "staff";
+  | "outlet_staff";
 
 interface SidebarProps {
   role: UserRole;

@@ -16,11 +16,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { AuthUrls } from "@/utils/urls/urls";
-
+import Cookies from "js-cookie";
 const UserControls = () => {
   const navigate = usePrefetchNavigate();
 
   const handleLogout = () => {
+    Cookies.remove("token");
     navigate(AuthUrls.signIn);
   };
 

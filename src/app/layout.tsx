@@ -1,3 +1,5 @@
+import Toast from "@/components/Toast";
+import QueryProvider from "@/providers/QueryProvider";
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
@@ -20,7 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>{children}</body>
+      <body className={`${montserrat.variable} antialiased`}>
+        <QueryProvider>
+          {children}
+          <Toast />
+        </QueryProvider>
+      </body>
     </html>
   );
 }

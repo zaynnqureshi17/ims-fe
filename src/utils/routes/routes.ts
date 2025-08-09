@@ -110,7 +110,7 @@ export const ProtectedRoutes = {
     },
   },
   //  --- Brand Manager URLs ---
-  brandManager: {
+  brand_manager: {
     dashboard: {
       path: ProtectedUrls.brandManager.manageDashboard,
       title: "Dashboard",
@@ -169,7 +169,7 @@ export const ProtectedRoutes = {
     },
   },
   //  --- Outlet Manager URLs ---
-  outletManager: {
+  outlet_manager: {
     manageDashboard: {
       path: ProtectedUrls.outletManager.manageDashboard,
       title: "Dashboard",
@@ -247,7 +247,7 @@ export const ProtectedRoutes = {
     },
   },
   //  --- Staff URLs ---
-  staff: {
+  outlet_staff: {
     manageDashboard: {
       path: ProtectedUrls.staff.manageDashboard,
       title: "Dashboard",

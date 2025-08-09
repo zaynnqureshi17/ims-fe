@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 
 import axiosInstance from "@/services/axiosInstance";
 import { ErrorResponseType } from "@/utils/types/api.types";
-import { ProtectedUrls } from "@/utils/urls/urls";
 
 interface Body {
   email: string;
@@ -41,16 +40,20 @@ export const useSignIn = (): UseMutationResult<
     mutationFn: ({ data }: Props) => onSignIn(data),
     onSuccess: (response: any) => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
-
-      const token = response?.body?.token;
-
+      const token = response?.body?.data.token;
       Cookies.set("token", token, {
         expires: 30, // Expires in 30 days
         secure: true, // Ensures the cookie is sent over HTTPS
         sameSite: "strict", // Prevent CSRF attacks
       });
+      const role = response?.body?.data.role_name;
+      Cookies.set("role", role, {
+        expires: 30,
+        secure: true,
+        sameSite: "strict",
+      });
 
-      router.push(ProtectedUrls.admin.manageDashboard);
+      router.push("/");
       router.refresh();
     },
 

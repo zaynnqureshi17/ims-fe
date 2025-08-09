@@ -77,3 +77,4 @@ export const ProtectedUrls = {
     viewUser: "/users/view-user/:id",
   },
 };
+export const AuthRoutes = [AuthUrls.signIn, AuthUrls.forgotPassword];
