@@ -23,7 +23,7 @@ interface Props {
 }
 
 const onSignIn = async (data: Body): Promise<AxiosResponse<Body>> => {
-  console.log("Full URL:", axiosInstance.defaults.baseURL + "auth/login");
+  console.warn("Full URL:", axiosInstance.defaults.baseURL + "auth/login");
   return await axiosInstance.post("auth/login", data);
 };
 
