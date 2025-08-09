@@ -32,5 +32,4 @@ jobs:
             rm -rf node_modules
             npm install
             npm run build
-            pm2 delete prod || true
-            pm2 start npm --name "prod" -- run start
+            pm2 restart prod || pm2 start npm --name "prod" -- run start

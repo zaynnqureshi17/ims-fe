@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "lint": "next lint",
-    "start": "cross-env PORT=3002 next start",
+    "start": "cross-env PORT=3003 next start",
     "prepare": "echo 'Skipping husky in production'",
     "lint-staged": "lint-staged"
   },
