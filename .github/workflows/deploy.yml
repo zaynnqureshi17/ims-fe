@@ -43,6 +43,5 @@ jobs:
           script: |
             cd /var/www/qa
             npm install --omit=dev
-            pm2 delete qa || true
-            pm2 start npm --name "qa" -- run start
+            pm2 restart qa || pm2 start npm --name "qa" -- run start
             pm2 save

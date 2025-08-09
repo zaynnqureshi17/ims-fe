@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env PORT=3002 next start",
     "lint": "next lint",
     "prepare": "echo 'Skipping husky in production'",
     "lint-staged": "lint-staged"
@@ -48,6 +48,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "cross-env": "^10.0.0",
     "date-fns": "^4.1.0",
     "input-otp": "^1.4.2",
     "lodash": "^4.17.21",
