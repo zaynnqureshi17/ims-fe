@@ -18,22 +18,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies & Build
-        run: |
-          npm ci
-          npm run build
-
-      - name: Upload Project to VPS
+      - name: Upload Source to VPS
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
-          source: "."
+          source: "." # sirf source code bhej rahe hain, node_modules nahi
           target: "/var/www/dev"
 
-      - name: SSH & Restart Dev App using PM2
+      - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -42,6 +37,8 @@ jobs:
           port: 22
           script: |
             cd /var/www/dev
-            npm install --omit=dev
+            rm -rf node_modules
+            npm ci
+            npm run build
             pm2 restart dev || pm2 start npm --name "dev" -- run start
             pm2 save
