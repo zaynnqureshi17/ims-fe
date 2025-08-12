@@ -8,7 +8,7 @@ import { useController, useFormContext } from "react-hook-form";
 interface UploadSingleImageProps {
   name: string;
   label?: string;
-  image_url?: string | null; // Existing image for edit mode
+  image_url?: string | null;
   rules?: Record<string, any>;
 }
 
@@ -24,46 +24,56 @@ const UploadSingleImage: React.FC<UploadSingleImageProps> = ({
   const {
     field: { value, onChange },
     fieldState: { error },
-  } = useController({
-    name,
-    control,
-    rules,
-  });
+  } = useController({ name, control, rules });
 
-  // Helper: Get preview URL from File or string
+  const isBrowser = typeof window !== "undefined";
+  const hasFile = isBrowser && typeof File !== "undefined";
+
+  // Helper: Get preview URL from File or string (safe on server)
   const getPreviewUrl = (val: unknown, fallback?: string | null) => {
-    if (val instanceof File) {
-      return URL.createObjectURL(val);
+    if (hasFile && val instanceof File) {
+      try {
+        return URL.createObjectURL(val);
+      } catch {
+        return fallback ?? null;
+      }
     }
     if (typeof val === "string" && val.trim() !== "") {
       return val;
     }
-    return fallback || null;
+    return fallback ?? null;
   };
 
-  const [preview, setPreview] = useState<string | null>(
+  // IMPORTANT: safe init (runs on server too)
+  const [preview, setPreview] = useState<string | null>(() =>
     getPreviewUrl(value, image_url),
   );
 
   // Sync preview when value changes
   useEffect(() => {
     setPreview(getPreviewUrl(value, image_url));
-  }, [value, image_url]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, image_url, hasFile]);
 
   // Cleanup object URL when component unmounts
   useEffect(() => {
     return () => {
-      if (preview?.startsWith("blob:")) {
-        URL.revokeObjectURL(preview);
+      if (isBrowser && preview?.startsWith("blob:")) {
+        try {
+          URL.revokeObjectURL(preview);
+        } catch {}
       }
     };
-  }, [preview]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [preview, isBrowser]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setPreview(URL.createObjectURL(file));
-      onChange(file); // react-hook-form field update
+      if (isBrowser) {
+        setPreview(URL.createObjectURL(file));
+      }
+      onChange(file);
     }
   };
 

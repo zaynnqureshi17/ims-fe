@@ -10,26 +10,6 @@ import { useCreateSupplier } from "@/queries/supplier/useCreateSupplier.query";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
-type SupplierFormValues = {
-  category: string;
-  name: string;
-  registration_code: string;
-  pic: string;
-  contact: string;
-  email: string;
-  supplier_code: string;
-  finance_code: string;
-  status: string;
-  area_short: string[];
-  supplier_image_url: string | null;
-};
-
-const area_short = [
-  { value: "KV", label: "KV – Kuala Lumpur" },
-  { value: "SU", label: "SU – Subang" },
-  { value: "PN", label: "PN – Penang" },
-];
-
 const SupplierAddForm = () => {
   const { mutate: createSupplier, status } = useCreateSupplier();
 
@@ -53,7 +33,6 @@ const SupplierAddForm = () => {
   const loading = status === "pending";
 
   const onSubmit = (data: any) => {
-    console.log(data);
     createSupplier(
       { body: data },
       {
@@ -64,7 +43,11 @@ const SupplierAddForm = () => {
       },
     );
   };
-
+  const area_short = [
+    { value: "KV", label: "KV – Kuala Lumpur" },
+    { value: "SU", label: "SU – Subang" },
+    { value: "PN", label: "PN – Penang" },
+  ];
   return (
     <FormProvider {...methods}>
       <FormWrapper onSubmit={handleSubmit(onSubmit)} disabled={loading}>
