@@ -1,16 +1,17 @@
 "use client";
-import UOMListTable, {
-  UOMDataProps,
-} from "@/components/table/uom/UOMListTable";
+import UOMListTable from "@/components/table/uom/UOMListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
+import { IUOM } from "@/utils/types/uom.type";
 import { useState } from "react";
 
 interface UnitOfMeasurementTableProps {
+  uom: IUOM[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
 const UnitOfMeasurementTable = ({
+  uom,
   onEdit,
   onDelete,
 }: UnitOfMeasurementTableProps) => {
@@ -24,7 +25,7 @@ const UnitOfMeasurementTable = ({
     >
       <UOMListTable
         headtable={headtable}
-        UOMData={UOMData}
+        UOMData={uom}
         onEdit={onEdit}
         onDelete={onDelete}
       />
@@ -42,31 +43,4 @@ const headtable = [
   "Base UOM",
   "Status",
   "Actions",
-];
-
-const UOMData: UOMDataProps[] = [
-  {
-    id: 1,
-    UOM: "Kilogram",
-    category: "Weight",
-    quantity: 100,
-    base_UOM: "Gram",
-    status: "Active",
-  },
-  {
-    id: 2,
-    UOM: "Kilogram",
-    category: "Weight",
-    quantity: 100,
-    base_UOM: "Gram",
-    status: "Active",
-  },
-  {
-    id: 3,
-    UOM: "Kilogram",
-    category: "Weight",
-    quantity: 100,
-    base_UOM: "Gram",
-    status: "Active",
-  },
 ];

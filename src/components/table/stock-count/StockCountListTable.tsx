@@ -8,18 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-export type InterfaceStockCountsDataProps = {
-  id: number;
-  storage_name?: string;
-  outlet: string;
-  department: string;
-  description: string;
-  status: string;
-};
+import { IStorage } from "@/utils/types/stock.count.type";
 
 interface InterfaceStockCountTable {
-  StockCountData: InterfaceStockCountsDataProps[];
+  StockCountData: IStorage[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -46,27 +38,27 @@ const StockCountListTable = ({
       <TableBody>
         {StockCountData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
+            <TableCell className="text-gray">{item.storage_id}</TableCell>
             <TableCell>
               <span>{item.storage_name}</span>
             </TableCell>
             <TableCell className="text-left text-gray">
               <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
-                {item.outlet}
+                {item.outlet_name}
               </span>
             </TableCell>
             <TableCell>
               <div className="font-medium">{item.department}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.description}
+              {item.storage_description || "N/A"}
             </TableCell>
             <TableCell className="text-left">
               <StatusBadge status={item.status} />
             </TableCell>
             <TableCell>
               <ActionButtons
-                itemId={item.id}
+                itemId={item.storage_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

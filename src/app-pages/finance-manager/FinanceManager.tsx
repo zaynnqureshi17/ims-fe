@@ -14,7 +14,7 @@ const FinanceManager = () => {
         heading="Finance Manager"
         description="Monitor financial metrics and purchase analytics."
       />
-      <FinanceFilter />
+      {/* <FinanceFilter /> */}
       <FinanceManagerMontlySummaryData />
       <FinanceManagerStat />
       <FinanceManagerSalesVarianceChart />

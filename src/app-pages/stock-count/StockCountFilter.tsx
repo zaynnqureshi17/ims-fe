@@ -1,4 +1,6 @@
 "use client";
+import { useStockContext } from "@/context/stockCount.context";
+import { useGetStockCount } from "@/queries/stock-count/useGetStockCount.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,13 +13,19 @@ type queryParams = string;
 const StockCountFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
   const [selectedOutlet, setSelectedOutlet] = useState<queryParams>("");
   const [selectedDepartment, setSelectedDepartment] = useState<queryParams>("");
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
-
+  const { setStock, setLoading } = useStockContext();
+  const { data: StorageData, status } = useGetStockCount({
+    brand: selectedBrand,
+    outlet: selectedOutlet,
+    department: selectedDepartment,
+    status: selectedStatus,
+    search: searchText,
+  });
   // Load from URL on page load
   useEffect(() => {
     const brand = searchParams.get("brand") || "";
@@ -52,7 +60,12 @@ const StockCountFilter: React.FC = () => {
       },
     });
   };
-
+  useEffect(() => {
+    if (StorageData) {
+      setStock(StorageData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [StorageData]);
   return (
     <div className="flex gap-6">
       <StockCountSearch

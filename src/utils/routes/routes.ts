@@ -102,6 +102,12 @@ export const ProtectedRoutes = {
       icon: `${baseNavbarIconPath}suppliers.svg`,
       activeRoute: "manageSuppliers",
     },
+    uomManage: {
+      path: ProtectedUrls.admin.uom,
+      title: "Unit of Measurement",
+      icon: `${baseNavbarIconPath}suppliers.svg`,
+      activeRoute: "uomManage",
+    },
     ingredients: {
       path: ProtectedUrls.admin.manageIngredients,
       title: "Ingredients",

@@ -1,5 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
-import IconBg from "@/components/common/IconBg";
+import FormattedDate from "@/components/format-date/FormattedDate";
 import {
   Table,
   TableBody,
@@ -8,19 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { brandsActions } from "@/utils/PublicImageBaseUrl";
-
-export type RecentPurchaseProps = {
-  id: number;
-  brandName: string;
-  description: string;
-  outlets: string;
-  createdDate: string;
-  status: string;
-};
+import { IBrand } from "@/utils/types/brand.type";
 
 interface InterfaceRecentPurchase {
-  brandData: RecentPurchaseProps[];
+  brandData: IBrand[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -47,18 +38,18 @@ const BrandsListTable = ({
       <TableBody>
         {brandData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
-            <TableCell>{item.brandName}</TableCell>
+            <TableCell className="text-gray">{item.brand_id}</TableCell>
+            <TableCell>{item.brand_name}</TableCell>
             <TableCell className="text-left text-gray">
               {item.description}
             </TableCell>
             <TableCell>
               <div className="text-accent-orange bg-accent-orange-light w-fit px-2 py-1  rounded-full">
-                {item.outlets}
+                {1}
               </div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.createdDate}
+              <FormattedDate date={item.created_at} />
             </TableCell>
             <TableCell className="text-left">
               <span
@@ -73,7 +64,7 @@ const BrandsListTable = ({
             </TableCell>
             <TableCell className="text-center flex justify-start items-center !py-4 gap-x-3">
               <ActionButtons
-                itemId={item.id}
+                itemId={item.brand_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

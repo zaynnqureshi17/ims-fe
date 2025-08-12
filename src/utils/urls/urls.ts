@@ -17,6 +17,11 @@ export const ProtectedUrls = {
     editOutlet: "/outlets/edit-outlet/:id",
     viewOutlet: "/outlets/view-outlet/:id",
 
+    uom: "/uom",
+    addUom: "/uom/add-uom",
+    editUom: "/uom/edit-uom/:id",
+    viewUom: "/uom/view-uom/:id",
+
     manageSuppliers: "/suppliers",
     addSupplier: "/suppliers/add-supplier",
     editSupplier: "/suppliers/edit-supplier/:id",
@@ -37,7 +42,7 @@ export const ProtectedUrls = {
 
   //  --- Finance URLs ---
   finance: {
-    manageDashboard: "/dashboard",
+    manageDashboard: "/finance-manager/dashboard",
   },
 
   //  --- Staff URLs ---

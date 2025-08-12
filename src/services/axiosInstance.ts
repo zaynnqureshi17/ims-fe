@@ -4,9 +4,6 @@ import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 
 // Custom Axios request configuration interface
-export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  noAuth?: boolean;
-}
 
 const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL, // Base URL for all API requests
@@ -21,11 +18,11 @@ export default axiosInstance;
 
 // Request interceptor run before the request is sent
 axiosInstance.interceptors.request.use(
-  async (config: CustomAxiosRequestConfig) => {
+  async (config: InternalAxiosRequestConfig) => {
     const token = Cookies.get("token");
 
     // Get the token from Cookies
-    if (!config.noAuth && token) {
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 

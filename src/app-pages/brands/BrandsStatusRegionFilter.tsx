@@ -1,5 +1,5 @@
 import IconBg from "@/components/common/IconBg";
-import SelectField from "@/components/form/Select";
+import SelectField from "@/components/form/SelectField";
 import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
 import React from "react";
 interface BrandsStatusRegionFilterProps {

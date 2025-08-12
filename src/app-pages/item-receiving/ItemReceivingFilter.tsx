@@ -1,4 +1,6 @@
 "use client";
+import { useItemContext } from "@/context/item.context";
+import { useGetItemReceiving } from "@/queries/itemReceiving/useGetItemReceiving.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -18,6 +20,15 @@ const ItemReceivingFilter: React.FC = () => {
   const [selectedSupplier, setSelectedSupplier] = useState<queryParams>("");
   const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
+  const { setItem, setLoading } = useItemContext();
+  const { data: itemReceivingData, status } = useGetItemReceiving({
+    status: selectedStatus,
+    category: selectedCategory,
+    subCategory: selectedSubCategory,
+    supplier: selectedSupplier,
+    brand: selectedBrand,
+    search: searchText,
+  });
 
   // Load from URL on page load
   useEffect(() => {
@@ -57,6 +68,13 @@ const ItemReceivingFilter: React.FC = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (itemReceivingData) {
+      setItem(itemReceivingData?.body?.data);
+      setLoading(status === "pending");
+    }
+  }, [itemReceivingData]);
 
   return (
     <div className="flex gap-6">

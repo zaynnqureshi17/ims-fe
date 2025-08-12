@@ -1,5 +1,4 @@
 import ActionButtons from "@/components/common/ActionButtons";
-import StatusBadge from "@/components/common/StatusBadge";
 import {
   Table,
   TableBody,
@@ -8,21 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-export type ItemReceivingDataProps = {
-  id: number;
-  item_name: string;
-  brand_name: string;
-  category_name: string;
-  sub_category_name: string;
-  supplier_name: string;
-  purchase_uom: string;
-  price: string;
-  status: string;
-};
+import { IItem } from "@/utils/types/item.types";
 
 interface InterfaceOutlet {
-  ItemReceivingData: ItemReceivingDataProps[];
+  ItemReceivingData: IItem[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -49,28 +37,28 @@ const ItemsReceivingListTable = ({
       <TableBody>
         {ItemReceivingData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
+            <TableCell className="text-gray">{item.item_id}</TableCell>
             <TableCell className="font-medium">{item.item_name}</TableCell>
-            <TableCell className="text-left">{item.brand_name}</TableCell>
+            <TableCell className="text-left">{item.brand}</TableCell>
             <TableCell>
-              <div className="text-gray">{item.category_name}</div>
+              <div className="text-gray">{item.sub_category_1}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.sub_category_name}
+              {item.sub_category_1}
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.supplier_name}
+              {item.supplier_item_code}
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.purchase_uom}
+              {item.unit_uom}
             </TableCell>
-            <TableCell className="text-left text-gray">{item.price}</TableCell>
-            <TableCell className="text-left">
-              <StatusBadge status={item.status} />
+            <TableCell className="text-left text-gray">
+              {item.unit_price}
             </TableCell>
+            <TableCell className="text-left">N/A</TableCell>
             <TableCell>
               <ActionButtons
-                itemId={item.id}
+                itemId={item.item_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

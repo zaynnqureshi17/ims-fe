@@ -1,7 +1,8 @@
 import LabelValue from "@/components/common/LabelValue";
 import SectionWrapper from "@/components/wrapper/SectionWrapper";
+import { IUser } from "@/utils/types/user.type";
 
-const UserViewActivity = () => {
+const UserViewActivity = ({ userData }: { userData: IUser }) => {
   return (
     <div className="space-y-4">
       <SectionWrapper title="Activity Summary">

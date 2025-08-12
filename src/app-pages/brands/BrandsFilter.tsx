@@ -1,4 +1,6 @@
 "use client";
+import { useBrandContext } from "@/context/brand.context";
+import { useGetBrand } from "@/queries/brands/useGetBrand.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,11 +13,17 @@ type queryParams = string;
 const BrandsFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [selectedRegion, setSelectedRegion] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
   const [collapsed, setCollapsed] = useState<queryParams>("list");
+  const { setBrand, setLoading } = useBrandContext();
+
+  const { data: brandData, status } = useGetBrand({
+    status: selectedStatus,
+    region: selectedRegion,
+    search: searchText,
+  });
 
   // Load from URL on page load
   useEffect(() => {
@@ -47,6 +55,13 @@ const BrandsFilter: React.FC = () => {
       },
     });
   };
+  useEffect(() => {
+    if (brandData) {
+      setBrand(brandData.body.data);
+      const loading = status === "pending";
+      setLoading(loading);
+    }
+  }, [brandData]);
 
   return (
     <div className="flex gap-6">

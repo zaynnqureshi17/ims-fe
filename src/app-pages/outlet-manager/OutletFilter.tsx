@@ -1,8 +1,15 @@
+"use client";
 import SelectField from "@/components/form/SelectField";
 import PageHeader from "@/components/page-header";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import { Filter } from "lucide-react";
+import { useMultiOptions } from "@/hooks/useMultiOptions";
+import { useGetDepartment } from "@/queries/departments/useGetDepartment.query";
 const OutletFilter = () => {
+  const { data: departmentsOption } = useGetDepartment();
+  const { outletOptions } = useMultiOptions({
+    departments: departmentsOption?.body?.data,
+  });
+
   return (
     <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 ">
       <PageHeader
@@ -10,10 +17,13 @@ const OutletFilter = () => {
         description="Overview of Downtown Outlet Activity."
       />
       <div className="flex items-center justify-between space-x-4  ">
+        {/* Brand */}
         <SelectField
-          icon={<Filter className="h-5 w-5 text-gray-500" />}
-          placeholder="All Department"
-          item={departmentOptions}
+          label="All Departments"
+          placeholder="Select department"
+          options={outletOptions}
+          className="w-full bg-white"
+          onValueChange={(value) => console.log(value)}
         />
         <div className="w-full ">
           <span>Last updated 2 min ago</span>
@@ -24,5 +34,3 @@ const OutletFilter = () => {
 };
 
 export default OutletFilter;
-
-const departmentOptions = ["all", "kitchen", "bar", "dining"];

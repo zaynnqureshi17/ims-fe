@@ -1,18 +1,24 @@
 "use client";
-import OutletsListTable, {
-  OutletDataProps,
-} from "@/components/table/outlets/OutletsListTable";
+import OutletsListTable from "@/components/table/outlets/OutletsListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
+import { IOutlet } from "@/utils/types/outlet.type";
 import { useState } from "react";
 
 interface OutletsTableProps {
+  outlets: IOutlet[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
-const OutletsTable = ({ onEdit, onDelete, onView }: OutletsTableProps) => {
+const OutletsTable = ({
+  outlets,
+  onEdit,
+  onDelete,
+  onView,
+}: OutletsTableProps) => {
   const [page, setPage] = useState(1);
+  console.log(outlets);
   return (
     <TableWrapper
       totalItems={12}
@@ -22,7 +28,7 @@ const OutletsTable = ({ onEdit, onDelete, onView }: OutletsTableProps) => {
     >
       <OutletsListTable
         headtable={headtable}
-        outletData={OutletData}
+        outletData={outlets}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
@@ -41,32 +47,4 @@ const headtable = [
   "Created Date",
   "Status",
   "Actions",
-];
-
-const OutletData: OutletDataProps[] = [
-  {
-    id: 1,
-    outlets: "Downtown Branch",
-    location: "123 Main Street New York, NY 10001",
-    brand_name: "Brand A",
-    status: "Active",
-    created_date: "2023-01-01",
-  },
-  {
-    id: 2,
-    outlets: "Downtown Branch",
-    location: "123 Main Street New York, NY 10001",
-    brand_name: "Brand A",
-    status: "Active",
-    created_date: "2023-01-01",
-  },
-
-  {
-    id: 3,
-    outlets: "Downtown Branch",
-    location: "123 Main Street New York, NY 10001",
-    brand_name: "Brand A",
-    status: "Active",
-    created_date: "2023-01-01",
-  },
 ];

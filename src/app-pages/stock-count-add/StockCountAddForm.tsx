@@ -1,107 +1,76 @@
 "use client";
+import ControllerSelect from "@/components/form/ControllerSelect";
 import FormInputField from "@/components/form/FormInputField";
 import FormTextarea from "@/components/form/FormTextarea";
-import SelectField from "@/components/form/Select";
+import SelectField from "@/components/form/SelectField";
 import { Button } from "@/components/ui/button";
+import { FormWrapper } from "@/components/wrapper/FormWrapper";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import React from "react";
+import { useCreateStockCount } from "@/queries/stock-count/useCreateStockCount.query";
+import { optionsType } from "@/utils/types/common.type";
 import { Controller, FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export type StorageFormValues = {
-  name: string;
-  brand: string;
-  outlet: string;
-  department: string;
+  storage_name: string;
+  outlet_id: string;
   status: string;
   description: string;
 };
 
-const StockCountAddForm: React.FC = () => {
+const StockCountAddForm = ({
+  outletOptions,
+}: {
+  outletOptions: optionsType[];
+}) => {
+  const { mutate: createStorage, status } = useCreateStockCount();
+
   const methods = useForm<StorageFormValues>({
     defaultValues: {
-      name: "",
-      brand: "",
-      outlet: "",
-      department: "",
-      status: "Active",
+      storage_name: "",
+      outlet_id: "",
+      status: "active",
       description: "",
     },
   });
-  const { handleSubmit, control } = methods;
+
+  const { handleSubmit, reset, control } = methods;
+  const loading = status === "pending";
 
   const onSubmit = (data: StorageFormValues) => {
-    console.log("Storage data:", data);
+    console.log(data);
+    createStorage(
+      { body: data },
+      {
+        onSuccess: () => {
+          // reset();
+          toast.success("Storage created successfully");
+        },
+      },
+    );
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <FormWrapper onSubmit={handleSubmit(onSubmit)} disabled={loading}>
         <GridWrapper className="grid-cols-1 md:grid-cols-2 gap-6">
           {/* Storage Name */}
           <FormInputField
-            name="name"
+            name="storage_name"
             label="Storage Name"
             placeholder="Enter Name"
             type="text"
+            rules={{ required: "Storage name is required" }}
           />
 
           {/* Brand */}
-          <Controller
-            name="brand"
+          <ControllerSelect
+            name="outlet_id"
             control={control}
-            render={({ field }) => (
-              <SelectField
-                label="Brand"
-                placeholder="Select Brand"
-                options={[
-                  { value: "brand1", label: "Brand 1" },
-                  { value: "brand2", label: "Brand 2" },
-                  { value: "brand3", label: "Brand 3" },
-                ]}
-                className="w-full bg-white"
-                value={field.value}
-                onValueChange={field.onChange}
-              />
-            )}
-          />
-
-          {/* Outlet */}
-          <Controller
-            name="outlet"
-            control={control}
-            render={({ field }) => (
-              <SelectField
-                label="Outlet"
-                placeholder="Select Outlet"
-                options={[
-                  { value: "outlet1", label: "Outlet 1" },
-                  { value: "outlet2", label: "Outlet 2" },
-                ]}
-                className="w-full bg-white"
-                value={field.value}
-                onValueChange={field.onChange}
-              />
-            )}
-          />
-
-          {/* Department */}
-          <Controller
-            name="department"
-            control={control}
-            render={({ field }) => (
-              <SelectField
-                label="Department"
-                placeholder="Select Department"
-                options={[
-                  { value: "sales", label: "Sales" },
-                  { value: "inventory", label: "Inventory" },
-                  { value: "finance", label: "Finance" },
-                ]}
-                className="w-full bg-white"
-                value={field.value}
-                onValueChange={field.onChange}
-              />
-            )}
+            label="Outlet"
+            placeholder="Select outlet"
+            options={outletOptions}
+            rules={{ required: "Brand is required" }}
           />
 
           {/* Status */}
@@ -113,8 +82,8 @@ const StockCountAddForm: React.FC = () => {
                 label="Status"
                 placeholder="Select Status"
                 options={[
-                  { value: "Active", label: "Active" },
-                  { value: "Inactive", label: "Inactive" },
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
                 ]}
                 className="w-full bg-white"
                 value={field.value}
@@ -124,18 +93,32 @@ const StockCountAddForm: React.FC = () => {
           />
 
           {/* Description */}
-          <FormTextarea label="Description" placeholder="Notes" rows={6} />
+          <FormTextarea
+            name="description"
+            label="Description"
+            placeholder="Notes"
+            rows={6}
+          />
         </GridWrapper>
-
         <div className="flex justify-end items-center mt-4 gap-6">
-          <Button type="button" variant="cancel" className="w-fit">
+          <Button
+            type="button"
+            variant="cancel"
+            className="w-fit"
+            onClick={() => reset()}
+          >
             Cancel
           </Button>
-          <Button type="submit" variant="secondary" className="w-fit">
-            Save
+          <Button
+            type="submit"
+            variant="secondary"
+            className="w-fit"
+            disabled={loading}
+          >
+            {loading ? "Saving..." : "Save"}
           </Button>
         </div>
-      </form>
+      </FormWrapper>
     </FormProvider>
   );
 };

@@ -1,12 +1,17 @@
 "use client";
+import { useItemContext } from "@/context/item.context";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
-import UnitOfMeasurementTable from "./ItemReceivingTable";
 import ItemReceivingTable from "./ItemReceivingTable";
 
 const ItemReceivingListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
+  const { item, loading } = useItemContext();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const handleEditUOM = (uomId: number) => {
     navigate(
@@ -27,6 +32,7 @@ const ItemReceivingListTable: React.FC = () => {
 
   return (
     <ItemReceivingTable
+      item={item}
       onEdit={handleEditUOM}
       onDelete={handleDeleteUOM}
       onView={handleViewUOM}

@@ -1,4 +1,5 @@
 "use client";
+import { IBrand } from "@/utils/types/brand.type";
 import React, { useState } from "react";
 
 type props = {
@@ -6,17 +7,21 @@ type props = {
 };
 
 type BrandContextType = {
-  brandId: number;
-  setBrandId: React.Dispatch<React.SetStateAction<number>>;
+  brand: IBrand[] | [];
+  setBrand: React.Dispatch<React.SetStateAction<IBrand[] | []>>;
+
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const BrandContext = React.createContext<BrandContextType | undefined>(
   undefined,
 );
 const BrandProvider: React.FC<props> = ({ children }) => {
-  const [brandId, setBrandId] = useState<number>(1);
+  const [brand, setBrand] = useState<IBrand[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   return (
-    <BrandContext.Provider value={{ brandId, setBrandId }}>
+    <BrandContext.Provider value={{ brand, setBrand, loading, setLoading }}>
       {children}
     </BrandContext.Provider>
   );
@@ -26,10 +31,12 @@ const useBrandContext = () => {
   if (!context) {
     throw new Error("useBrandContext must be used within a BrandProvider");
   }
-  const { brandId, setBrandId } = context;
+  const { brand, setBrand, loading, setLoading } = context;
   return {
-    brandId,
-    setBrandId,
+    brand,
+    setBrand,
+    loading,
+    setLoading,
   };
 };
 

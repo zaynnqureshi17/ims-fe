@@ -1,4 +1,5 @@
 import IconBg from "@/components/common/IconBg";
+import FormattedDate from "@/components/format-date/FormattedDate";
 import {
   Card,
   CardContent,
@@ -7,37 +8,36 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { brandsActions, brandsIconPath } from "@/utils/PublicImageBaseUrl";
+import { IBrand } from "@/utils/types/brand.type";
 import Image from "next/image";
 
-export interface BrandViewCardProps {
-  id: number;
-  title: string;
-  description: string;
-  name: string;
-  date: string;
-  outletsCount: number;
-  status: "Active" | "Inactive";
-  logo: React.ReactNode;
+export type BrandViewCardProps = IBrand & {
   onEdit?: () => void;
   onDelete?: () => void;
-}
+};
 
 const BrandViewCard: React.FC<BrandViewCardProps> = ({
-  id,
-  title,
+  brand_id,
+  brand_name,
   description,
-  outletsCount,
   status,
   logo,
-  name,
-  date,
+  created_at,
   onEdit,
   onDelete,
 }) => {
   return (
     <Card className="w-full gap-2">
       <CardHeader className="flex justify-between items-start">
-        {logo}
+        <Image
+          src={logo}
+          alt="Brand Logo"
+          width={24}
+          height={24}
+          className="!p-0 cursor-pointer"
+          onClick={onEdit}
+        />
+
         <div className="text-center flex justify-start gap-x-3">
           <IconBg
             icon={`${brandsActions}edit.svg`}
@@ -58,7 +58,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+        <CardTitle className="text-lg font-semibold">{brand_name}</CardTitle>
         <p className="text-sm text-gray-500">{description}</p>
       </CardContent>
       <CardFooter>
@@ -70,7 +70,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={16}
               height={16}
             />
-            <p>{outletsCount} Outlets</p>
+            <p>{1} Outlets</p>
           </div>
           <div
             className={`px-3 py-1 font-semibold rounded-full text-sm flex justify-center items-center gap-x-2 ${
@@ -94,7 +94,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={12}
               height={12}
             />
-            <span>{name}</span>
+            <span>{"outlet name"}</span>
           </div>
           <div className="px-3 py-1 rounded-full text-sm text-gray bg-pagination-gray font-semibold flex justify-center items-center gap-x-2">
             <Image
@@ -103,7 +103,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={16}
               height={16}
             />
-            <span>{date}</span>
+            <FormattedDate date={created_at} />
           </div>
         </div>
       </CardFooter>

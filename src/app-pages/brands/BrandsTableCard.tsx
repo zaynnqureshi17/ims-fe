@@ -1,4 +1,5 @@
 "use client";
+import { useBrandContext } from "@/context/brand.context";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useSearchParams } from "next/navigation";
@@ -10,6 +11,7 @@ const BrandsTableCard: React.FC = () => {
   const [collapsed, setCollapsed] = useState<string>("list");
   const navigate = usePrefetchNavigate();
   const searchParams = useSearchParams();
+  const { brand, loading } = useBrandContext();
 
   // Initialize the collapsed state based on the search parameters
   useEffect(() => {
@@ -31,11 +33,12 @@ const BrandsTableCard: React.FC = () => {
   };
 
   if (collapsed === "grid") {
-    return <BrandsCard onEdit={handleEditBrand} />;
+    return <BrandsCard brand={brand} onEdit={handleEditBrand} />;
   }
   if (collapsed === "list") {
     return (
       <BrandsTable
+        brand={brand}
         onEdit={handleEditBrand}
         onDelete={handleDeleteBrand}
         onView={handleViewBrand}

@@ -24,10 +24,11 @@ const FinanceFilter: React.FC = () => {
       <div className="col-span-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-2">
         {filterFields.map((field) => (
           <SelectField
-            key={field.label}
             label={field.label}
-            item={field.item}
             placeholder={`Select ${field.label}`}
+            options={field.item.map((item) => ({ value: item, label: item }))}
+            className="w-full bg-white  "
+            onValueChange={(value) => console.log(value)}
           />
         ))}
       </div>

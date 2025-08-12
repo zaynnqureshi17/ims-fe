@@ -1,4 +1,6 @@
 "use client";
+import { useOutletContext } from "@/context/outlet.context";
+import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,11 +13,17 @@ type queryParams = string;
 const OutletsFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [selectedRegion, setSelectedRegion] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
   const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
+  const { setOutlet, setLoading } = useOutletContext();
+  const { data: outletsData, status } = useGetOutlets({
+    status: selectedStatus,
+    region: selectedRegion,
+    brand: selectedBrand,
+    search: searchText,
+  });
 
   // Load from URL on page load
   useEffect(() => {
@@ -47,6 +55,14 @@ const OutletsFilter: React.FC = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (outletsData) {
+      setOutlet(outletsData?.body?.data);
+      const loading = status === "pending";
+      setLoading(loading);
+    }
+  }, [outletsData]);
 
   return (
     <div className="flex gap-6">

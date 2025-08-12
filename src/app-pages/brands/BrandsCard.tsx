@@ -1,22 +1,19 @@
-import BrandCardTable, {
-  BrandCardTableProps,
-} from "@/components/card/brand/BrandCardTable";
-import IconBg from "@/components/common/IconBg";
+import BrandCardTable from "@/components/card/brand/BrandCardTable";
 import GridWrapper from "@/components/wrapper/GridWrapper";
+import { IBrand } from "@/utils/types/brand.type";
 
-const BrandsCard = ({ onEdit }: { onEdit: (id: number) => void }) => {
+interface BrandsCardProps {
+  brand: IBrand[];
+  onEdit: (brand_id: number) => void;
+}
+
+const BrandsCard = ({ brand, onEdit }: BrandsCardProps) => {
   return (
     <GridWrapper className="sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-      {BrandCardTableData.map((brand, index) => (
+      {brand.map((brand: IBrand) => (
         <BrandCardTable
-          id={brand.id}
-          key={index}
-          title={brand.title}
-          description={brand.description}
-          outletsCount={brand.outletsCount}
-          status={brand.status}
-          logo={brand.logo}
-          onEdit={() => onEdit(brand.id)}
+          brand={brand}
+          onEdit={() => onEdit(brand.brand_id)}
           onDelete={() => console.log("Delete clicked")}
         />
       ))}
@@ -25,102 +22,3 @@ const BrandsCard = ({ onEdit }: { onEdit: (id: number) => void }) => {
 };
 
 export default BrandsCard;
-
-const BrandCardTableData: BrandCardTableProps[] = [
-  {
-    id: 1,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-  {
-    id: 2,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-  {
-    id: 3,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-  {
-    id: 4,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-  {
-    id: 5,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-  {
-    id: 6,
-    title: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outletsCount: 10,
-    status: "Active",
-    logo: (
-      <IconBg
-        className=" bg-pagination-gray"
-        icon="/static/pizza.svg"
-        title="Pizza Palace"
-        width={50}
-        height={50}
-      />
-    ),
-  },
-];

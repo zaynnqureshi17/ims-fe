@@ -1,5 +1,9 @@
-import SelectField from "@/components/form/Select";
-import React from "react";
+import SelectField from "@/components/form/SelectField";
+import { useGetDepartment } from "@/queries/departments/useGetDepartment.query";
+import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
+import { useGetRoles } from "@/queries/roles/useGetRoles.query";
+import React, { useMemo } from "react";
+
 interface UsersRoleOutletDepartmentFilterProps {
   selectedRole?: string;
   selectedOutlet?: string;
@@ -25,11 +29,36 @@ const UsersRoleOutletDepartmentFilter: React.FC<
   setSelectedDepartment,
   handleUpdateQuery,
 }) => {
+  const { data: roles } = useGetRoles();
+  const { data: outlets } = useGetOutlets({});
+  const { data: departments } = useGetDepartment();
+  const roleOptions = useMemo(() => {
+    if (!roles?.body) return [];
+    return roles.body.roles.map((role: any) => ({
+      value: role.role_name,
+      label: role.role_name.replace(/_/g, " "),
+    }));
+  }, [roles]);
+  const outletOptions = useMemo(() => {
+    if (!outlets?.body) return [];
+    return outlets.body.data.map((outlet: any) => ({
+      value: outlet.outlet_name,
+      label: outlet.outlet_name.replace(/_/g, " "),
+    }));
+  }, [outlets]);
+
+  const departmentOptions = useMemo(() => {
+    if (!departments?.body) return [];
+    return departments.body.departments.map((department: any) => ({
+      value: department.department_name,
+      label: department.department_name.replace(/_/g, " "),
+    }));
+  }, [departments]);
   return (
     <div className="inline-flex gap-6">
       <SelectField
         placeholder="All Roles"
-        options={allRoles}
+        options={roleOptions}
         value={selectedRole}
         onValueChange={(val) => {
           setSelectedRole(val);
@@ -38,7 +67,7 @@ const UsersRoleOutletDepartmentFilter: React.FC<
       />
       <SelectField
         placeholder="All Outlets"
-        options={allOutlets}
+        options={outletOptions}
         value={selectedOutlet}
         onValueChange={(val) => {
           setSelectedOutlet(val);
@@ -47,7 +76,7 @@ const UsersRoleOutletDepartmentFilter: React.FC<
       />
       <SelectField
         placeholder="All Departments"
-        options={allDepartments}
+        options={departmentOptions}
         value={selectedDepartment}
         onValueChange={(val) => {
           setSelectedDepartment(val);
@@ -59,27 +88,3 @@ const UsersRoleOutletDepartmentFilter: React.FC<
 };
 
 export default UsersRoleOutletDepartmentFilter;
-
-const allRoles = [
-  { value: "all-roles", label: "All Roles" },
-  { value: "admin", label: "Admin" },
-  { value: "editor", label: "Editor" },
-  { value: "viewer", label: "Viewer" },
-];
-
-const allOutlets = [
-  { value: "all-outlets", label: "All Outlets" },
-  { value: "outlet-1", label: "Outlet 1" },
-  { value: "outlet-2", label: "Outlet 2" },
-  { value: "outlet-3", label: "Outlet 3" },
-];
-
-const allDepartments = [
-  { value: "all-departments", label: "All Departments" },
-  { value: "sales", label: "Sales" },
-  { value: "marketing", label: "Marketing" },
-  { value: "engineering", label: "Engineering" },
-  { value: "hr", label: "HR" },
-  { value: "finance", label: "Finance" },
-  { value: "customer-support", label: "Customer Support" },
-];

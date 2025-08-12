@@ -27,6 +27,10 @@ jobs:
           port: 22
           source: "." # sirf source code bhej rahe hain, node_modules nahi
           target: "/var/www/dev"
+          rm: true
+          strip_components: 0
+          exclude: ".env"
+          
 
       - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master

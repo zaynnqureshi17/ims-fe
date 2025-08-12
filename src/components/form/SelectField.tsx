@@ -1,4 +1,4 @@
-import { Label } from "@/components/ui/label";
+// components/OutletSelect.tsx
 import {
   Select,
   SelectContent,
@@ -6,32 +6,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import React from "react";
 
-type SelectFieldProps = {
+export interface SelectFieldProps {
+  placeholder?: string;
+  options: { value: string; label: string }[];
+  onValueChange?: (value: string) => void;
+  className?: string;
+  value?: string;
   label?: string;
-  item: string[];
-  placeholder: string;
-  icon?: React.ReactNode;
-};
+}
 
-const SelectField = ({ label, item, placeholder, icon }: SelectFieldProps) => {
+export const SelectField: React.FC<SelectFieldProps> = ({
+  placeholder = "Select",
+  options,
+  onValueChange,
+  className = "w-[240px] h-9 text-sm bg-white",
+  value,
+  label,
+}) => {
+  const internalValue = value === "" ? "__empty__" : value;
+
   return (
-    <div className="space-y-2 w-full bg-white rounded-md">
-      {label && <Label htmlFor="select-field">{label}</Label>}
-      <Select>
-        <SelectTrigger
-          id="select-field"
-          className="w-full space-x-2"
-        >
-          <div className="flex justify-start items-center space-x-2">
-          {icon && <span className="flex-none">{icon}</span>}
+    <div className="flex flex-col space-y-1.5">
+      {label && <label className="text-sm capitalize">{label}</label>}
+      <Select
+        value={internalValue}
+        onValueChange={(val) => {
+          onValueChange?.(val === "__empty__" ? "" : val);
+        }}
+      >
+        <SelectTrigger className={className}>
           <SelectValue placeholder={placeholder} />
-          </div>
         </SelectTrigger>
         <SelectContent>
-          {item.map((i) => (
-            <SelectItem key={i} value={i} className="capitalize">
-              {i}
+          {/* Default empty option */}
+          <SelectItem value="__empty__">{placeholder}</SelectItem>
+          {options.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value}>
+              {opt.label}
             </SelectItem>
           ))}
         </SelectContent>

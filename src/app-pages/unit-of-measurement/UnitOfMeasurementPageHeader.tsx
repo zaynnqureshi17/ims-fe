@@ -9,7 +9,7 @@ import { memo } from "react";
 const UnitOfMeasurementPageHeader = () => {
   const navigate = usePrefetchNavigate();
   const handleAddUnit = () => {
-    navigate(ProtectedUrls.common.addItemReceiving);
+    navigate(ProtectedUrls.admin.addUom);
   };
   return (
     <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 ">

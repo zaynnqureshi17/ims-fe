@@ -5,7 +5,7 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 const UserEditTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
     { label: "Users", href: ProtectedUrls.common.manageUsers },
-    { label: "Add New User", active: true },
+    { label: "Edit User", active: true },
   ];
 
   return <TopBar breadcrumbs={breadcrumbs} />;

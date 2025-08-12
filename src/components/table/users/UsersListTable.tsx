@@ -1,4 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
+import FormattedDate from "@/components/format-date/FormattedDate";
 import {
   Table,
   TableBody,
@@ -8,22 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
+import { IUser } from "@/utils/types/user.type";
 import Image from "next/image";
 
-export type UsersDataProps = {
-  id: number;
-  profile_picture?: string;
-  name: string;
-  email: string;
-  role: string;
-  outlet: string;
-  department: string;
-  created_date: string;
-  status: string;
-};
-
 interface InterfaceUsers {
-  UsersData: UsersDataProps[];
+  UsersData: IUser[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -50,7 +40,7 @@ const UsersListTable = ({
       <TableBody>
         {UsersData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
+            <TableCell className="text-gray">{item.user_id}</TableCell>
             <TableCell>
               <div className="flex justify-start gap-x-2">
                 <Image
@@ -66,15 +56,17 @@ const UsersListTable = ({
                 </div>
               </div>
             </TableCell>
-            <TableCell className="text-left text-gray">{item.role}</TableCell>
+            <TableCell className="text-left text-gray">
+              {item.role_name || "N/A"}
+            </TableCell>
             <TableCell>
-              <div className="font-medium">{item.outlet}</div>
+              <div className="font-medium">{item.outlet_name || "N/A"}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.department}
+              {item.department_name || "N/A"}
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.created_date}
+              <FormattedDate date={item.created_at} />
             </TableCell>
             <TableCell className="text-left">
               <span
@@ -89,7 +81,7 @@ const UsersListTable = ({
             </TableCell>
             <TableCell>
               <ActionButtons
-                itemId={item.id}
+                itemId={item.user_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

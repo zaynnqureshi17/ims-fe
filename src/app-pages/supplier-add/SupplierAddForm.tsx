@@ -1,169 +1,199 @@
 "use client";
+import ControllerCheckboxGroup from "@/components/form/ControllerCheckboxGroup";
+import ControllerSelect from "@/components/form/ControllerSelect";
 import FormInputField from "@/components/form/FormInputField";
-import SelectField from "@/components/form/Select";
+import UploadSingleImage from "@/components/form/UploadSingleImage";
 import { Button } from "@/components/ui/button";
+import { FormWrapper } from "@/components/wrapper/FormWrapper";
 import GridWrapper from "@/components/wrapper/GridWrapper";
+import { useCreateSupplier } from "@/queries/supplier/useCreateSupplier.query";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 type SupplierFormValues = {
   category: string;
   name: string;
-  registrationCode: string;
+  registration_code: string;
   pic: string;
   contact: string;
   email: string;
-  supplierCode: string;
-  financeCode: string;
+  supplier_code: string;
+  finance_code: string;
   status: string;
-  serviceAreas: string[];
+  area_short: string[];
+  supplier_image_url: string | null;
 };
 
-const serviceAreas = [
+const area_short = [
   { value: "KV", label: "KV – Kuala Lumpur" },
   { value: "SU", label: "SU – Subang" },
   { value: "PN", label: "PN – Penang" },
 ];
 
 const SupplierAddForm = () => {
-  const methods = useForm<SupplierFormValues>({
+  const { mutate: createSupplier, status } = useCreateSupplier();
+
+  const methods = useForm({
     defaultValues: {
       category: "",
-      name: "",
-      registrationCode: "",
+      company_name: "",
+      registration_code: "",
       pic: "",
       contact: "",
       email: "",
-      supplierCode: "",
-      financeCode: "",
-      status: "Active",
-      serviceAreas: [],
+      supplier_code: "",
+      finance_code: "",
+      status: "",
+      area_short: [],
+      supplier_image_url: null,
     },
   });
-  const { handleSubmit, setValue } = methods;
 
-  const onSubmit = (data: SupplierFormValues) => {
-    console.log("Form data:", data);
+  const { handleSubmit, reset, control } = methods;
+  const loading = status === "pending";
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+    createSupplier(
+      { body: data },
+      {
+        onSuccess: () => {
+          reset();
+          toast.success("Supplier created successfully");
+        },
+      },
+    );
   };
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col justify-between h-full">
+      <FormWrapper onSubmit={handleSubmit(onSubmit)} disabled={loading}>
+        <div className="flex flex-col justify-between">
           <div className="flex flex-col gap-6">
+            <UploadSingleImage
+              name="supplier_image_url"
+              label="Supplier Image"
+            />
+
             <GridWrapper className="grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Category */}
-              <SelectField
+              <ControllerSelect
+                name="category"
+                control={control}
                 label="Category"
                 placeholder="Select Category"
-                options={[
-                  { value: "admin", label: "Admin" },
-                  { value: "finance", label: "Finance" },
-                  { value: "brandManager", label: "Brand Manager" },
-                  { value: "outletManager", label: "Outlet Manager" },
-                  { value: "outletStaff", label: "Outlet Staff" },
-                ]}
-                className="w-full bg-white"
-                onValueChange={(val) => setValue("category", val)}
+                options={[{ value: "food", label: "Food" }]}
+                rules={{ required: "Category is required" }}
               />
 
-              {/* Company Name */}
               <FormInputField
-                name="name"
+                name="company_name"
                 label="Company Name"
                 placeholder="Enter Company Name"
                 type="text"
+                rules={{ required: "Company name is required" }}
               />
 
-              {/* Registration Code */}
               <FormInputField
-                name="registrationCode"
+                name="registration_code"
                 label="Registration Code"
                 placeholder="Company Registration Number"
                 type="text"
+                rules={{ required: "Registration code is required" }}
               />
 
-              {/* Person in Charge */}
               <FormInputField
                 name="pic"
                 label="Person in Charge (PIC)"
                 placeholder="Contact Person's Full Name"
                 type="text"
+                rules={{ required: "PIC name is required" }}
               />
 
-              {/* Contact */}
               <FormInputField
-                name="contact"
+                name="contact_number"
                 label="Contact"
                 placeholder="e.g., +92 300 1234567"
                 type="text"
+                rules={{
+                  required: "Contact number is required",
+                  pattern: {
+                    value: /^\+?\d{7,15}$/,
+                    message: "Invalid contact number",
+                  },
+                }}
               />
 
-              {/* Email */}
               <FormInputField
                 name="email"
                 label="Email"
                 placeholder="supplier@company.com"
                 type="email"
+                rules={{
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email format",
+                  },
+                }}
               />
 
-              {/* Supplier Code */}
-              <SelectField
+              <FormInputField
+                name="supplier_code"
                 label="Supplier Code"
                 placeholder="Auto-generated (Editable)"
-                options={[]}
-                className="w-full bg-white"
-                onValueChange={(val) => setValue("supplierCode", val)}
+                type="text"
               />
 
-              {/* Finance Code */}
               <FormInputField
-                name="financeCode"
+                name="finance_code"
                 label="Finance Code"
                 placeholder="Financial Module Mapping Code"
                 type="text"
               />
 
-              {/* Status */}
-              <SelectField
+              <ControllerSelect
+                name="status"
+                control={control}
                 label="Status"
                 placeholder="Select Status"
                 options={[
-                  { value: "Active", label: "Active" },
-                  { value: "Inactive", label: "Inactive" },
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
                 ]}
-                className="w-full bg-white"
-                onValueChange={(val) => setValue("status", val)}
+                rules={{ required: "Status is required" }}
               />
 
-              {/* Service Area */}
-              <div className="flex flex-col">
-                <span className="mb-2 font-medium">Service Area</span>
-                <div className="flex flex-col space-y-2">
-                  {serviceAreas.map((area) => (
-                    <label
-                      key={area.value}
-                      className="inline-flex items-center gap-2"
-                    >
-                      <input type="checkbox" value={area.value} />
-                      <span>{area.label}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
+              {/* Service Areas */}
+              <ControllerCheckboxGroup
+                name="area_short"
+                control={control}
+                label="Service Areas"
+                options={area_short}
+                rules={{ required: "At least one service area is required" }}
+              />
             </GridWrapper>
           </div>
 
-          {/* Buttons */}
           <div className="flex justify-end items-center mt-4 gap-6">
-            <Button type="button" variant="cancel" className="w-fit">
+            <Button
+              type="button"
+              variant="cancel"
+              className="w-fit"
+              onClick={() => reset()}
+            >
               Cancel
             </Button>
-            <Button type="submit" variant="secondary" className="w-fit">
-              Save
+            <Button
+              type="submit"
+              variant="secondary"
+              className="w-fit"
+              disabled={loading}
+            >
+              {loading ? "Saving..." : "Save"}
             </Button>
           </div>
         </div>
-      </form>
+      </FormWrapper>
     </FormProvider>
   );
 };

@@ -1,10 +1,10 @@
 "use client";
 import OutletViewCard from "@/components/card/outlet/OutletViewCard";
-import IconBg from "@/components/common/IconBg";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { IOutlet } from "@/utils/types/outlet.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
 
-const OutletDetailView = () => {
+const OutletDetailView = ({ outletData }: { outletData: IOutlet }) => {
   const navigate = usePrefetchNavigate();
   const handleEditOutlet = (outletId: number) => {
     navigate(ProtectedUrls.admin.editOutlet);
@@ -15,16 +15,14 @@ const OutletDetailView = () => {
     console.log("Delete outlet action triggered");
   };
 
-  const handleViewOutlet = (outletId: number) => {
-    navigate(ProtectedUrls.admin.viewOutlet);
-  };
+  console.log(outletData);
   return (
     <OutletViewCard
-      title="Karahi Express – D Ground"
-      outletCode="OUT-FSD-001"
-      status="Active"
-      brand="karachi express"
-      onEdit={() => handleEditOutlet(1)}
+      outlet_name={outletData.outlet_name}
+      outlet_code={outletData.outlet_code}
+      status={outletData.status}
+      brand_name={outletData.brand_name}
+      onEdit={() => handleEditOutlet(outletData.outlet_id)}
       onDelete={() => handleDeleteOutlet()}
     />
   );

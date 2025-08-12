@@ -1,4 +1,6 @@
 "use client";
+import { useUOMContext } from "@/context/uom.context";
+import { useGetOMs } from "@/queries/uom/useGetOMs.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,7 +16,11 @@ const UnitOfMeasurementFilter: React.FC = () => {
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [selectedCategory, setSelectedCategory] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
-
+  const { setUOM, setLoading } = useUOMContext();
+  const { data: uomsData, status } = useGetOMs({
+    category: selectedCategory,
+    search: searchText,
+  });
   // Load from URL on page load
   useEffect(() => {
     const search = searchParams.get("search") || "";
@@ -41,6 +47,12 @@ const UnitOfMeasurementFilter: React.FC = () => {
       },
     });
   };
+
+  useEffect(() => {
+    setUOM(uomsData?.body?.data);
+    const loading = status === "pending";
+    setLoading(loading);
+  }, [uomsData, status]);
 
   return (
     <div className="flex gap-6">

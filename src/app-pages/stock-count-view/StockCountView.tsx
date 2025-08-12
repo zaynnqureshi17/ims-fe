@@ -1,11 +1,11 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import StockCountViewTopBar from "./StockCountViewTopBar";
+import StockCountViewActivity from "./StockCountViewActivity";
 import StockCountViewHeader from "./StockCountViewHeader";
 import StockCountViewMain from "./StockCountViewMain";
-import StockCountViewActivity from "./StockCountViewActivity";
+import StockCountViewTopBar from "./StockCountViewTopBar";
 
-const StockCountView = () => {
+const StockCountView = ({ id }: { id: number }) => {
   return (
     <ProtectedLayoutWrapper topBar={<StockCountViewTopBar />}>
       <StockCountViewHeader />

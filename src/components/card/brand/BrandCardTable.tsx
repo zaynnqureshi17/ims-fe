@@ -7,32 +7,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
+import { IBrand } from "@/utils/types/brand.type";
 
-export interface BrandCardTableProps {
-  id: number;
-  title: string;
-  description: string;
-  outletsCount: number;
-  status: "Active" | "Inactive";
-  logo: React.ReactNode;
+type BrandCardTableProps = {
+  brand: IBrand;
   onEdit?: () => void;
   onDelete?: () => void;
-}
+};
 
 const BrandCardTable: React.FC<BrandCardTableProps> = ({
-  id,
-  title,
-  description,
-  outletsCount,
-  status,
-  logo,
+  brand,
   onEdit,
   onDelete,
 }) => {
   return (
     <Card className="w-full gap-2">
       <CardHeader className="flex justify-between items-start">
-        {logo}
+        {brand.logo}
         <div className="text-center flex justify-start gap-x-3">
           <IconBg
             icon={`${brandsActions}edit.svg`}
@@ -53,13 +44,15 @@ const BrandCardTable: React.FC<BrandCardTableProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-        <p className="text-sm text-gray-500">{description}</p>
+        <CardTitle className="text-lg font-semibold">
+          {brand.brand_name}
+        </CardTitle>
+        <p className="text-sm text-gray-500">{brand.description}</p>
       </CardContent>
       <CardFooter>
         <div className=" w-full flex justify-between items-center">
           <p className="text-sm font-medium text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
-            {outletsCount} Outlets
+            {1} Outlets
           </p>
           <span
             className={`px-3 py-1 rounded-full text-sm ${
@@ -68,7 +61,7 @@ const BrandCardTable: React.FC<BrandCardTableProps> = ({
                 : "text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5"
             }`}
           >
-            {status}
+            {brand.status}
           </span>
         </div>
       </CardFooter>

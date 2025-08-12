@@ -1,7 +1,7 @@
 import Outlets from "@/app-pages/outlets/Outlets";
 
-const page = () => {
+const Page = async () => {
   return <Outlets />;
 };
 
-export default page;
+export default Page;

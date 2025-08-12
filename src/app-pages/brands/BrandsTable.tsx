@@ -1,15 +1,17 @@
 "use client";
 import BrandsListTable from "@/components/table/brands/BrandsListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
+import { IBrand } from "@/utils/types/brand.type";
 import { useState } from "react";
 
 interface BrandTableProps {
+  brand: IBrand[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
-const BrandsTable = ({ onEdit, onDelete, onView }: BrandTableProps) => {
+const BrandsTable = ({ brand, onEdit, onDelete, onView }: BrandTableProps) => {
   const [page, setPage] = useState(1);
   return (
     <TableWrapper
@@ -20,7 +22,7 @@ const BrandsTable = ({ onEdit, onDelete, onView }: BrandTableProps) => {
     >
       <BrandsListTable
         headtable={headtable}
-        brandData={brandData}
+        brandData={brand}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
@@ -39,31 +41,4 @@ const headtable = [
   "Created Date",
   "Status",
   "Actions",
-];
-
-const brandData = [
-  {
-    id: 1,
-    brandName: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outlets: "2",
-    status: "Active",
-    createdDate: "2023-01-01",
-  },
-  {
-    id: 2,
-    brandName: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outlets: "2",
-    status: "Active",
-    createdDate: "2023-01-01",
-  },
-  {
-    id: 3,
-    brandName: "Pizza Palace",
-    description: "Premium pizza chain with authentic Italian recipes",
-    outlets: "2",
-    status: "Active",
-    createdDate: "2023-01-01",
-  },
 ];

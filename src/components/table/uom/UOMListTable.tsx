@@ -8,18 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-export type UOMDataProps = {
-  id: number;
-  UOM: string;
-  category: string;
-  quantity: number;
-  base_UOM: string;
-  status: string;
-};
+import { IUOM } from "@/utils/types/uom.type";
 
 interface InterfaceOutlet {
-  UOMData: UOMDataProps[];
+  UOMData: IUOM[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -44,21 +36,21 @@ const UOMListTable = ({
       <TableBody>
         {UOMData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
-            <TableCell className="">{item.UOM}</TableCell>
-            <TableCell className="text-left ">{item.category}</TableCell>
+            <TableCell className="text-gray">{item.preset_uom_id}</TableCell>
+            <TableCell className="">{item.uom}</TableCell>
+            <TableCell className="text-left ">{item.for_category}</TableCell>
             <TableCell>
               <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
                 {item.quantity}
               </span>
             </TableCell>
-            <TableCell className="text-left">{item.base_UOM}</TableCell>
+            <TableCell className="text-left">{item.baseUOM}</TableCell>
             <TableCell className="text-left">
               <StatusBadge status={item.status} />
             </TableCell>
             <TableCell className="">
               <ActionButtons
-                itemId={item.id}
+                itemId={item.preset_uom_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
               />{" "}

@@ -8,23 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
+import { ISupplier } from "@/utils/types/supplier.type";
 import Image from "next/image";
 
-export type SuppliersDataProps = {
-  id: number;
-  profile_picture?: string;
-  name: string;
-  email: string;
-  category: string;
-  PIC: string;
-  contact: string;
-  service_area: string[];
-  status: string;
-};
-
 interface InterfaceSupplierTable {
-  UsersData: SuppliersDataProps[];
+  supplierData: ISupplier[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -32,7 +20,7 @@ interface InterfaceSupplierTable {
 }
 
 const SupplierListTable = ({
-  UsersData,
+  supplierData,
   headtable,
   onEdit,
   onDelete,
@@ -49,20 +37,20 @@ const SupplierListTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {UsersData.map((item, index) => (
+        {supplierData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
+            <TableCell className="text-gray">{item.supplier_id}</TableCell>
             <TableCell>
               <div className="flex justify-start gap-x-2">
                 <Image
-                  src={`${brandsIconPath}/user.svg`}
+                  src={item.supplier_image_url}
                   alt="Manager"
                   width={24}
                   height={24}
                   className="border size-10 rounded-full object-cover"
                 />
                 <div className="flex flex-col ">
-                  <span>{item.name}</span>
+                  <span>{item.supplier_code}</span>
                   <span className="text-gray">{item.email}</span>
                 </div>
               </div>
@@ -73,13 +61,13 @@ const SupplierListTable = ({
               </span>
             </TableCell>
             <TableCell>
-              <div className="font-medium">{item.PIC}</div>
+              <div className="font-medium">{item.pic}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.contact}
+              {item.contact_number}
             </TableCell>
             <TableCell>
-              {item.service_area.map((area) => {
+              {item.area_short.map((area: string) => {
                 return (
                   <span
                     key={area}
@@ -95,7 +83,7 @@ const SupplierListTable = ({
             </TableCell>
             <TableCell>
               <ActionButtons
-                itemId={item.id}
+                itemId={item.supplier_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

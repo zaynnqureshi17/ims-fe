@@ -1,5 +1,6 @@
 import ActionButtons from "@/components/common/ActionButtons";
 import StatusBadge from "@/components/common/StatusBadge";
+import FormattedDate from "@/components/format-date/FormattedDate";
 import {
   Table,
   TableBody,
@@ -8,18 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-export type OutletDataProps = {
-  id: number;
-  outlets: string;
-  location: string;
-  brand_name?: string;
-  created_date: string;
-  status: string;
-};
+import { IOutlet } from "@/utils/types/outlet.type";
 
 interface InterfaceOutlet {
-  outletData: OutletDataProps[];
+  outletData: IOutlet[];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
@@ -46,23 +39,23 @@ const OutletsListTable = ({
       <TableBody>
         {outletData.map((item, index) => (
           <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.id}</TableCell>
-            <TableCell className="font-medium">{item.outlets}</TableCell>
+            <TableCell className="text-gray">{item.outlet_id}</TableCell>
+            <TableCell className="font-medium">{item.outlet_name}</TableCell>
             <TableCell className="text-left text-gray">
-              {item.location}
+              {item.country}, {item.state}, {item.city}
             </TableCell>
             <TableCell>
               <div className="font-medium">{item.brand_name}</div>
             </TableCell>
             <TableCell className="text-left text-gray">
-              {item.created_date}
+              <FormattedDate date={item.created_at} />
             </TableCell>
             <TableCell className="text-left">
               <StatusBadge status={item.status} />
             </TableCell>
             <TableCell>
               <ActionButtons
-                itemId={item.id}
+                itemId={item.outlet_id}
                 onEdit={onEdit}
                 onDelete={onDelete}
                 onView={onView}

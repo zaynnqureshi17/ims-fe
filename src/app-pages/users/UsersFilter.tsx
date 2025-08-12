@@ -1,4 +1,6 @@
 "use client";
+import { useUserContext } from "@/context/user.context";
+import { useGetUsers } from "@/queries/users/useGetUsers.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,13 +13,18 @@ type queryParams = string;
 const UsersFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [selectedRole, setSelectedRole] = useState<queryParams>("");
   const [selectedRegion, setSelectedRegion] = useState<queryParams>("");
   const [selectedDepartment, setSelectedDepartment] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
+  const { setUser, setLoading } = useUserContext();
+  const { data: usersData, status } = useGetUsers({
+    role: selectedRole,
+    outlet: selectedRegion,
+    department: selectedDepartment,
+    search: searchText,
+  });
 
-  // Load from URL on page load
   useEffect(() => {
     const role = searchParams.get("role") || "";
     const outlet = searchParams.get("outlet") || "";
@@ -29,6 +36,12 @@ const UsersFilter: React.FC = () => {
     setSelectedDepartment(department);
     setSearchText(search);
   }, [searchParams]);
+  useEffect(() => {
+    if (usersData) {
+      setUser(usersData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [usersData]);
 
   const handleUpdateQuery = (
     role?: string,
@@ -36,14 +49,13 @@ const UsersFilter: React.FC = () => {
     department?: string,
     search?: string,
   ) => {
-    console.log("Updating query params:", { role, outlet, department, search });
     updateQueryParams({
       router: router,
       basePath: ProtectedUrls.common.manageUsers,
       queryParams: {
-        role: role === "all-roles" ? "" : role,
-        outlet: outlet === "all-outlets" ? "" : outlet,
-        department: department === "all-departments" ? "" : department,
+        role: role,
+        outlet: outlet,
+        department: department,
         search: search || "",
       },
     });
