@@ -1,6 +1,6 @@
 import OutletInformation from "@/components/card/outlet/OutletInformation";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import { useOutletContext } from "@/context/outlet.context";
+import { useOutletContext } from "@/context/OutletContext";
 
 const OutletOverview = () => {
   const { outletView } = useOutletContext();

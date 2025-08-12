@@ -1,5 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import { BrandProvider } from "@/context/brand.context";
+import { BrandProvider } from "@/context/BrandContext";
 import { Suspense } from "react";
 import BrandsFilter from "./BrandsFilter";
 import BrandPageHeader from "./BrandsPageHeader";

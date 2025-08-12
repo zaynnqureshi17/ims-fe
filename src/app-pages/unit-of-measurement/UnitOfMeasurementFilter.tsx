@@ -1,5 +1,5 @@
 "use client";
-import { useUOMContext } from "@/context/uom.context";
+import { useUOMContext } from "@/context/UomContext";
 import { useGetOMs } from "@/queries/uom/useGetOMs.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

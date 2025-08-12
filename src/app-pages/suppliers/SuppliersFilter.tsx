@@ -1,5 +1,5 @@
 "use client";
-import { useSupplierContext } from "@/context/supplier.context";
+import { useSupplierContext } from "@/context/SupplierContext";
 import { useGetSupplier } from "@/queries/supplier/useGetSupplier.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

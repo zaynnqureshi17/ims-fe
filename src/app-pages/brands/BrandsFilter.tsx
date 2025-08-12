@@ -1,5 +1,5 @@
 "use client";
-import { useBrandContext } from "@/context/brand.context";
+import { useBrandContext } from "@/context/BrandContext";
 import { useGetBrand } from "@/queries/brands/useGetBrand.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

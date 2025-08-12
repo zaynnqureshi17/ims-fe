@@ -1,5 +1,5 @@
 "use client";
-import { useUserContext } from "@/context/user.context";
+import { useUserContext } from "@/context/UserContext";
 import { useGetUsers } from "@/queries/users/useGetUsers.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

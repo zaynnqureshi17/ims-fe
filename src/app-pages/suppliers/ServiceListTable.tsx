@@ -1,5 +1,5 @@
 "use client";
-import { useSupplierContext } from "@/context/supplier.context";
+import { useSupplierContext } from "@/context/SupplierContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";

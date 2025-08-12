@@ -1,7 +1,7 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
-import { OutletProvider } from "@/context/outlet.context";
+import { OutletProvider } from "@/context/OutletContext";
 import { useGetOutletById } from "@/queries/outlets/useGetOutletById.query";
 import { IOutlet } from "@/utils/types/outlet.type";
 import { useEffect, useState } from "react";

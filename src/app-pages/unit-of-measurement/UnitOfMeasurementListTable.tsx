@@ -1,5 +1,5 @@
 "use client";
-import { useUOMContext } from "@/context/uom.context";
+import { useUOMContext } from "@/context/UomContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";

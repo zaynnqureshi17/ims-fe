@@ -1,5 +1,5 @@
 "use client";
-import { useOutletContext } from "@/context/outlet.context";
+import { useOutletContext } from "@/context/OutletContext";
 import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

@@ -1,5 +1,5 @@
 "use client";
-import { useBrandContext } from "@/context/brand.context";
+import { useBrandContext } from "@/context/BrandContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useSearchParams } from "next/navigation";

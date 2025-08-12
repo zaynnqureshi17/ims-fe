@@ -1,5 +1,5 @@
 "use client";
-import { useItemContext } from "@/context/item.context";
+import { useItemContext } from "@/context/ItemContext";
 import { useGetItemReceiving } from "@/queries/itemReceiving/useGetItemReceiving.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

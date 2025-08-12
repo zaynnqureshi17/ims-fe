@@ -1,5 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import { SupplierProvider } from "@/context/supplier.context";
+import { SupplierProvider } from "@/context/SupplierContext";
 import { Suspense } from "react";
 import ServiceListTable from "./ServiceListTable";
 import SuppliersFilter from "./SuppliersFilter";

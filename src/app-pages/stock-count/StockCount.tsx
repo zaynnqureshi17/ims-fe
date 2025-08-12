@@ -1,10 +1,10 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
+import { StockProvider } from "@/context/StockCountContext";
 import { Suspense } from "react";
 import StockCountFilter from "./StockCountFilter";
 import StockCountPageHeader from "./StockCountPageHeader";
 import StockCountTopBar from "./StockCountTopBar";
 import StorageListTable from "./StorageListTable";
-import { StockProvider } from "@/context/stockCount.context";
 
 const StockCount = () => {
   return (

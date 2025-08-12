@@ -1,5 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import { UOMProvider } from "@/context/uom.context";
+import { UOMProvider } from "@/context/UomContext";
 import { Suspense } from "react";
 import UnitOfMeasurementFilter from "./UnitOfMeasurementFilter";
 import UnitOfMeasurementListTable from "./UnitOfMeasurementListTable";

@@ -1,5 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import { UserProvider } from "@/context/user.context";
+import { UserProvider } from "@/context/UserContext";
 import { Suspense } from "react";
 import UsersFilter from "./UsersFilter";
 import UsersListTable from "./UsersListTable";

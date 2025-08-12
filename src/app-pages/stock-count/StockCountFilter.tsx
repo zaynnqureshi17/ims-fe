@@ -1,5 +1,5 @@
 "use client";
-import { useStockContext } from "@/context/stockCount.context";
+import { useStockContext } from "@/context/StockCountContext";
 import { useGetStockCount } from "@/queries/stock-count/useGetStockCount.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";

@@ -1,5 +1,5 @@
 "use client";
-import { useUserContext } from "@/context/user.context";
+import { useUserContext } from "@/context/UserContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";

@@ -1,5 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import { OutletProvider } from "@/context/outlet.context";
+import { OutletProvider } from "@/context/OutletContext";
 import { Suspense } from "react";
 import OutletListTable from "./OutletListTable";
 import OutletsFilter from "./OutletsFilter";
