@@ -25,8 +25,9 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
-          source: "." # sirf source code bhej rahe hain, node_modules nahi
+          source: "."   # repo ka source code; .env usually repo me hota hi nahi
           target: "/var/www/dev"
+          # NOTE: hum 'rm' flag use nahi kar rahe, isliye VPS par maujood .env as-is rahega
 
       - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master
@@ -36,9 +37,20 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
           script: |
+            set -e
             cd /var/www/dev
-            rm -rf node_modules
-            npm ci
+
+            # node_modules ko delete NAHI karna; npm ci bhi use nahi karna (wo wipe karta hai)
+            npm install --no-audit --no-fund
+
+            # build create karo
             npm run build
-            pm2 restart dev || pm2 start npm --name "dev" -- run start
+
+            # PM2 restart (agar running), warna start
+            if pm2 describe dev > /dev/null; then
+              pm2 restart dev
+            else
+              pm2 start "npm run start" --name dev --cwd /var/www/dev --time
+            fi
+
             pm2 save

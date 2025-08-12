@@ -1,9 +1,7 @@
-import StockCountView from "@/app-pages/stock-count-view/StockCountView";
-import { PageProps } from "@/utils/types/common.type";
+import StockCount from "@/app-pages/stock-count/StockCount";
 
-const Page = async ({ params }: PageProps) => {
-  const { id } = await params;
-  return <StockCountView id={id} />;
+const Page = async () => {
+  return <StockCount />;
 };
 
 export default Page;
