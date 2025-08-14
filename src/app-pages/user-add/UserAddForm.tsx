@@ -52,7 +52,7 @@ const UserAddForm = ({
       <FormWrapper onSubmit={handleSubmit(onSubmit)} disabled={loading}>
         <div className="flex flex-col justify-between">
           <div className="flex flex-col gap-6">
-            <UploadSingleImage name="user_image_url" label="User Image" />a
+            <UploadSingleImage name="user_image_url" label="User Image" />
             <GridWrapper className="grid-cols-1 md:grid-cols-2">
               <FormInputField
                 name="name"
