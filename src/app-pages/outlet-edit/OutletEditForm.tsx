@@ -20,6 +20,7 @@ const OutletEditForm = ({
 }) => {
   const { mutate: onUpdateOutlet, status: updateStatus } = useUpdateOutlet();
   const {
+    status,
     brand_id,
     outlet_id,
     outlet_code,

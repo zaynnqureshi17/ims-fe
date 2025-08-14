@@ -20,7 +20,6 @@ const UsersListTable: React.FC = () => {
   };
 
   const handleDeleteUser = (userId: number) => {
-    console.log("User deleted");
     deleteUser({
       id: userId,
     });

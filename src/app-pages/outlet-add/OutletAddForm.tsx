@@ -65,7 +65,7 @@ const OutletAddForm = () => {
             />
             <FormInputField
               name="outlet_name"
-              label="Outlet Name"
+              label="Outlet Name (Unique)"
               placeholder="Enter outlet name (e.g., Karahi Express - D Ground)"
               type="text"
             />
