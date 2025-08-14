@@ -1,7 +1,7 @@
 "use client";
+import ControllerSelect from "@/components/form/ControllerSelect";
 import FormInputField from "@/components/form/FormInputField";
 import FormTextarea from "@/components/form/FormTextarea";
-import SelectField from "@/components/form/SelectField";
 import UploadSingleImage from "@/components/form/UploadSingleImage";
 import { Button } from "@/components/ui/button";
 import { FormWrapper } from "@/components/wrapper/FormWrapper";
@@ -13,15 +13,21 @@ import { toast } from "react-toastify";
 
 const BrandEditForm = ({ brandData }: { brandData: IBrand }) => {
   const { mutate: onUpdateBrand, status: updateStatus } = useUpdateBrand();
-  const { logo, brand_name, description } = brandData;
+  const { logo, brand_name, description, status } = brandData;
   const methods = useForm({
     defaultValues: {
       logo,
+      status:
+        typeof status === "string"
+          ? status.toLowerCase()
+          : status
+            ? "active"
+            : "inactive",
       brand_name,
       description,
     },
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit, control } = methods;
   const loading = updateStatus === "pending";
 
   const onSubmit = (data: any) => {
@@ -48,15 +54,16 @@ const BrandEditForm = ({ brandData }: { brandData: IBrand }) => {
                 placeholder="Enter Brand Name"
                 type="text"
               />
-              <SelectField
+              <ControllerSelect
+                name="status"
+                control={control}
                 label="Status"
-                placeholder="Active"
+                placeholder="Select Status"
                 options={[
-                  { value: "Active", label: "Active" },
-                  { value: "Inactive", label: "Inactive" },
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
                 ]}
-                className="w-full bg-white  "
-                onValueChange={(value) => console.log(value)}
+                rules={{ required: "Status is required" }}
               />
             </GridWrapper>
             {/* Description */}

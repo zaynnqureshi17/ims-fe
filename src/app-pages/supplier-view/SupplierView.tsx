@@ -1,7 +1,7 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
+import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useGetSupplierById } from "@/queries/supplier/useGetSupplierById.query";
 import SupplierViewActivity from "./SupplierViewActivity";
 import SupplierViewHeader from "./SupplierViewHeader";
@@ -14,7 +14,7 @@ const SupplierView = ({ id }: { id: string }) => {
   const loading = status === "pending";
   console.log(supplierData?.body?.data);
   return (
-    <LoadingWrapper loading={loading}>
+    <StateWrapper loading={loading}>
       <ProtectedLayoutWrapper topBar={<SupplierViewTopBar />}>
         <SupplierViewHeader />
         <GridWrapper className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -22,7 +22,7 @@ const SupplierView = ({ id }: { id: string }) => {
           <SupplierViewActivity />
         </GridWrapper>
       </ProtectedLayoutWrapper>
-    </LoadingWrapper>
+    </StateWrapper>
   );
 };
 

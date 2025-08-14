@@ -8,21 +8,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { brandsActions, brandsIconPath } from "@/utils/PublicImageBaseUrl";
-import { IBrand } from "@/utils/types/brand.type";
+import { IBrandResponse } from "@/utils/types/brand.type";
 import Image from "next/image";
 
-export type BrandViewCardProps = IBrand & {
+export type BrandViewCardProps = {
+  brandViewData: IBrandResponse;
   onEdit?: () => void;
   onDelete?: () => void;
 };
 
 const BrandViewCard: React.FC<BrandViewCardProps> = ({
-  brand_id,
-  brand_name,
-  description,
-  status,
-  logo,
-  created_at,
+  brandViewData,
   onEdit,
   onDelete,
 }) => {
@@ -30,7 +26,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
     <Card className="w-full gap-2">
       <CardHeader className="flex justify-between items-start">
         <Image
-          src={logo}
+          src={brandViewData.logo}
           alt="Brand Logo"
           width={24}
           height={24}
@@ -58,8 +54,10 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="text-lg font-semibold">{brand_name}</CardTitle>
-        <p className="text-sm text-gray-500">{description}</p>
+        <CardTitle className="text-lg font-semibold">
+          {brandViewData.brand_name}
+        </CardTitle>
+        <p className="text-sm text-gray-500">{brandViewData.description}</p>
       </CardContent>
       <CardFooter>
         <div className=" w-full flex justify-start gap-4 items-center">
@@ -70,11 +68,11 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={16}
               height={16}
             />
-            <p>{1} Outlets</p>
+            <p>{brandViewData.outlets.length} Outlets</p>
           </div>
           <div
             className={`px-3 py-1 font-semibold rounded-full text-sm flex justify-center items-center gap-x-2 ${
-              status === "Active"
+              brandViewData.status === "active"
                 ? "text-accent-green bg-accent-green-light rounded-full px-2 py-0.5"
                 : "text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5"
             }`}
@@ -85,7 +83,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={16}
               height={16}
             />
-            <span>{status}</span>
+            <span>{brandViewData.status}</span>
           </div>
           <div className="text-sm font-semibold text-blue-700 bg-accent-green-light rounded-full px-2 py-0.5 flex justify-center items-center gap-x-2">
             <Image
@@ -94,7 +92,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={12}
               height={12}
             />
-            <span>{"outlet name"}</span>
+            <span>{brandViewData?.user?.name || "N/A"}</span>
           </div>
           <div className="px-3 py-1 rounded-full text-sm text-gray bg-pagination-gray font-semibold flex justify-center items-center gap-x-2">
             <Image
@@ -103,7 +101,7 @@ const BrandViewCard: React.FC<BrandViewCardProps> = ({
               width={16}
               height={16}
             />
-            <FormattedDate date={created_at} />
+            <FormattedDate date={brandViewData.created_at} />
           </div>
         </div>
       </CardFooter>

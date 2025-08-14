@@ -1,6 +1,7 @@
 "use client";
 import { useSupplierContext } from "@/context/SupplierContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { useDeleteSupplier } from "@/queries/supplier/useDeleteSupplier.query";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
 import SupplierTable from "./SupplierTable";
@@ -8,20 +9,25 @@ import SupplierTable from "./SupplierTable";
 const SupplierListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
   const { supplier } = useSupplierContext();
+  const { mutate: deleteSupplier } = useDeleteSupplier();
 
-  const handleEditSupplier = (userId: number) => {
-    navigate(ProtectedUrls.admin.editSupplier.replace(":id", String(userId)));
+  const handleEditSupplier = (supplierId: number) => {
+    navigate(
+      ProtectedUrls.admin.editSupplier.replace(":id", String(supplierId)),
+    );
   };
 
-  const handleDeleteSupplier = () => {
-    // TODO
-    console.log("Delete Supplier action triggered");
+  const handleDeleteSupplier = (supplierId: number) => {
+    deleteSupplier({
+      id: supplierId,
+    });
   };
 
-  const handleViewSupplier = (userId: number) => {
-    navigate(ProtectedUrls.admin.viewSupplier.replace(":id", String(userId)));
+  const handleViewSupplier = (supplierId: number) => {
+    navigate(
+      ProtectedUrls.admin.viewSupplier.replace(":id", String(supplierId)),
+    );
   };
-  console.log(supplier);
   return (
     <SupplierTable
       supplierData={supplier}

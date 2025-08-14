@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
 import { IBrand } from "@/utils/types/brand.type";
+import Image from "next/image";
 
 type BrandCardTableProps = {
   brand: IBrand;
@@ -23,7 +24,7 @@ const BrandCardTable: React.FC<BrandCardTableProps> = ({
   return (
     <Card className="w-full gap-2">
       <CardHeader className="flex justify-between items-start">
-        {brand.logo}
+        <Image src={brand.logo} alt="Bar" width={24} height={24} />
         <div className="text-center flex justify-start gap-x-3">
           <IconBg
             icon={`${brandsActions}edit.svg`}

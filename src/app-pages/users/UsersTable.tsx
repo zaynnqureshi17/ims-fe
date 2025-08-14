@@ -22,7 +22,7 @@ const UsersTable = ({ user, onEdit, onDelete, onView }: UsersTableProps) => {
     >
       <UsersListTable
         headtable={headtable}
-        UsersData={user || UsersData}
+        UsersData={user}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
@@ -37,44 +37,10 @@ const headtable = [
   "ID",
   "Name & Email",
   "Role",
+  "Brand",
   "Outlet",
   "Department",
   "Created Date",
   "Status",
   "Actions",
-];
-const UsersData: IUser[] = [
-  {
-    user_id: 1,
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role_name: "Admin",
-    outlet_name: "Downtown Branch",
-    department_name: "Sales",
-    brand_name: "Brand A",
-    created_at: "2023-01-01",
-    status: "Active",
-  },
-  {
-    user_id: 2,
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    role_name: "User",
-    outlet_name: "Uptown Branch",
-    department_name: "Marketing",
-    brand_name: "Brand B",
-    created_at: "2023-01-02",
-    status: "Inactive",
-  },
-  {
-    user_id: 3,
-    name: "Alice Johnson",
-    email: "alice.johnson@example.com",
-    role_name: "User",
-    outlet_name: "Downtown Branch",
-    department_name: "Engineering",
-    brand_name: "Brand C",
-    created_at: "2023-01-03",
-    status: "Active",
-  },
 ];

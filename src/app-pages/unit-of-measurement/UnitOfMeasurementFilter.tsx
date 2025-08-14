@@ -1,12 +1,12 @@
 "use client";
 import { useUOMContext } from "@/context/UomContext";
-import { useGetOMs } from "@/queries/uom/useGetOMs.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import UnitOfMeasurementSearch from "./UnitOfMeasurementSearch";
 import UnitOfMeasurementStatusCategoryFilter from "./UnitOfMeasurementStatusCategoryFilter";
+import { useGetUOMs } from "@/queries/uom/useGetUOMs.query";
 
 type queryParams = string;
 
@@ -17,7 +17,7 @@ const UnitOfMeasurementFilter: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
   const { setUOM, setLoading } = useUOMContext();
-  const { data: uomsData, status } = useGetOMs({
+  const { data: uomsData, status } = useGetUOMs({
     category: selectedCategory,
     search: searchText,
   });

@@ -68,8 +68,8 @@ const BrandAddForm = () => {
                     label="Status"
                     placeholder="Select Status"
                     options={[
-                      { value: "Active", label: "Active" },
-                      { value: "Inactive", label: "Inactive" },
+                      { value: "active", label: "Active" },
+                      { value: "inactive", label: "Inactive" },
                     ]}
                     className="w-full bg-white"
                     value={field.value}

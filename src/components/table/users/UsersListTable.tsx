@@ -1,4 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
+import StatusBadge from "@/components/common/StatusBadge";
 import FormattedDate from "@/components/format-date/FormattedDate";
 import {
   Table,
@@ -8,7 +9,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
 import { IUser } from "@/utils/types/user.type";
 import Image from "next/image";
 
@@ -44,7 +44,7 @@ const UsersListTable = ({
             <TableCell>
               <div className="flex justify-start gap-x-2">
                 <Image
-                  src={`${brandsIconPath}/user.svg`}
+                  src={item.user_image_url}
                   alt="Manager"
                   width={24}
                   height={24}
@@ -59,6 +59,9 @@ const UsersListTable = ({
             <TableCell className="text-left text-gray">
               {item.role_name || "N/A"}
             </TableCell>
+            <TableCell className="text-left text-gray">
+              {item.brand_name || "N/A"}
+            </TableCell>
             <TableCell>
               <div className="font-medium">{item.outlet_name || "N/A"}</div>
             </TableCell>
@@ -69,15 +72,7 @@ const UsersListTable = ({
               <FormattedDate date={item.created_at} />
             </TableCell>
             <TableCell className="text-left">
-              <span
-                className={`font-semibold ${
-                  item.status === "Active"
-                    ? "text-accent-green bg-accent-green-light rounded-full px-2 py-0.5"
-                    : "text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5"
-                }`}
-              >
-                {item.status}
-              </span>
+              <StatusBadge status={item.status} />
             </TableCell>
             <TableCell>
               <ActionButtons

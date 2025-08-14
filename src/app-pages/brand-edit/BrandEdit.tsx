@@ -1,27 +1,36 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import PageHeader from "@/components/page-header";
-import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
+import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useGetBrandById } from "@/queries/brands/useGetBrandById.query";
 import { IdProps } from "@/utils/types/common.type";
-import BrandEditTopBar from "./BrandEditTopBar";
 import BrandEditForm from "./BrandEditForm";
+import BrandEditTopBar from "./BrandEditTopBar";
 
 const BrandEdit = ({ id }: IdProps) => {
-  const { data: brandData, status } = useGetBrandById(id);
+  const { data: brandData, status, error } = useGetBrandById(id);
 
   const isLoading = status === "pending";
+  const brand = brandData?.body?.data;
+  const isError = status === "error";
+  const notFound = !isLoading && !isError && !brand;
 
   return (
-    <LoadingWrapper loading={isLoading}>
-      <ProtectedLayoutWrapper topBar={<BrandEditTopBar />}>
+    <ProtectedLayoutWrapper topBar={<BrandEditTopBar />}>
+      <StateWrapper
+        loading={isLoading}
+        error={
+          isError ? ((error as Error)?.message ?? "Failed to load data") : null
+        }
+        notFound={notFound}
+      >
         <PageHeader
           heading="Edit Brand"
           description="Update Brand information."
         />
-        <BrandEditForm brandData={brandData?.body?.data} />
-      </ProtectedLayoutWrapper>
-    </LoadingWrapper>
+        <BrandEditForm brandData={brand} />
+      </StateWrapper>
+    </ProtectedLayoutWrapper>
   );
 };
 

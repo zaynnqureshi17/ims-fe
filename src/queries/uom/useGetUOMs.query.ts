@@ -15,7 +15,7 @@ const onGetUOMs = async (filters: userFilter): Promise<any> => {
   return await axiosInstance.get(`uom?${queryString}`);
 };
 
-export const useGetOMs = (filters: userFilter) => {
+export const useGetUOMs = (filters: userFilter) => {
   const token = Cookies.get("token");
 
   return useQuery({

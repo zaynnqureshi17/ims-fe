@@ -15,9 +15,9 @@ const BrandsTable = ({ brand, onEdit, onDelete, onView }: BrandTableProps) => {
   const [page, setPage] = useState(1);
   return (
     <TableWrapper
-      totalItems={12}
+      totalItems={brand.length}
       currentPage={page}
-      itemsPerPage={3}
+      itemsPerPage={10}
       onPageChange={(page) => setPage(page)}
     >
       <BrandsListTable

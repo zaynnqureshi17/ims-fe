@@ -1,6 +1,7 @@
 "use client";
 import { useBrandContext } from "@/context/BrandContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { useDeleteBrand } from "@/queries/brands/useDeleteBrand.query";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
@@ -12,6 +13,7 @@ const BrandsTableCard: React.FC = () => {
   const navigate = usePrefetchNavigate();
   const searchParams = useSearchParams();
   const { brand, loading } = useBrandContext();
+  const { mutate: deleteBrand } = useDeleteBrand();
 
   // Initialize the collapsed state based on the search parameters
   useEffect(() => {
@@ -23,11 +25,11 @@ const BrandsTableCard: React.FC = () => {
     navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
   };
 
-  const handleDeleteBrand = () => {
-    // TODO
-    console.log("Delete brand action triggered");
+  const handleDeleteBrand = (brandId: number) => {
+    deleteBrand({
+      id: brandId,
+    });
   };
-
   const handleViewBrand = (brandId: number) => {
     navigate(ProtectedUrls.admin.viewBrand.replace(":id", brandId.toString()));
   };

@@ -1,6 +1,8 @@
+import { IRole } from "./role.type";
+
 export interface IUser {
   user_id: number;
-  user_image_url?: string;
+  user_image_url: string;
   name: string;
   email: string;
   role_name: string;
@@ -9,6 +11,7 @@ export interface IUser {
   department_name: string | undefined;
   created_at: string;
   status: string;
+  role?: IRole;
 }
 
 export type IUserWithID = IUser & {

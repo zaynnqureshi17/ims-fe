@@ -1,3 +1,5 @@
+import { IUser } from "./user.type";
+
 export enum OutletStatus {
   ACTIVE = "active",
   INACTIVE = "inactive",
@@ -18,6 +20,7 @@ export interface IOutlet {
   preferred_delivery_hour?: string | null;
   brand_id?: number;
   brand_name?: string;
+  user?: IUser;
   created_at: Date;
   updated_at?: Date;
 }

@@ -1,7 +1,7 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import PageHeader from "@/components/page-header";
-import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
+import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useMultiOptions } from "@/hooks/useMultiOptions";
 import { useGetDepartment } from "@/queries/departments/useGetDepartment.query";
 import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
@@ -25,7 +25,7 @@ const UserAdd = () => {
     departmentStatus === "pending";
 
   return (
-    <LoadingWrapper loading={isLoading}>
+    <StateWrapper loading={isLoading}>
       <ProtectedLayoutWrapper topBar={<UserAddTopBar />}>
         <PageHeader
           heading="Add New User"
@@ -37,7 +37,7 @@ const UserAdd = () => {
           departmentOptions={departmentOptions}
         />
       </ProtectedLayoutWrapper>
-    </LoadingWrapper>
+    </StateWrapper>
   );
 };
 

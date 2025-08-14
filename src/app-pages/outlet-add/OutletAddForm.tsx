@@ -93,10 +93,7 @@ const OutletAddForm = () => {
               control={control}
               label="Country"
               placeholder="Select Country"
-              options={[
-                { value: "Pakistan", label: "Pakistan" },
-                { value: "India", label: "India" },
-              ]}
+              options={[{ value: "malaysia", label: "Malaysia" }]}
               rules={{ required: "Department is required" }}
             />
             <ControllerSelect
@@ -105,8 +102,19 @@ const OutletAddForm = () => {
               label="State"
               placeholder="Select State"
               options={[
-                { value: "Punjab", label: "Punjab" },
-                { value: "Sindh", label: "Sindh" },
+                { value: "johor", label: "Johor" },
+                { value: "kedah", label: "Kedah" },
+                { value: "kelantan", label: "Kelantan" },
+                { value: "malacca", label: "Malacca" },
+                { value: "negeri-sembilan", label: "Negeri Sembilan" },
+                { value: "pahang", label: "Pahang" },
+                { value: "perak", label: "Perak" },
+                { value: "perlis", label: "Perlis" },
+                { value: "penang", label: "Penang" },
+                { value: "sabah", label: "Sabah" },
+                { value: "sarawak", label: "Sarawak" },
+                { value: "selangor", label: "Selangor" },
+                { value: "terengganu", label: "Terengganu" },
               ]}
               rules={{ required: "State is required" }}
             />
@@ -116,8 +124,21 @@ const OutletAddForm = () => {
               label="City"
               placeholder="Select City"
               options={[
-                { value: "Faisalabad", label: "Faisalabad" },
-                { value: "Karachi", label: "Karachi" },
+                { value: "kuala-lumpur", label: "Kuala Lumpur" },
+                { value: "klang", label: "Klang" },
+                { value: "johor-bahru", label: "Johor Bahru" },
+                { value: "subang-jaya", label: "Subang Jaya" },
+                { value: "ipoh", label: "Ipoh" },
+                { value: "kuching", label: "Kuching" },
+                { value: "petaling-jaya", label: "Petaling Jaya" },
+                { value: "malacca-city", label: "Malacca City" },
+                { value: "kota-bharu", label: "Kota Bharu" },
+                { value: "shah-alam", label: "Shah Alam" },
+                { value: "kota-kinabalu", label: "Kota Kinabalu" },
+                { value: "batu-pahat", label: "Batu Pahat" },
+                { value: "sandakan", label: "Sandakan" },
+                { value: "seremban", label: "Seremban" },
+                { value: "kuantan", label: "Kuantan" },
               ]}
               rules={{ required: "City is required" }}
             />
@@ -152,7 +173,7 @@ const OutletAddForm = () => {
               name="status"
               control={control}
               label="Status"
-              placeholder="Select City"
+              placeholder="Select Status"
               options={[
                 { value: "active", label: "Active" },
                 { value: "inactive", label: "Inactive" },

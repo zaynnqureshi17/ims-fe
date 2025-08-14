@@ -1,54 +1,67 @@
+// components/form/ControllerSelect.tsx
 "use client";
+import { Controller } from "react-hook-form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-import { Control, Controller, FieldValues } from "react-hook-form";
+type Option = { value: string; label: string };
 
-import { Path } from "react-hook-form";
-
-interface ControllerSelectProps<TFieldValues extends FieldValues> {
-  name: Path<TFieldValues>;
-  control: Control<TFieldValues>;
-  label: string;
-  options: { value: string; label: string }[];
+interface ControllerSelectProps {
+  name: string;
+  control: any;
+  label?: string;
   placeholder?: string;
+  options: Option[];
   rules?: any;
+  disabled?: boolean;
+  className?: string;
 }
 
-export default function ControllerSelect<TFieldValues extends FieldValues>({
+const ControllerSelect = ({
   name,
   control,
   label,
+  placeholder,
   options,
-  placeholder = "Select",
   rules,
-}: ControllerSelectProps<TFieldValues>) {
+  disabled,
+  className,
+}: ControllerSelectProps) => {
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={rules}
-      render={({ field, fieldState }) => (
-        <div className="flex flex-col">
-          <label className="mb-1 text-sm ">{label}</label>
-          <select
-            {...field}
-            className="border rounded-md bg-white text-sm p-2  mb-2"
-            value={field.value || ""}
-            onChange={(e) => field.onChange(e.target.value)}
-          >
-            <option value="">{placeholder}</option>
-            {options.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-          {fieldState.error && (
-            <p className="text-red-600 mt-1 text-sm">
-              {fieldState.error.message}
-            </p>
-          )}
-        </div>
+    <div className={className}>
+      {label && (
+        <label className="mb-2 block text-sm font-medium">{label}</label>
       )}
-    />
+      <Controller
+        name={name}
+        control={control}
+        rules={rules}
+        render={({ field }) => (
+          <Select
+            value={field.value ?? ""}
+            onValueChange={field.onChange}
+            disabled={disabled}
+          >
+            <SelectTrigger className="w-full bg-white">
+              <SelectValue placeholder={placeholder} />
+            </SelectTrigger>
+            <SelectContent className="bg-white">
+              {options.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+      />
+    </div>
   );
-}
+};
+
+export default ControllerSelect;

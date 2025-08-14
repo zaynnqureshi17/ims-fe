@@ -1,25 +1,31 @@
 "use client";
 import BrandViewCard from "@/components/card/brand/BrandViewCard";
+import { useBrandViewContext } from "@/context/BrandViewContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
-import { IBrand } from "@/utils/types/brand.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
 
-const BrandDetailView = ({ brandData }: { brandData: IBrand }) => {
+const BrandDetailView = () => {
   const navigate = usePrefetchNavigate();
+  const { brandView } = useBrandViewContext();
+
+  // Handling null or undefined brandView
+  if (!brandView) {
+    return <p>Loading brand details...</p>; // Show a loading message or a fallback UI
+  }
+
   const handleEditBrand = (brandId: number) => {
     navigate(ProtectedUrls.admin.editBrand.replace(":id", brandId.toString()));
   };
 
+  const handleDeleteBrand = (brandId: number) => {
+    console.log("Delete brand action triggered");
+  };
+
   return (
     <BrandViewCard
-      brand_id={brandData.brand_id}
-      brand_name={brandData.brand_name}
-      description={brandData.description}
-      status={brandData.status}
-      created_at={brandData.created_at}
-      logo={brandData.logo}
-      onEdit={() => handleEditBrand(1)}
-      onDelete={() => console.log("Delete brand action triggered")}
+      brandViewData={brandView}
+      onEdit={() => handleEditBrand(brandView?.brand_id)}
+      onDelete={() => handleDeleteBrand(brandView?.brand_id)}
     />
   );
 };

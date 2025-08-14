@@ -1,7 +1,7 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import PageHeader from "@/components/page-header";
-import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
+import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useMultiOptions } from "@/hooks/useMultiOptions";
 import { useGetBrand } from "@/queries/brands/useGetBrand.query";
 import ItemReceivingAddForm from "./ItemReceivingAddForm";
@@ -14,7 +14,7 @@ const ItemReceivingAdd = () => {
   });
   const loading = status === "pending";
   return (
-    <LoadingWrapper loading={loading}>
+    <StateWrapper loading={loading}>
       <ProtectedLayoutWrapper topBar={<ItemReceivingAddTopBar />}>
         <PageHeader
           heading="Add New Item"
@@ -22,7 +22,7 @@ const ItemReceivingAdd = () => {
         />
         <ItemReceivingAddForm brandOptions={brandOptions} />
       </ProtectedLayoutWrapper>
-    </LoadingWrapper>
+    </StateWrapper>
   );
 };
 

@@ -1,7 +1,7 @@
-import StockCount from "@/app-pages/stock-count/StockCount";
+import PendingPage from "@/components/common/PendingPage";
 
-const Page = async () => {
-  return <StockCount />;
+const page = () => {
+  return <PendingPage />;
 };
 
-export default Page;
+export default page;

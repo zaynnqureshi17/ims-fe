@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useOutletContext } from "@/context/OutletContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
@@ -7,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import BrandStatusAdd from "./BrandStatusAdd";
 import BrandViewSearch from "./BrandViewSearch";
+import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 
 type queryParams = string;
 
@@ -14,7 +16,6 @@ const BrandViewFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const navigate = usePrefetchNavigate();
-
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
 

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { IOutlet } from "@/utils/types/outlet.type";
+import { Loader } from "lucide-react";
 
 interface InterfaceOutlet {
   outletData: IOutlet[];
@@ -30,39 +31,49 @@ const OutletsListTable = ({
     <Table>
       <TableHeader>
         <TableRow>
-          {headtable &&
-            headtable.map((head, index) => (
-              <TableHead key={index}>{head}</TableHead>
-            ))}
+          {headtable?.map((head, index) => (
+            <TableHead key={index}>{head}</TableHead>
+          ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {outletData.map((item, index) => (
-          <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.outlet_id}</TableCell>
-            <TableCell className="font-medium">{item.outlet_name}</TableCell>
-            <TableCell className="text-left text-gray">
-              {item.country}, {item.state}, {item.city}
-            </TableCell>
-            <TableCell>
-              <div className="font-medium">{item.brand_name}</div>
-            </TableCell>
-            <TableCell className="text-left text-gray">
-              <FormattedDate date={item.created_at} />
-            </TableCell>
-            <TableCell className="text-left">
-              <StatusBadge status={item.status} />
-            </TableCell>
-            <TableCell>
-              <ActionButtons
-                itemId={item.outlet_id}
-                onEdit={onEdit}
-                onDelete={onDelete}
-                onView={onView}
-              />{" "}
+        {outletData.length === 0 ? (
+          <TableRow>
+            <TableCell colSpan={headtable?.length || 1}>
+              <div className="w-full flex flex-col justify-center items-center gap-4 py-6">
+                <Loader className="animate-spin" />
+                <p>No data available</p>
+              </div>
             </TableCell>
           </TableRow>
-        ))}
+        ) : (
+          outletData.map((item, index) => (
+            <TableRow key={index} className="hover:bg-white my-4">
+              <TableCell className="text-gray">{item.outlet_id}</TableCell>
+              <TableCell className="font-medium">{item.outlet_name}</TableCell>
+              <TableCell className="text-left text-gray">
+                {item.country}, {item.state}, {item.city}
+              </TableCell>
+              <TableCell>
+                <div className="font-medium">{item.brand_name}</div>
+              </TableCell>
+              <TableCell className="text-left text-gray">
+                <FormattedDate date={item.created_at} />
+              </TableCell>
+              <TableCell className="text-left">
+                <StatusBadge status={item.status} />
+              </TableCell>
+              <TableCell>
+                <ActionButtons
+                  itemId={item.outlet_id}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onView={onView}
+                />
+              </TableCell>
+            </TableRow>
+          ))
+        )}
       </TableBody>
     </Table>
   );

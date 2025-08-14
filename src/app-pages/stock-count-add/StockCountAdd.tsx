@@ -1,12 +1,11 @@
 "use client";
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import PageHeader from "@/components/page-header";
-import LoadingWrapper from "@/components/wrapper/LoadingWrapper";
+import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useMultiOptions } from "@/hooks/useMultiOptions";
-import { useGetBrand } from "@/queries/brands/useGetBrand.query";
+import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 import StockCountAddForm from "./StockCountAddForm";
 import StockCountAddTopBar from "./StockCountAddTopBar";
-import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 
 const StockCountAdd = () => {
   const { data: outlets, status: outletStatus } = useGetOutlets({});
@@ -17,7 +16,7 @@ const StockCountAdd = () => {
   const isLoading = outletStatus === "pending";
 
   return (
-    <LoadingWrapper loading={isLoading}>
+    <StateWrapper loading={isLoading}>
       <ProtectedLayoutWrapper topBar={<StockCountAddTopBar />}>
         <PageHeader
           heading="Add New Storage "
@@ -25,7 +24,7 @@ const StockCountAdd = () => {
         />
         <StockCountAddForm outletOptions={outletOptions} />
       </ProtectedLayoutWrapper>
-    </LoadingWrapper>
+    </StateWrapper>
   );
 };
 
