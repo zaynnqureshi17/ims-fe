@@ -1,4 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
+import Loader from "@/components/common/loader";
 import StatusBadge from "@/components/common/StatusBadge";
 import {
   Table,
@@ -9,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ISupplier } from "@/utils/types/supplier.type";
-import { Loader } from "lucide-react";
 import Image from "next/image";
 
 interface InterfaceSupplierTable {

@@ -21,7 +21,7 @@ const OutletsTable = ({
   console.log(outlets);
   return (
     <TableWrapper
-      totalItems={12}
+      totalItems={outlets.length > 0 ? outlets.length : 0}
       currentPage={page}
       itemsPerPage={3}
       onPageChange={(page) => setPage(page)}

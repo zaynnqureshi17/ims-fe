@@ -25,9 +25,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: 22
-          source: "."   # repo ka source code; .env usually repo me hota hi nahi
+          source: "."
           target: "/var/www/dev"
-          # NOTE: hum 'rm' flag use nahi kar rahe, isliye VPS par maujood .env as-is rahega
 
       - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master

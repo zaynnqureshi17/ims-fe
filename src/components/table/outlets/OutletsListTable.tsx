@@ -41,7 +41,7 @@ const OutletsListTable = ({
           <TableRow>
             <TableCell colSpan={headtable?.length || 1}>
               <div className="w-full flex flex-col justify-center items-center gap-4 py-6">
-                <Loader className="animate-spin" />
+                <Loader />
                 <p>No data available</p>
               </div>
             </TableCell>

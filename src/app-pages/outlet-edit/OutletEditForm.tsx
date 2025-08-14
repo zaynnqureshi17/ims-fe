@@ -188,7 +188,7 @@ const OutletEditForm = ({
               name="status"
               control={control}
               label="Status"
-              placeholder="Select City"
+              placeholder="Select Status"
               options={[
                 { value: "active", label: "Active" },
                 { value: "inactive", label: "Inactive" },

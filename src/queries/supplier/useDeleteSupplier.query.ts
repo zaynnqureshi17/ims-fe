@@ -5,7 +5,7 @@ import axiosInstance from "@/services/axiosInstance";
 import { ErrorResponseType } from "@/utils/types/api.types";
 
 const onDeleteSupplier = async (id: string) => {
-  return await axiosInstance.delete(`uom/${id}`);
+  return await axiosInstance.delete(`supplier/${id}`);
 };
 
 export const useDeleteSupplier = () => {
