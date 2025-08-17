@@ -64,6 +64,10 @@ export const ProtectedUrls = {
     viewStockCount: "/stock-count/view-stock-count/:id",
 
     manageTransfers: "/transfers",
+    addTransfer: "/transfers/add-transfer",
+    editTransfer: "/transfers/edit-transfer/:id",
+    viewTransfer: "/transfers/view-transfer/:id",
+
     manageWaste: "/waste",
 
     managePurchaseOrder: "/purchase-order",

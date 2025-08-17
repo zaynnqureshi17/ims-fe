@@ -1,7 +1,8 @@
+import Transfers from "@/app-pages/transfer/Transfers";
 import PendingPage from "@/components/common/PendingPage";
 
 const page = () => {
-  return <PendingPage />;
+  return <Transfers />;
 };
 
 export default page;
