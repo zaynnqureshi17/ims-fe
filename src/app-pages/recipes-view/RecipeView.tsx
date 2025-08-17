@@ -2,9 +2,9 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import GridWrapper from "@/components/wrapper/GridWrapper";
 import RecipesViewPageHeader from "./RecipesViewPageHeader";
-import RecipeViewActivity from "./RecipeViewActivity";
-import RecipeViewMain from "./RecipeViewMain";
 import RecipeViewTopBar from "./RecipeViewTopBar";
+import RecipeViewMain from "./RecipeViewMain";
+import RecipeViewActivity from "./RecipeViewActivity";
 
 const RecipeView = () => {
   return (

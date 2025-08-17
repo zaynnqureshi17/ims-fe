@@ -53,6 +53,7 @@ export const ProtectedUrls = {
   // --- Common URLs (shared across roles) ---
   common: {
     manageSalesReport: "/sales-report",
+    viewSalesReport: "/sales-report/view-sales-report",
     manageFinancialReports: "/financial-reports",
     manageCatalogue: "/catalogue",
     manageSettings: "/settings",

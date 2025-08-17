@@ -9,7 +9,7 @@ import { memo } from "react";
 const SalesReportPageHeader = () => {
   const navigate = usePrefetchNavigate();
   const handleAddSalesReport = () => {
-    navigate(ProtectedUrls.admin.addBrand);
+    navigate(ProtectedUrls.common.viewSalesReport);
   };
   return (
     <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 ">
