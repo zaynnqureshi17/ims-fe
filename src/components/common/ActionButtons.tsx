@@ -5,6 +5,7 @@ interface ActionsButtonProps {
   onEdit?: (id: number) => void;
   onDelete?: (id: number) => void;
   onView?: (id: number) => void;
+  onDownload?: (id: number) => void;
   itemId: number;
 }
 
@@ -12,6 +13,7 @@ const ActionButtons = ({
   onEdit,
   onDelete,
   onView,
+  onDownload,
   itemId,
 }: ActionsButtonProps) => {
   return (
@@ -44,6 +46,16 @@ const ActionButtons = ({
           height={16}
           className="!p-0 cursor-pointer"
           onClick={() => onView?.(itemId)}
+        />
+      )}
+      {onDownload && (
+        <IconBg
+          icon={`${brandsActions}download.svg`}
+          title="Download"
+          width={16}
+          height={16}
+          className="!p-0 cursor-pointer"
+          onClick={() => onDownload?.(itemId)}
         />
       )}
     </div>
