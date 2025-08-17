@@ -56,7 +56,11 @@ export const ProtectedUrls = {
     manageFinancialReports: "/financial-reports",
     manageCatalogue: "/catalogue",
     manageSettings: "/settings",
+    // Production URLs
     manageProduction: "/production",
+    addProduction: "/production/add-production",
+    editProduction: "/production/edit-production/:id",
+    viewProduction: "/production/view-production/:id",
     //  Stock Count URLs
     manageStockCount: "/stock-count",
     addStockCount: "/stock-count/add-stock-count",
