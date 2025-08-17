@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import Recipes from "@/app-pages/recipes/Recipes";
 
 const page = () => {
-  return <PendingPage />;
+  return <Recipes />;
 };
 
 export default page;

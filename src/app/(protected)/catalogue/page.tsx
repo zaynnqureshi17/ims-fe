@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import Catalogue from "@/app-pages/catalogue/Catalogue";
 
 const page = () => {
-  return <PendingPage />;
+  return <Catalogue />;
 };
 
 export default page;

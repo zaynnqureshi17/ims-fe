@@ -65,7 +65,11 @@ export const ProtectedUrls = {
 
     manageTransfers: "/transfers",
     manageWaste: "/waste",
+
     managePurchaseOrder: "/purchase-order",
+    addPurchaseOrder: "/purchase-order/add-purchase-order",
+    editPurchaseOrder: "/purchase-order/edit-purchase-order/:id",
+    viewPurchaseOrder: "/purchase-order/view-purchase-order/:id",
 
     manageItemReceiving: "/item-receiving",
     addItemReceiving: "/item-receiving/add-item-receiving",
@@ -73,6 +77,10 @@ export const ProtectedUrls = {
     viewItemReceiving: "/item-receiving/view-item-receiving/:id",
 
     manageRecipes: "/recipes",
+    addRecipe: "/recipes/add-recipe",
+    editRecipe: "/recipes/edit-recipe/:id",
+    viewRecipe: "/recipes/view-recipe/:id",
+
     manageTransfer: "/transfers",
     managePurchaseReport: "/reports",
     // Users management

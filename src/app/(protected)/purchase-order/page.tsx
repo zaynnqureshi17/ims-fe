@@ -1,5 +1,7 @@
+import PurchaseOrder from "@/app-pages/purchase-order/PurchaseOrder";
+
 const page = () => {
-  return <div></div>;
+  return <PurchaseOrder />;
 };
 
 export default page;
