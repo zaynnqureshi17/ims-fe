@@ -58,7 +58,7 @@ const ReportMultipleFilter: React.FC<ReportMultipleFilterProps> = ({
   handleUpdateQuery,
 }) => {
   return (
-    <div className="inline-flex gap-6">
+    <div className="inline-flex gap-6 col-span-5">
       <Input
         type="date"
         value={selectedStartDate}

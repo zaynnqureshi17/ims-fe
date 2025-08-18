@@ -1,6 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import PageHeader from "@/components/page-header";
-import FinanceFilter from "./FinanceFilter";
 import FinanceManagerMontlySummaryData from "./FinanceManagerMontlySummaryData";
 import FinanceManagerRecentTop from "./FinanceManagerRecentTop";
 import FinanceManagerSalesVarianceChart from "./FinanceManagerSalesVarianceChart";

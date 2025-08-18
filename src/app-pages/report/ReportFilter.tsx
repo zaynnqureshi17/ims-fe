@@ -1,4 +1,6 @@
 "use client";
+import { Button } from "@/components/ui/button";
+import GridWrapper from "@/components/wrapper/GridWrapper";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -44,9 +46,15 @@ const ReportFilter: React.FC = () => {
       },
     });
   };
+  const handleExportCSV = () => {
+    console.log("Exporting CSV...");
+  };
+  const handleApplyFilter = () => {
+    console.log("Applying filters...");
+  };
 
   return (
-    <div className="flex gap-6">
+    <GridWrapper className="grid grid-cols-3  md:grid-cols-6 gap-6">
       <ReportMultipleFilter
         selectedStartDate={startDate}
         selectedEndDate={endDate}
@@ -62,7 +70,15 @@ const ReportFilter: React.FC = () => {
           handleUpdateQuery(startDate, endDate, category, reason, staff)
         }
       />
-    </div>
+      <div className="flex flex-col items-end gap-3 border">
+        <Button className="w-full cursor-pointer" onClick={handleApplyFilter}>
+          Apply Filter
+        </Button>
+        <Button className=" w-full cursor-pointer" onClick={handleExportCSV}>
+          Export CSV
+        </Button>
+      </div>
+    </GridWrapper>
   );
 };
 
