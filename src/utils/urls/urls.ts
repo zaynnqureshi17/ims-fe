@@ -74,6 +74,9 @@ export const ProtectedUrls = {
     viewTransfer: "/transfers/view-transfer/:id",
 
     manageWaste: "/waste",
+    addWaste: "/waste/add-waste",
+    editWaste: "/waste/edit-waste/:id",
+    viewWaste: "/waste/view-waste/:id",
 
     managePurchaseOrder: "/purchase-order",
     addPurchaseOrder: "/purchase-order/add-purchase-order",

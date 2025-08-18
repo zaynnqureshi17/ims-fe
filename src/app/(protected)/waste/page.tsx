@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import Waste from "@/app-pages/waste/Waste";
 
 const page = () => {
-  return <PendingPage />;
+  return <Waste />;
 };
 
 export default page;
