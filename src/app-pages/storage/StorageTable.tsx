@@ -5,7 +5,7 @@ import { IStorage } from "@/utils/types/storage.type";
 import { useState } from "react";
 
 interface StorageTableProps {
-  storage: IStorage[];
+  storage: IStorage[] | [];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;

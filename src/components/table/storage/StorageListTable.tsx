@@ -11,7 +11,7 @@ import {
 import { IStorage } from "@/utils/types/storage.type";
 
 interface InterfaceStorageTable {
-  StockCountData: IStorage[];
+  StockCountData: IStorage[] | [];
   headtable?: string[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
