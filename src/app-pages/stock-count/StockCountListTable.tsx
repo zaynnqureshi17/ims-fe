@@ -1,5 +1,4 @@
 "use client";
-import { useStockContext } from "@/context/StockCountContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { IStockItem } from "@/utils/types/stock.count.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
@@ -8,7 +7,6 @@ import StockCountTable from "./StockCountTable";
 
 const StockCountListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
-  const { stock, loading } = useStockContext();
 
   const handleEditStockCount = (userId: number) => {
     navigate(

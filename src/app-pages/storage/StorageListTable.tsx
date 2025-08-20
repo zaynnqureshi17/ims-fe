@@ -3,7 +3,7 @@ import { useStockContext } from "@/context/StockCountContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
-import StockCountTable from "./StorageTable";
+import StorageTable from "./StorageTable";
 
 const StorageListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
@@ -27,7 +27,7 @@ const StorageListTable: React.FC = () => {
   };
 
   return (
-    <StockCountTable
+    <StorageTable
       onEdit={handleEditStockCount}
       onDelete={handleDeleteStockCount}
       onView={handleViewStockCount}
