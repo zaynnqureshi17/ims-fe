@@ -24,7 +24,7 @@ const VarianceReviewTable = ({
 
   return (
     <div className="space-y-6">
-      <StockCountListTable StockCountData={data} headtable={headtable} />
+      <StockCountListTable stockCount={data} headtable={headtable} />
       <div className="flex justify-end">
         <Button variant="secondary" className="w-fit" onClick={onApprove}>
           Approve Variance

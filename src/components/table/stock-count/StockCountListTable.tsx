@@ -10,7 +10,7 @@ import {
 import { IStockItem } from "@/utils/types/stock.count.type";
 
 interface InterfaceStockCountTable {
-  StockCountData: IStockItem[];
+  stockCount: IStockItem[];
   headtable?: string[];
   onEdit?: (id: number) => void;
   onDelete?: (id: number) => void;
@@ -18,7 +18,7 @@ interface InterfaceStockCountTable {
 }
 
 const StockCountListTable = ({
-  StockCountData,
+  stockCount,
   headtable,
   onEdit,
   onDelete,
@@ -35,7 +35,7 @@ const StockCountListTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {StockCountData.map((item, index) => (
+        {stockCount.map((item, index) => (
           <TableRow key={index} className="hover:bg-white my-2">
             <TableCell>{item.id}</TableCell>
             <TableCell>{item.item_name}</TableCell>

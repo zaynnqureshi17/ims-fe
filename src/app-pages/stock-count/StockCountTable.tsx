@@ -27,7 +27,7 @@ const StockCountTable = ({
     >
       <StockCountListTable
         headtable={headtable}
-        StockCountData={stockCount}
+        stockCount={stockCount}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
