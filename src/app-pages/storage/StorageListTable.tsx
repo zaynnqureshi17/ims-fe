@@ -1,5 +1,5 @@
 "use client";
-import { useStockContext } from "@/context/StockCountContext";
+import { useStorageContext } from "@/context/StorageContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
@@ -7,7 +7,7 @@ import StorageTable from "./StorageTable";
 
 const StorageListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
-  const { stock, loading } = useStockContext();
+  const { storage, loading } = useStorageContext();
 
   const handleEditStockCount = (userId: number) => {
     navigate(
@@ -31,7 +31,7 @@ const StorageListTable: React.FC = () => {
       onEdit={handleEditStockCount}
       onDelete={handleDeleteStockCount}
       onView={handleViewStockCount}
-      storage={stock}
+      storage={storage}
     />
   );
 };

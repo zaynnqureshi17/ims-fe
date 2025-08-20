@@ -1,5 +1,4 @@
 "use client";
-import { useStockContext } from "@/context/StockCountContext";
 import { useGetStockCount } from "@/queries/stock-count/useGetStockCount.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
@@ -7,6 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import StockCountMultipleFilter from "./StorageMultipleFilter";
 import StockCountSearch from "./StorageSearch";
+import { useStorageContext } from "@/context/StorageContext";
 
 type queryParams = string;
 
@@ -18,7 +18,7 @@ const StorageFilter: React.FC = () => {
   const [selectedDepartment, setSelectedDepartment] = useState<queryParams>("");
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
-  const { setStock, setLoading } = useStockContext();
+  const { setStorage, setLoading } = useStorageContext();
   const { data: StorageData, status } = useGetStockCount({
     brand: selectedBrand,
     outlet: selectedOutlet,
@@ -62,7 +62,7 @@ const StorageFilter: React.FC = () => {
   };
   useEffect(() => {
     if (StorageData) {
-      setStock(StorageData.body.data);
+      setStorage(StorageData.body.data);
       setLoading(status === "pending");
     }
   }, [StorageData]);
