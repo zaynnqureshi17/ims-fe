@@ -1,9 +1,9 @@
-import StockCountEdit from "@/app-pages/stock-count-edit/StockCountEdit";
+import StorageEdit from "@/app-pages/storage-edit/StorageEdit";
 import { PageProps } from "@/utils/types/common.type";
 
 const Page = async ({ params }: PageProps) => {
   const { id } = await params;
-  return <StockCountEdit id={id} />;
+  return <StorageEdit id={id} />;
 };
 
 export default Page;

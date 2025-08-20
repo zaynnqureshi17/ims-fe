@@ -1,8 +1,9 @@
-import StockCountView from "@/app-pages/stock-count-view/StockCountView";
+import StorageView from "@/app-pages/storage-view/StorageView";
 import { PageProps } from "@/utils/types/common.type";
 
 const Page = async ({ params }: PageProps) => {
-  return <StockCountView />;
+  const { id } = await params;
+  return <StorageView id={id} />;
 };
 
 export default Page;

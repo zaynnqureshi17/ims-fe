@@ -6,13 +6,13 @@ import { Pencil, Trash2 } from "lucide-react";
 
 const StockCountViewHeader = () => {
   const navigate = usePrefetchNavigate();
-  const handleEditStockCount = (userId: number) => {
+  const handleEditStorage = (storageId: number) => {
     navigate(
-      ProtectedUrls.common.editStockCount.replace(":id", userId.toString()),
+      ProtectedUrls.common.editStorage.replace(":id", storageId.toString()),
     );
   };
-  const handleDeletetockCount = (userId: number) => {
-    console.log(`Delete stock count action triggered for user ID: ${userId}`);
+  const handleDeleteStorage = (storageId: number) => {
+    console.log(`Delete storage action triggered for user ID: ${storageId}`);
     // Implement delete logic here
   };
   return (
@@ -30,11 +30,11 @@ const StockCountViewHeader = () => {
         <div className="flex justify-end w-full gap-3">
           <Pencil
             className="w-4 h-4 cursor-pointer"
-            onClick={() => handleEditStockCount(1)}
+            onClick={() => handleEditStorage(1)}
           />
           <Trash2
             className="w-4 h-4 cursor-pointer"
-            onClick={() => handleDeletetockCount(1)}
+            onClick={() => handleDeleteStorage(1)}
           />
         </div>
       </div>

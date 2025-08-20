@@ -4,7 +4,7 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 
 const StorageAddTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: "Stock Count", href: ProtectedUrls.common.manageStockCount },
+    { label: "Storage", href: ProtectedUrls.common.addStorage },
     { label: "Add Storage", active: true },
   ];
 

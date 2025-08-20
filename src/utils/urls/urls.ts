@@ -68,6 +68,12 @@ export const ProtectedUrls = {
     editStockCount: "/stock-count/edit-stock-count/:id",
     viewStockCount: "/stock-count/view-stock-count/:id",
 
+    //  Storage Count URLs
+    manageStorage: "/storage",
+    addStorage: "/storage/add-storage",
+    editStorage: "/storage/edit-storage/:id",
+    viewStorage: "/storage/view-storage/:id",
+
     manageTransfers: "/transfers",
     addTransfer: "/transfers/add-transfer",
     editTransfer: "/transfers/edit-transfer/:id",

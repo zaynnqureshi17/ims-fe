@@ -5,7 +5,7 @@ import StockCountViewHeader from "./StockCountViewHeader";
 import StockCountViewMain from "./StockCountViewMain";
 import StockCountViewTopBar from "./StockCountViewTopBar";
 
-const StockCountView = ({ id }: { id: number }) => {
+const StockCountView = () => {
   return (
     <ProtectedLayoutWrapper topBar={<StockCountViewTopBar />}>
       <StockCountViewHeader />

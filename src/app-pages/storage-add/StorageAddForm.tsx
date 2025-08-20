@@ -43,7 +43,7 @@ const StorageAddForm = ({
       { body: data },
       {
         onSuccess: () => {
-          // reset();
+          reset();
           toast.success("Storage created successfully");
         },
       },
