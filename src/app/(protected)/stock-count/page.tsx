@@ -1,7 +1,7 @@
-import PendingPage from "@/components/common/PendingPage";
+import StockCount from "@/app-pages/stock-count/StockCount";
 
 const page = () => {
-  return <PendingPage />;
+  return <StockCount />;
 };
 
 export default page;

@@ -1,22 +1,22 @@
 "use client";
-import StockCountListTable from "@/components/table/stock-count/StockCountListTable";
+import StockCountListTable from "@/components/table/storage/StockCountListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
-import { IStockItem } from "@/utils/types/stock.count.type";
+import { IStorage } from "@/utils/types/storage.type";
 import { useState } from "react";
 
-interface StockCountTableProps {
-  stockCount: IStockItem[];
+interface StorageTableProps {
+  storage: IStorage[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
-const StockCountTable = ({
-  stockCount,
+const StorageTable = ({
+  storage,
   onEdit,
   onDelete,
   onView,
-}: StockCountTableProps) => {
+}: StorageTableProps) => {
   const [page, setPage] = useState(1);
   return (
     <TableWrapper
@@ -27,7 +27,7 @@ const StockCountTable = ({
     >
       <StockCountListTable
         headtable={headtable}
-        StockCountData={stockCount}
+        StockCountData={storage}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
@@ -36,17 +36,14 @@ const StockCountTable = ({
   );
 };
 
-export default StockCountTable;
+export default StorageTable;
 
 const headtable = [
   "ID",
-  "Item Name",
-  "Category",
-  "Storage",
-  "Full Unit",
-  "Loose Units",
-  "After Packaging",
-  "Unit Price",
+  "Storage Name",
+  "Outlet",
+  "Department",
+  "Description",
   "Status",
   "Actions",
 ];

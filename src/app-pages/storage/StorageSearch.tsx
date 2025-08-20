@@ -1,12 +1,12 @@
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import React from "react";
-interface StockCountSearchProps {
+interface StorageSearchProps {
   searchText: string;
   setSearchText: (val: string) => void;
   onSearch: (val: string) => void;
 }
-const StockCountSearch: React.FC<StockCountSearchProps> = ({
+const StorageSearch: React.FC<StorageSearchProps> = ({
   searchText,
   setSearchText,
   onSearch,
@@ -27,4 +27,4 @@ const StockCountSearch: React.FC<StockCountSearchProps> = ({
   );
 };
 
-export default StockCountSearch;
+export default StorageSearch;

@@ -1,99 +1,79 @@
 "use client";
-import { useStockContext } from "@/context/StockCountContext";
-import { useGetStockCount } from "@/queries/stock-count/useGetStockCount.query";
+import { Button } from "@/components/ui/button";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import StockCountMultipleFilter from "./StockCountMultipleFilter";
-import StockCountSearch from "./StockCountSearch";
 
 type queryParams = string;
 
 const StockCountFilter: React.FC = () => {
+  const today = new Date().toISOString().split("T")[0];
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
-  const [selectedOutlet, setSelectedOutlet] = useState<queryParams>("");
-  const [selectedDepartment, setSelectedDepartment] = useState<queryParams>("");
+  const [selectedCategory, setSelectedCategory] = useState<queryParams>("");
+  const [selectedStorageArea, setSelectedStorageArea] =
+    useState<queryParams>("");
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
-  const [searchText, setSearchText] = useState<queryParams>("");
-  const { setStock, setLoading } = useStockContext();
-  const { data: StorageData, status } = useGetStockCount({
-    brand: selectedBrand,
-    outlet: selectedOutlet,
-    department: selectedDepartment,
-    status: selectedStatus,
-    search: searchText,
-  });
+
+  const [selectedDeliveryData, setSelectedDeliveryData] =
+    useState<queryParams>(today);
+
   // Load from URL on page load
   useEffect(() => {
-    const brand = searchParams.get("brand") || "";
-    const outlet = searchParams.get("outlet") || "";
-    const department = searchParams.get("department") || "";
+    const category = searchParams.get("category") || "";
+    const storageArea = searchParams.get("storageArea") || "";
     const status = searchParams.get("status") || "";
-    const search = searchParams.get("search") || "";
 
-    setSelectedBrand(brand);
-    setSelectedOutlet(outlet);
-    setSelectedDepartment(department);
+    setSelectedCategory(category);
+    setSelectedStorageArea(storageArea);
     setSelectedStatus(status);
-    setSearchText(search);
   }, [searchParams]);
 
   const handleUpdateQuery = (
-    brand?: string,
-    outlet?: string,
-    department?: string,
+    deliveryData?: string,
+    category?: string,
+    storageArea?: string,
     status?: string,
-    search?: string,
   ) => {
     updateQueryParams({
       router: router,
       basePath: ProtectedUrls.admin.manageSuppliers,
       queryParams: {
-        brand: brand === "all-brands" ? "" : brand,
-        outlet: outlet === "all-outlets" ? "" : outlet,
-        department: department === "all-departments" ? "" : department,
+        deliveryData: deliveryData || selectedDeliveryData,
+        category: category === "all-categories" ? "" : category,
+        storageArea: storageArea === "all-storage-areas" ? "" : storageArea,
         status: status === "all-status" ? "" : status,
-        search: search || "",
       },
     });
   };
-  useEffect(() => {
-    if (StorageData) {
-      setStock(StorageData.body.data);
-      setLoading(status === "pending");
-    }
-  }, [StorageData]);
+
+  const handleApplyFilter = () => {
+    handleUpdateQuery(
+      selectedDeliveryData,
+      selectedCategory,
+      selectedStorageArea,
+      selectedStatus,
+    );
+  };
+
   return (
     <div className="flex gap-6">
-      <StockCountSearch
-        searchText={searchText}
-        setSearchText={setSearchText}
-        onSearch={(val) =>
-          handleUpdateQuery(
-            selectedBrand,
-            selectedOutlet,
-            selectedDepartment,
-            selectedStatus,
-            val,
-          )
-        }
-      />
       <StockCountMultipleFilter
-        selectedBrand={selectedBrand}
+        selectedDeliveryData={selectedDeliveryData}
+        selectedCategory={selectedCategory}
         selectedStatus={selectedStatus}
-        selectedDepartment={selectedDepartment}
-        selectedOutlet={selectedOutlet}
-        setSelectedOutlet={setSelectedOutlet}
-        setSelectedBrand={setSelectedBrand}
+        selectedStorageArea={selectedStorageArea}
+        setSelectedDeliveryData={setSelectedDeliveryData}
+        setSelectedCategory={setSelectedCategory}
         setSelectedStatus={setSelectedStatus}
-        setSelectedDepartment={setSelectedDepartment}
-        handleUpdateQuery={(brand, outlet, department, status) =>
-          handleUpdateQuery(brand, outlet, department, status, searchText)
-        }
+        setSelectedStorageArea={setSelectedStorageArea}
+        handleUpdateQuery={handleUpdateQuery}
       />
+      <Button className="w-auto" onClick={handleApplyFilter}>
+        Apply Filter
+      </Button>
     </div>
   );
 };

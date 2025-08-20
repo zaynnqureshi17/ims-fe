@@ -1,11 +1,15 @@
-export interface IStorage {
-  storage_id: number;
-  storage_name: string;
-  outlet_id: string;
-  outlet_name: string;
-  department: string[];
-  storage_description?: string;
-  status: string;
+export interface IStockItem {
+  id?: number;
+  item_name: string;
+  category: string;
+  storage_area: string;
+  full_price: string | number;
+  full_units: string | number;
+  loose_units: string | number;
+  unit_price: string | number;
+  counted_quantity: string | number;
+  note_count: string;
+  status?: "Draft" | "Completed" | "Approved";
   created_at?: Date;
   updated_at?: Date;
 }

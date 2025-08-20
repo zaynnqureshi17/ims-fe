@@ -19,7 +19,7 @@ export type StorageFormValues = {
   storage_description: string;
 };
 
-const StockCountEditForm = ({
+const StorageEditForm = ({
   outletOptions,
   storageData,
 }: {
@@ -129,4 +129,4 @@ const StockCountEditForm = ({
   );
 };
 
-export default StockCountEditForm;
+export default StorageEditForm;

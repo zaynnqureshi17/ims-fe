@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import StockCountFilter from "./StockCountFilter";
 import StockCountPageHeader from "./StockCountPageHeader";
 import StockCountTopBar from "./StockCountTopBar";
-import StorageListTable from "./StorageListTable";
+import StockCountListTable from "./StockCountListTable";
 
 const StockCount = () => {
   return (
@@ -15,7 +15,7 @@ const StockCount = () => {
           <StockCountFilter />
         </Suspense>
         <Suspense fallback={<div>Loading filters...</div>}>
-          <StorageListTable />
+          <StockCountListTable />
         </Suspense>
       </ProtectedLayoutWrapper>
     </StockProvider>

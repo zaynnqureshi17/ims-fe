@@ -1,70 +1,79 @@
 import SelectField from "@/components/form/SelectField";
+import { Input } from "@/components/ui/input";
 import React from "react";
+
 interface StockCountMultipleFilterProps {
-  selectedBrand: string;
+  selectedCategory: string;
   selectedStatus: string;
-  selectedDepartment: string;
-  selectedOutlet: string;
-  setSelectedOutlet: (val: string) => void;
-  setSelectedBrand: (val: string) => void;
+  selectedStorageArea: string;
+  selectedDeliveryData: string;
+  setSelectedCategory: (val: string) => void;
   setSelectedStatus: (val: string) => void;
-  setSelectedDepartment: (val: string) => void;
+  setSelectedStorageArea: (val: string) => void;
+  setSelectedDeliveryData: (val: string) => void;
   handleUpdateQuery: (
-    brand: string,
-    outlet: string,
-    department: string,
+    selectedDeliveryData: string,
+    category: string,
+    storageArea: string,
     status: string,
   ) => void;
 }
 
 const StockCountMultipleFilter: React.FC<StockCountMultipleFilterProps> = ({
-  selectedBrand,
+  selectedCategory,
   selectedStatus,
-  selectedDepartment,
-  selectedOutlet,
-  setSelectedOutlet,
-  setSelectedBrand,
+  selectedStorageArea,
+  setSelectedCategory,
   setSelectedStatus,
-  setSelectedDepartment,
+  setSelectedStorageArea,
   handleUpdateQuery,
+  selectedDeliveryData,
+  setSelectedDeliveryData,
 }) => {
   return (
     <div className="inline-flex gap-6">
-      <SelectField
-        placeholder="All Brand"
-        options={allBrands}
-        value={selectedBrand}
-        onValueChange={(val) => {
-          setSelectedBrand(val);
+      <Input
+        type="date"
+        value={selectedDeliveryData}
+        onChange={(e) => {
+          const v = e.target.value;
+          setSelectedDeliveryData(v);
           handleUpdateQuery(
+            v,
+            selectedCategory,
+            selectedStorageArea,
+            selectedStatus,
+          );
+        }}
+        className="w-[160px] bg-white"
+        placeholder="mm/dd/yyyy"
+      />
+      <SelectField
+        placeholder="All Categories"
+        options={allCategories}
+        value={selectedCategory}
+        onValueChange={(val) => {
+          setSelectedCategory(val);
+          handleUpdateQuery(
+            selectedDeliveryData,
             val,
-            selectedOutlet,
-            selectedDepartment,
+            selectedStorageArea,
             selectedStatus,
           );
         }}
       />
       <SelectField
-        placeholder="All Outlets"
-        options={allOutlets}
-        value={selectedOutlet}
+        placeholder="All Storage Areas"
+        options={allStorageAreas}
+        value={selectedStorageArea}
         onValueChange={(val) => {
-          setSelectedOutlet(val);
+          setSelectedStorageArea(val);
           handleUpdateQuery(
-            selectedBrand,
+            selectedDeliveryData,
+            selectedCategory,
             val,
-            selectedDepartment,
             selectedStatus,
           );
-        }}
-      />
-      <SelectField
-        placeholder="All Department"
-        options={allDepartment}
-        value={selectedDepartment}
-        onValueChange={(val) => {
-          setSelectedDepartment(val);
-          handleUpdateQuery(selectedBrand, selectedOutlet, val, selectedStatus);
         }}
       />
       <SelectField
@@ -74,9 +83,9 @@ const StockCountMultipleFilter: React.FC<StockCountMultipleFilterProps> = ({
         onValueChange={(val) => {
           setSelectedStatus(val);
           handleUpdateQuery(
-            selectedBrand,
-            selectedOutlet,
-            selectedDepartment,
+            selectedDeliveryData,
+            selectedCategory,
+            selectedStorageArea,
             val,
           );
         }}
@@ -87,21 +96,18 @@ const StockCountMultipleFilter: React.FC<StockCountMultipleFilterProps> = ({
 
 export default StockCountMultipleFilter;
 
-const allBrands = [
-  { label: "All Brands", value: "all-brands" },
-  { label: "Brand A", value: "brand-a" },
-  { label: "Brand B", value: "brand-b" },
+const allCategories = [
+  { label: "All Categories", value: "all-categories" },
+  { label: "Category A", value: "category-a" },
+  { label: "Category B", value: "category-b" },
 ];
-const allOutlets = [
-  { label: "All Outlets", value: "all-outlets" },
-  { label: "Outlet A", value: "outlet-a" },
-  { label: "Outlet B", value: "outlet-b" },
+
+const allStorageAreas = [
+  { label: "All Storage Areas", value: "all-storage-areas" },
+  { label: "Storage Area A", value: "storage-area-a" },
+  { label: "Storage Area B", value: "storage-area-b" },
 ];
-const allDepartment = [
-  { label: "All Departments", value: "all-departments" },
-  { label: "Department A", value: "department-a" },
-  { label: "Department B", value: "department-b" },
-];
+
 const allStatus = [
   { label: "All Status", value: "all-status" },
   { label: "Active", value: "active" },

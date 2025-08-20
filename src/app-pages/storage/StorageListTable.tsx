@@ -3,7 +3,7 @@ import { useStockContext } from "@/context/StockCountContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
-import StockCountTable from "./StockCountTable";
+import StockCountTable from "./StorageTable";
 
 const StorageListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();

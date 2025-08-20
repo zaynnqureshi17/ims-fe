@@ -6,9 +6,8 @@ import SelectField from "@/components/form/SelectField";
 import { Button } from "@/components/ui/button";
 import { FormWrapper } from "@/components/wrapper/FormWrapper";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import { useUpdateStockCount } from "@/queries/stock-count/useUpdateStockCount";
+import { useCreateStockCount } from "@/queries/stock-count/useCreateStockCount.query";
 import { optionsType } from "@/utils/types/common.type";
-import { IStorage } from "@/utils/types/storage.type";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -16,45 +15,41 @@ export type StorageFormValues = {
   storage_name: string;
   outlet_id: string;
   status: string;
-  storage_description: string;
+  description: string;
 };
 
-const StockCountEditForm = ({
+const StorageAddForm = ({
   outletOptions,
-  storageData,
 }: {
   outletOptions: optionsType[];
-  storageData: IStorage;
 }) => {
-  const { mutate: updateStorage, status: updateStatus } = useUpdateStockCount();
-  const { storage_id, storage_name, outlet_id, status, storage_description } =
-    storageData || {};
+  const { mutate: createStorage, status } = useCreateStockCount();
 
   const methods = useForm<StorageFormValues>({
     defaultValues: {
-      storage_name: storage_name || "",
-      outlet_id: outlet_id || "",
-      status: status || "active",
-      storage_description: storage_description || "",
+      storage_name: "",
+      outlet_id: "",
+      status: "active",
+      description: "",
     },
   });
 
   const { handleSubmit, reset, control } = methods;
-  const loading = updateStatus === "pending";
+  const loading = status === "pending";
 
   const onSubmit = (data: StorageFormValues) => {
     console.log(data);
-    updateStorage(
-      { body: data, id: storage_id },
+    createStorage(
+      { body: data },
       {
         onSuccess: () => {
-          reset(data);
-          toast.success("Storage updated successfully");
+          // reset();
+          toast.success("Storage created successfully");
         },
       },
     );
   };
-  console.log(storageData);
+
   return (
     <FormProvider {...methods}>
       <FormWrapper onSubmit={handleSubmit(onSubmit)} disabled={loading}>
@@ -99,13 +94,12 @@ const StockCountEditForm = ({
 
           {/* Description */}
           <FormTextarea
-            name="storage_description"
+            name="description"
             label="Description"
             placeholder="Notes"
             rows={6}
           />
         </GridWrapper>
-
         <div className="flex justify-end items-center mt-4 gap-6">
           <Button
             type="button"
@@ -129,4 +123,4 @@ const StockCountEditForm = ({
   );
 };
 
-export default StockCountEditForm;
+export default StorageAddForm;

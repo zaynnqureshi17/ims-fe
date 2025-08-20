@@ -1,5 +1,5 @@
 "use client";
-import { IStorage } from "@/utils/types/stock.count.type";
+import { IStorage } from "@/utils/types/storage.type";
 import React, { useState } from "react";
 
 type props = {
