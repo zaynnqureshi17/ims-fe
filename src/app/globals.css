@@ -279,4 +279,7 @@
     border-radius: 2px;
     border: 1px solid var(--scroll-bar-bg-color);
   }
+  .auth-wrapper {
+    background: url("../../public/bg/auth-bg.svg") 100%/100% no-repeat;
+  }
 }

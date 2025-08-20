@@ -18,17 +18,6 @@ jobs:
         with:
           node-version: 18
 
-      - name: Clean old files on VPS
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          port: 22
-          script: |
-            echo "🧹 Cleaning old files..."
-            rm -rf /var/www/dev/*
-
       - name: Upload Source to VPS
         uses: appleboy/scp-action@master
         with:
