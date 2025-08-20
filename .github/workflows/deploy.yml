@@ -39,15 +39,13 @@ jobs:
             set -e
             cd /var/www/dev
 
+            # node_modules ko delete NAHI karna; npm ci bhi use nahi karna (wo wipe karta hai)
             npm install --no-audit --no-fund
 
-            echo "Building project..."
-            if ! npm run build; then
-              echo "❌ Build failed. Skipping PM2 restart. Keeping old version running."
-              exit 1
-            fi
+            # build create karo
+            npm run build
 
-            echo "✅ Build successful. Restarting app..."
+            # PM2 restart (agar running), warna start
             if pm2 describe dev > /dev/null; then
               pm2 restart dev
             else
