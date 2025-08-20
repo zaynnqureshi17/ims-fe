@@ -1,5 +1,5 @@
 "use client";
-import StockCountListTable from "@/components/table/storage/StockCountListTable";
+import StorageListTable from "@/components/table/storage/StorageListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
 import { IStorage } from "@/utils/types/storage.type";
 import { useState } from "react";
@@ -25,7 +25,7 @@ const StorageTable = ({
       itemsPerPage={3}
       onPageChange={(page) => setPage(page)}
     >
-      <StockCountListTable
+      <StorageListTable
         headtable={headtable}
         StockCountData={storage}
         onEdit={onEdit}
