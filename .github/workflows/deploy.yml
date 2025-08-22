@@ -34,6 +34,7 @@ jobs:
             .next
             .git
             .github
+            .env
 
       - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master
