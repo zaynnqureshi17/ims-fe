@@ -6,7 +6,7 @@ import SelectField from "@/components/form/SelectField";
 import { Button } from "@/components/ui/button";
 import { FormWrapper } from "@/components/wrapper/FormWrapper";
 import GridWrapper from "@/components/wrapper/GridWrapper";
-import { useUpdateStockCount } from "@/queries/stock-count/useUpdateStockCount";
+import { useUpdateStorage } from "@/queries/storage/useUpdateStorage.query";
 import { optionsType } from "@/utils/types/common.type";
 import { IStorage } from "@/utils/types/storage.type";
 import { Controller, FormProvider, useForm } from "react-hook-form";
@@ -26,7 +26,7 @@ const StorageEditForm = ({
   outletOptions: optionsType[];
   storageData: IStorage;
 }) => {
-  const { mutate: updateStorage, status: updateStatus } = useUpdateStockCount();
+  const { mutate: updateStorage, status: updateStatus } = useUpdateStorage();
   const { storage_id, storage_name, outlet_id, status, storage_description } =
     storageData || {};
 

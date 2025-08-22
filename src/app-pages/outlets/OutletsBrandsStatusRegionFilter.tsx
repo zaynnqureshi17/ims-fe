@@ -57,13 +57,11 @@ const OutletsBrandsStatusRegionFilter: React.FC<
 export default OutletsBrandsStatusRegionFilter;
 
 const allStatus = [
-  { value: "all-status", label: "All Status" },
   { value: "active", label: "Active" },
   { value: "inactive", label: "Inactive" },
 ];
 
 const allRegions = [
-  { value: "all-regions", label: "All Regions" },
   { value: "asia", label: "Asia" },
   { value: "europe", label: "Europe" },
   { value: "north-america", label: "North America" },
@@ -74,7 +72,6 @@ const allRegions = [
 ];
 
 const allBrands = [
-  { value: "all-brands", label: "All Brands" },
   { value: "brand-a", label: "Brand A" },
   { value: "brand-b", label: "Brand B" },
   { value: "brand-c", label: "Brand C" },

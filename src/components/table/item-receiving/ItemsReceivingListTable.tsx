@@ -39,7 +39,7 @@ const ItemsReceivingListTable = ({
           <TableRow key={index} className="hover:bg-white  my-4">
             <TableCell className="text-gray">{item.item_id}</TableCell>
             <TableCell className="font-medium">{item.item_name}</TableCell>
-            <TableCell className="text-left">{item.brand}</TableCell>
+            <TableCell className="text-left">{item.brand_name}</TableCell>
             <TableCell>
               <div className="text-gray">{item.sub_category_1}</div>
             </TableCell>
@@ -55,7 +55,6 @@ const ItemsReceivingListTable = ({
             <TableCell className="text-left text-gray">
               {item.unit_price}
             </TableCell>
-            <TableCell className="text-left">N/A</TableCell>
             <TableCell>
               <ActionButtons
                 itemId={item.item_id}

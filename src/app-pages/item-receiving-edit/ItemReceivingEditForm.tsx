@@ -47,7 +47,6 @@ const ItemReceivingEditForm = ({
       item_code: item.item_code || "",
       item_name: item.item_name || "",
       specification: item.specification || "",
-      brand: item.brand || "",
       supplier_item_code: item.supplier_item_code || "",
       category: item.category || "",
       sub_category_1: item.sub_category_1 || "",
@@ -102,14 +101,6 @@ const ItemReceivingEditForm = ({
               placeholder="e.g. Lemongrass 1KG"
               type="text"
               rules={{ required: "Item Name is required" }}
-            />
-
-            <FormInputField
-              name="brand"
-              label="Manufacturer Brand"
-              placeholder="e.g. Nestlé"
-              type="text"
-              rules={{ required: "Brand is required" }}
             />
 
             <FormInputField

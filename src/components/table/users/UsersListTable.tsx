@@ -29,7 +29,7 @@ const UsersListTable = ({
   onView,
 }: InterfaceUsers) => {
   return (
-    <Table>
+    <Table className="border-separate border-spacing-x-4 border-spacing-y-2">
       <TableHeader>
         <TableRow>
           {headtable &&
@@ -50,7 +50,7 @@ const UsersListTable = ({
           </TableRow>
         ) : (
           UsersData.map((item, index) => (
-            <TableRow key={index} className="hover:bg-white  my-4">
+            <TableRow key={index} className="hover:bg-white my-4">
               <TableCell className="text-gray">{item.user_id}</TableCell>
               <TableCell>
                 <div className="flex justify-start gap-x-2">
@@ -91,7 +91,7 @@ const UsersListTable = ({
                   onEdit={onEdit}
                   onDelete={onDelete}
                   onView={onView}
-                />{" "}
+                />
               </TableCell>
             </TableRow>
           ))

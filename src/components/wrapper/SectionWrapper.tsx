@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 interface SectionWrapperProps {
   title: string;
+  description?: string;
   children: ReactNode;
   lineDrawn?: boolean;
   className?: string;
@@ -10,6 +11,7 @@ interface SectionWrapperProps {
 const SectionWrapper = ({
   title,
   children,
+  description,
   className = "",
 }: SectionWrapperProps) => {
   return (
@@ -18,6 +20,7 @@ const SectionWrapper = ({
         <h2 className="text-xl font-semibold text-gray-800 capitalize">
           {title}
         </h2>
+        {description && <p className="text-sm text-gray-600">{description}</p>}
       </div>
       <div className=" flex flex-col gap-4">{children}</div>
     </div>

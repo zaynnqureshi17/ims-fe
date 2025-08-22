@@ -29,6 +29,7 @@ const ItemReceivingListTable: React.FC = () => {
       ProtectedUrls.common.viewItemReceiving.replace(":id", String(uomId)),
     );
   };
+  console.log(item);
 
   return (
     <ItemReceivingTable

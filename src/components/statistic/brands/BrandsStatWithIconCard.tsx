@@ -6,15 +6,17 @@ export interface BrandsStatWithIconCardProps {
   title: string;
   value: string | number;
   icon: React.ReactNode;
+  key: number;
 }
 
 const BrandsStatWithIconCard = ({
   title,
   value,
   icon,
+  key,
 }: BrandsStatWithIconCardProps) => {
   return (
-    <Card className="w-full gap-0">
+    <Card key={key} className="w-full gap-0">
       <CardContent>
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm  text-supporting-black">

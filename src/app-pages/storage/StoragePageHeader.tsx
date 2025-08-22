@@ -3,12 +3,13 @@ import PageHeader from "@/components/page-header";
 import { Button } from "@/components/ui/button";
 import GridWrapper from "@/components/wrapper/GridWrapper";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { ProtectedUrls } from "@/utils/urls/urls";
 import { memo } from "react";
 
 const StoragePageHeader = () => {
   const navigate = usePrefetchNavigate();
   const handleAddStorage = () => {
-    console.log("Add Storage action triggered");
+    navigate(ProtectedUrls.common.addStorage);
   };
   return (
     <GridWrapper className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 ">

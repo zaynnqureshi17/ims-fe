@@ -1,6 +1,8 @@
 export const AuthUrls = {
   signIn: "/sign-in",
   forgotPassword: "/forgot-password",
+  OTPVerify: "/otp-verify/:token",
+  resetPassword: "/reset-password/:token",
 };
 
 // --- Protected URLs for different roles ---
@@ -108,4 +110,9 @@ export const ProtectedUrls = {
     viewUser: "/users/view-user/:id",
   },
 };
-export const AuthRoutes = [AuthUrls.signIn, AuthUrls.forgotPassword];
+export const AuthRoutes = [
+  AuthUrls.signIn,
+  AuthUrls.forgotPassword,
+  AuthUrls.OTPVerify,
+  AuthUrls.resetPassword,
+];

@@ -1,14 +1,14 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
 import GridWrapper from "@/components/wrapper/GridWrapper";
 import StockCountViewActivity from "./StockCountViewActivity";
-import StockCountViewHeader from "./StockCountViewHeader";
 import StockCountViewMain from "./StockCountViewMain";
+import StockCountViewPageHeader from "./StockCountViewPageHeader";
 import StockCountViewTopBar from "./StockCountViewTopBar";
 
 const StockCountView = () => {
   return (
     <ProtectedLayoutWrapper topBar={<StockCountViewTopBar />}>
-      <StockCountViewHeader />
+      <StockCountViewPageHeader />
       <GridWrapper className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <StockCountViewMain />
         <StockCountViewActivity />

@@ -1,31 +1,40 @@
 "use client";
 import { useStorageContext } from "@/context/StorageContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
+import { useDeleteStorage } from "@/queries/storage/useDeleteStorage.query";
+import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
 import StorageTable from "./StorageTable";
 
 const StorageListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
   const { storage, loading } = useStorageContext();
+  const { mutate: deleteStorage } = useDeleteStorage();
 
-  const handleEditStockCount = (storageId: number) => {
-    console.log(storageId);
+  const handleEditStorage = (storageId: number) => {
+    navigate(
+      ProtectedUrls.common.editStorage.replace(":id", storageId.toString()),
+    );
   };
 
-  const handleDeleteStockCount = () => {
-    // TODO
-    console.log("Delete Stock Count action triggered");
+  const handleDeleteStorage = (storageId: number) => {
+    deleteStorage({
+      id: storageId,
+    });
   };
+  // TODO
 
-  const handleViewStockCount = (storageId: number) => {
-    console.log(storageId);
+  const handleViewStorage = (storageId: number) => {
+    navigate(
+      ProtectedUrls.common.viewStorage.replace(":id", storageId.toString()),
+    );
   };
 
   return (
     <StorageTable
-      onEdit={handleEditStockCount}
-      onDelete={handleDeleteStockCount}
-      onView={handleViewStockCount}
+      onEdit={handleEditStorage}
+      onDelete={handleDeleteStorage}
+      onView={handleViewStorage}
       storage={storage}
     />
   );

@@ -1,12 +1,12 @@
 "use client";
-import { useGetStockCount } from "@/queries/stock-count/useGetStockCount.query";
+import { useStorageContext } from "@/context/StorageContext";
+import { useGetStorage } from "@/queries/storage/useGetStorage.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import StockCountMultipleFilter from "./StorageMultipleFilter";
 import StockCountSearch from "./StorageSearch";
-import { useStorageContext } from "@/context/StorageContext";
 
 type queryParams = string;
 
@@ -19,7 +19,7 @@ const StorageFilter: React.FC = () => {
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
   const { setStorage, setLoading } = useStorageContext();
-  const { data: StorageData, status } = useGetStockCount({
+  const { data: StorageData, status } = useGetStorage({
     brand: selectedBrand,
     outlet: selectedOutlet,
     department: selectedDepartment,

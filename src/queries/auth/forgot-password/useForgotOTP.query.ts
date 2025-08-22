@@ -28,7 +28,7 @@ const onForgotVerifyOTP = async (
   otp: string,
 ) => {
   return await axiosInstance.post(
-    `auth/forgot-password/verify-otp`,
+    `auth/verify-forgot-password`,
     { otp },
     {
       headers: { Authorization: `Bearer ${token}` } as any,

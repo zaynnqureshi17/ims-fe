@@ -1,4 +1,5 @@
 import ActionButtons from "@/components/common/ActionButtons";
+import Loader from "@/components/common/loader";
 import StatusBadge from "@/components/common/StatusBadge";
 import {
   Table,
@@ -36,36 +37,44 @@ const StorageListTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {StockCountData.map((item, index) => (
-          <TableRow key={index} className="hover:bg-white  my-4">
-            <TableCell className="text-gray">{item.storage_id}</TableCell>
-            <TableCell>
-              <span>{item.storage_name}</span>
-            </TableCell>
-            <TableCell className="text-left text-gray">
-              <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
-                {item.outlet_name}
-              </span>
-            </TableCell>
-            <TableCell>
-              <div className="font-medium">{item.department}</div>
-            </TableCell>
-            <TableCell className="text-left text-gray">
-              {item.storage_description || "N/A"}
-            </TableCell>
-            <TableCell className="text-left">
-              <StatusBadge status={item.status} />
-            </TableCell>
-            <TableCell>
-              <ActionButtons
-                itemId={item.storage_id}
-                onEdit={onEdit}
-                onDelete={onDelete}
-                onView={onView}
-              />{" "}
+        {StockCountData.length === 0 ? (
+          <TableRow>
+            <TableCell colSpan={headtable?.length || 1}>
+              <div className="w-full flex flex-col justify-center items-center gap-4">
+                <Loader />
+                <p>No data available</p>
+              </div>
             </TableCell>
           </TableRow>
-        ))}
+        ) : (
+          StockCountData.map((item, index) => (
+            <TableRow key={index} className="hover:bg-white  my-4">
+              <TableCell className="text-gray">{item.storage_id}</TableCell>
+              <TableCell>
+                <span>{item.storage_name}</span>
+              </TableCell>
+              <TableCell className="text-left text-gray">
+                <span className="text-accent-orange bg-accent-orange-light rounded-full px-2 py-0.5">
+                  {item.outlet_name}
+                </span>
+              </TableCell>
+              <TableCell className="text-left text-gray">
+                {item.storage_description || "N/A"}
+              </TableCell>
+              <TableCell className="text-left">
+                <StatusBadge status={item.status} />
+              </TableCell>
+              <TableCell>
+                <ActionButtons
+                  itemId={item.storage_id}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
+                  onView={onView}
+                />{" "}
+              </TableCell>
+            </TableRow>
+          ))
+        )}
       </TableBody>
     </Table>
   );

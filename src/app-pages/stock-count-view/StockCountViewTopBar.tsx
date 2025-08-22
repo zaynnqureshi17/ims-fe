@@ -4,8 +4,8 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 
 const StockCountViewTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: "Stock Count", href: ProtectedUrls.admin.manageSuppliers },
-    { label: "Storage Details", active: true },
+    { label: "Stock Count", href: ProtectedUrls.common.manageStockCount },
+    { label: "Stock Count Details", active: true },
   ];
 
   return <TopBar breadcrumbs={breadcrumbs} />;

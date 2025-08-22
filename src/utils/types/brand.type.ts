@@ -8,9 +8,17 @@ export interface IBrand {
   status: string;
   description?: string;
   user?: IUser;
+  outlet_count: number;
   created_at: Date;
   updated_at?: Date;
 }
 export type IBrandResponse = IBrand & {
   outlets: IOutlet[];
+};
+
+export type brandModelSummary = {
+  total_brand: number;
+  active_brand: number;
+  total_outlet: number;
+  average_brand_outlet: number;
 };

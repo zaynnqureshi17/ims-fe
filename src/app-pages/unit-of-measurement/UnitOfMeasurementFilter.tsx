@@ -1,12 +1,12 @@
 "use client";
 import { useUOMContext } from "@/context/UomContext";
+import { useGetUOMs } from "@/queries/uom/useGetUOMs.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
 import UnitOfMeasurementSearch from "./UnitOfMeasurementSearch";
 import UnitOfMeasurementStatusCategoryFilter from "./UnitOfMeasurementStatusCategoryFilter";
-import { useGetUOMs } from "@/queries/uom/useGetUOMs.query";
 
 type queryParams = string;
 

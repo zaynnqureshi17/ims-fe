@@ -1,6 +1,4 @@
 "use client";
-import { startsWith } from "lodash";
-
 import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   SidebarGroup,
@@ -9,6 +7,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { startsWith } from "lodash";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,44 +26,60 @@ interface NavMainProps {
 export function NavMain({ roleRoutes }: NavMainProps) {
   const { state } = useSidebar(); // collapsed | expanded
   const path = usePathname();
-  const route = path.split("/").slice(2).join("/");
 
-  const isActive = startsWith(route, roleRoutes?.[route]?.activeRoute);
+  // normalize route segment(s)
+  const currentRoute = path.split("/").filter(Boolean).pop() ?? "";
 
   return (
     <SidebarGroup>
       <SidebarMenu className="flex flex-col gap-2">
-        {Object.entries(roleRoutes).map(([key, route]) => (
-          <Collapsible
-            key={key}
-            defaultOpen={isActive}
-            className={`group/collapsible flex justify-start items-center gap-1 text-white ${state === "collapsed" ? "" : "hover:bg-orange-200/10 rounded-md"} `}
-          >
-            <CollapsibleTrigger asChild className="w-auto px-2">
-              <SidebarMenuButton
-                tooltip={route.title}
-                size={state === "collapsed" ? "lg" : "default"}
-                variant={"default"}
+        {Object.entries(roleRoutes).map(([key, route]) => {
+          const isActive =
+            startsWith(path, route.path) || currentRoute === route.activeRoute;
+          return (
+            <div
+              className={`text-sm ${
+                isActive
+                  ? " border-l-4 rounded-l-xs border-orange-300 bg-orange-300/20"
+                  : ""
+              }`}
+            >
+              <Collapsible
+                key={key}
+                defaultOpen={isActive}
+                className={`group/collapsible flex justify-start items-center gap-1 text-white ${
+                  state === "collapsed"
+                    ? ""
+                    : "hover:bg-orange-200/10 rounded-md"
+                } `}
               >
-                <Image
-                  className="transition-all duration-300 "
-                  src={route.icon}
-                  alt={route.title}
-                  width={24}
-                  height={24}
-                />
-              </SidebarMenuButton>
-            </CollapsibleTrigger>
+                <CollapsibleTrigger asChild className="w-auto px-2">
+                  <SidebarMenuButton
+                    tooltip={route.title}
+                    size={state === "collapsed" ? "lg" : "default"}
+                    variant="default"
+                  >
+                    <Image
+                      className="transition-all duration-300"
+                      src={route.icon}
+                      alt={route.title}
+                      width={24}
+                      height={24}
+                    />
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
 
-            {state !== "collapsed" && (
-              <Link href={route.path} className="w-full">
-                <SidebarMenuItem>
-                  <span className="text-sm">{route.title}</span>
-                </SidebarMenuItem>
-              </Link>
-            )}
-          </Collapsible>
-        ))}
+                {state !== "collapsed" && (
+                  <Link href={route.path} className="w-full">
+                    <SidebarMenuItem>
+                      <span>{route.title}</span>
+                    </SidebarMenuItem>
+                  </Link>
+                )}
+              </Collapsible>
+            </div>
+          );
+        })}
       </SidebarMenu>
     </SidebarGroup>
   );

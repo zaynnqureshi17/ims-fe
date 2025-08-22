@@ -13,11 +13,13 @@ type queryParams = string;
 const OutletsFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [selectedRegion, setSelectedRegion] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
   const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
   const { setOutlet, setLoading } = useOutletContext();
+
   const { data: outletsData, status } = useGetOutlets({
     status: selectedStatus,
     region: selectedRegion,

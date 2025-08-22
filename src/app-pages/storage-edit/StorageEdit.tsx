@@ -4,12 +4,12 @@ import PageHeader from "@/components/page-header";
 import StateWrapper from "@/components/wrapper/StateWrapper";
 import { useMultiOptions } from "@/hooks/useMultiOptions";
 import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
-import { useGetStockCountById } from "@/queries/stock-count/useGetStockCountById.query";
+import { useGetStorageById } from "@/queries/storage/useGetStorageById.query";
 import StorageEditForm from "./StorageEditForm";
 import StorageEditTopBar from "./StorageEditTopBar";
 
 const StorageEdit = ({ id }: { id: string }) => {
-  const { data: storageData, status, error } = useGetStockCountById(id);
+  const { data: storageData, status, error } = useGetStorageById(id);
 
   const { data: outlets, status: outletStatus } = useGetOutlets({});
   const { outletOptions } = useMultiOptions({

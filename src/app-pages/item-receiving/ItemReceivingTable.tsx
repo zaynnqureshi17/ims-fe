@@ -47,6 +47,5 @@ const headtable = [
   "Supplier",
   "Purchase UOM",
   "Price",
-  "Status",
   "Actions",
 ];

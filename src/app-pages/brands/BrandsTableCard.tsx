@@ -35,7 +35,13 @@ const BrandsTableCard: React.FC = () => {
   };
 
   if (collapsed === "grid") {
-    return <BrandsCard brand={brand} onEdit={handleEditBrand} />;
+    return (
+      <BrandsCard
+        brand={brand}
+        onEdit={handleEditBrand}
+        onDelete={handleDeleteBrand}
+      />
+    );
   }
   if (collapsed === "list") {
     return (

@@ -58,7 +58,7 @@ const BrandsListTable = ({
               </TableCell>
               <TableCell>
                 <div className="text-accent-orange bg-accent-orange-light w-fit px-2 py-1  rounded-full">
-                  {1}
+                  {item.outlet_count}
                 </div>
               </TableCell>
               <TableCell className="text-left text-gray">

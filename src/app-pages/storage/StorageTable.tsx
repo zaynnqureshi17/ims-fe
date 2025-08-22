@@ -20,9 +20,9 @@ const StorageTable = ({
   const [page, setPage] = useState(1);
   return (
     <TableWrapper
-      totalItems={12}
+      totalItems={storage.length}
       currentPage={page}
-      itemsPerPage={3}
+      itemsPerPage={10}
       onPageChange={(page) => setPage(page)}
     >
       <StorageListTable
@@ -42,7 +42,6 @@ const headtable = [
   "ID",
   "Storage Name",
   "Outlet",
-  "Department",
   "Description",
   "Status",
   "Actions",

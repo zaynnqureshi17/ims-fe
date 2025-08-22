@@ -22,14 +22,14 @@ const AuthCardForm: React.FC<CardSectionProps> = ({
   footerChildren,
 }) => {
   return (
-    <Card className="w-full max-w-sm gap-0 rounded-sm px-4 py-6">
-      <CardHeader className="text-center mb-6">
+    <Card className="w-full max-w-md gap-0 rounded-sm px-4 py-8">
+      <CardHeader className="text-center my-6">
         <CardTitle className="text-2xl font-light ">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>{children}</CardContent>
       {footerChildren && (
-        <CardFooter className="flex-col gap-2">{footerChildren}</CardFooter>
+        <CardFooter className="flex-col gap-4">{footerChildren}</CardFooter>
       )}
     </Card>
   );

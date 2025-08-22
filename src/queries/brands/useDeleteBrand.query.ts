@@ -16,6 +16,7 @@ export const useDeleteBrand = () => {
     mutationFn: ({ id }: any) => onDeleteBrand(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["onGetBrand"] });
+      queryClient.invalidateQueries({ queryKey: ["onGetSummaryBrand"] });
     },
     onError: (error: ErrorResponseType) => {
       toast.error(error?.data?.message || "Some error occurred");

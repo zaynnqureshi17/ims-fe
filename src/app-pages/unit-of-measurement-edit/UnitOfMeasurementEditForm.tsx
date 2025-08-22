@@ -28,7 +28,6 @@ const UnitOfMeasurementEditForm = ({ uomData }: { uomData: IUOM }) => {
   const loading = updateStatus === "pending";
 
   const onSubmit = (data: any) => {
-    console.log(data);
     updateUOM(
       { body: data, id: preset_uom_id },
       {
@@ -92,8 +91,8 @@ const UnitOfMeasurementEditForm = ({ uomData }: { uomData: IUOM }) => {
               label="Status"
               placeholder="Select Status"
               options={[
-                { value: "Active", label: "Active" },
-                { value: "Inactive", label: "Inactive" },
+                { value: "active", label: "Active" },
+                { value: "inactive", label: "Inactive" },
               ]}
               rules={{ required: "Status is required" }}
             />

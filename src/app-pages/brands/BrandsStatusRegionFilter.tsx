@@ -72,13 +72,11 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
 export default BrandsStatusRegionFilter;
 
 const allStatus = [
-  { value: "all-status", label: "All Status" },
   { value: "active", label: "Active" },
   { value: "inactive", label: "Inactive" },
 ];
 
 const allRegions = [
-  { value: "all-regions", label: "All Regions" },
   { value: "asia", label: "Asia" },
   { value: "europe", label: "Europe" },
   { value: "north-america", label: "North America" },

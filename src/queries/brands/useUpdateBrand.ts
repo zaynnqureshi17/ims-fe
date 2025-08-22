@@ -19,6 +19,7 @@ export const useUpdateBrand = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["onGetBrands"] });
       queryClient.invalidateQueries({ queryKey: ["onGetBrandById"] });
+      queryClient.invalidateQueries({ queryKey: ["onGetSummaryBrand"] });
     },
     onError: (error: ErrorResponseType) => {
       toast.error(error?.data?.message || "Some error occurred");

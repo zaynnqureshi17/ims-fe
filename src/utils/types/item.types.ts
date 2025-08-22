@@ -6,7 +6,7 @@ export interface IItem {
   sub_category_2: string;
   item_name: string;
   specification: string;
-  brand: string;
+  brand_name: string;
   brand_id: number;
   supplier_item_code: string;
   purchase_by_uom: string;
