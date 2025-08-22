@@ -27,6 +27,13 @@ jobs:
           port: 22
           source: "."
           target: "/var/www/dev"
+          rm: true
+          strip_components: 0
+          exclude: |
+            node_modules
+            .next
+            .git
+            .github
 
       - name: SSH & Install + Build + Restart
         uses: appleboy/ssh-action@master
@@ -39,6 +46,10 @@ jobs:
             set -e
             cd /var/www/dev
 
+            echo "Cleaning old build..."
+            rm -rf .next
+
+            echo "Installing dependencies..."
             npm install --no-audit --no-fund
 
             echo "Building project..."
