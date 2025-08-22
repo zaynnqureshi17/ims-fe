@@ -1,6 +1,9 @@
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
+import { optionsType } from "@/utils/types/common.type";
 import React from "react";
 interface OutletsBrandsStatusRegionFilterProps {
+  brandOptions: optionsType[];
   selectedStatus?: string;
   selectedRegion?: string;
   selectedBrand?: string;
@@ -13,6 +16,7 @@ interface OutletsBrandsStatusRegionFilterProps {
 const OutletsBrandsStatusRegionFilter: React.FC<
   OutletsBrandsStatusRegionFilterProps
 > = ({
+  brandOptions,
   selectedStatus,
   selectedRegion,
   selectedBrand,
@@ -25,7 +29,7 @@ const OutletsBrandsStatusRegionFilter: React.FC<
     <div className="inline-flex gap-6">
       <SelectField
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -34,7 +38,7 @@ const OutletsBrandsStatusRegionFilter: React.FC<
       />
       <SelectField
         placeholder="All Brands"
-        options={allBrands}
+        options={brandOptions}
         value={selectedBrand}
         onValueChange={(val) => {
           setSelectedBrand(val);
@@ -56,11 +60,6 @@ const OutletsBrandsStatusRegionFilter: React.FC<
 
 export default OutletsBrandsStatusRegionFilter;
 
-const allStatus = [
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];
-
 const allRegions = [
   { value: "asia", label: "Asia" },
   { value: "europe", label: "Europe" },
@@ -69,11 +68,4 @@ const allRegions = [
   { value: "africa", label: "Africa" },
   { value: "oceania", label: "Oceania" },
   { value: "antarctica", label: "Antarctica" },
-];
-
-const allBrands = [
-  { value: "brand-a", label: "Brand A" },
-  { value: "brand-b", label: "Brand B" },
-  { value: "brand-c", label: "Brand C" },
-  { value: "brand-d", label: "Brand D" },
 ];

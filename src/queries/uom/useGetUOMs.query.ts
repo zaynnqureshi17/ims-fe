@@ -6,6 +6,7 @@ import qs from "query-string";
 import axiosInstance from "@/services/axiosInstance";
 
 type userFilter = {
+  status?: string;
   category?: string;
   search?: string;
 };

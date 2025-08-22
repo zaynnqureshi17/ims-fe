@@ -6,7 +6,7 @@ const UnitOfMeasurementAddTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
     {
       label: "Unit of Measurement",
-      href: ProtectedUrls.admin.uom,
+      href: ProtectedUrls.admin.manageuom,
     },
     { label: "Add New Unit of Measurement", active: true },
   ];

@@ -17,7 +17,7 @@ const UsersTable = ({ user, onEdit, onDelete, onView }: UsersTableProps) => {
     <TableWrapper
       totalItems={user.length > 0 ? user.length : 0}
       currentPage={page}
-      itemsPerPage={3}
+      itemsPerPage={10}
       onPageChange={(page) => setPage(page)}
     >
       <UsersListTable

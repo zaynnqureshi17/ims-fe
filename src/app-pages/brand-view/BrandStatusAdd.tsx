@@ -1,4 +1,5 @@
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
 import React from "react";
 interface BrandStatusAddProps {
   selectedStatus?: string;
@@ -15,7 +16,7 @@ const BrandStatusAdd: React.FC<BrandStatusAddProps> = ({
   return (
     <SelectField
       placeholder="All Status"
-      options={allStatus}
+      options={AllStatus}
       value={selectedStatus}
       onValueChange={(val) => {
         setSelectedStatus(val);
@@ -26,9 +27,3 @@ const BrandStatusAdd: React.FC<BrandStatusAddProps> = ({
 };
 
 export default BrandStatusAdd;
-
-const allStatus = [
-  { value: "all-status", label: "All Status" },
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];

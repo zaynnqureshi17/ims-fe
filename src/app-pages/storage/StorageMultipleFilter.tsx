@@ -1,4 +1,5 @@
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
 import React from "react";
 interface StorageMultipleFilterProps {
   selectedBrand: string;
@@ -69,7 +70,7 @@ const StorageMultipleFilter: React.FC<StorageMultipleFilterProps> = ({
       />
       <SelectField
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -101,9 +102,4 @@ const allDepartment = [
   { label: "All Departments", value: "all-departments" },
   { label: "Department A", value: "department-a" },
   { label: "Department B", value: "department-b" },
-];
-const allStatus = [
-  { label: "All Status", value: "all-status" },
-  { label: "Active", value: "active" },
-  { label: "Inactive", value: "inactive" },
 ];

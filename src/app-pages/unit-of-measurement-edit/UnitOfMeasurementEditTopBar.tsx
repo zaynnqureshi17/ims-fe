@@ -4,7 +4,7 @@ import { ProtectedUrls } from "@/utils/urls/urls";
 
 const UnitOfMeasurementEditTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: "Units of Measurement", href: ProtectedUrls.admin.uom },
+    { label: "Units of Measurement", href: ProtectedUrls.admin.manageuom },
     { label: "Edit Unit of Measurement", active: true },
   ];
 

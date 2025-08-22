@@ -1,4 +1,5 @@
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
 import React from "react";
 
 interface ItemReceivingMultipleFilterProps {
@@ -42,7 +43,7 @@ const ItemReceivingMultipleFilter: React.FC<
       <SelectField
         className="w-[150px] bg-white"
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -124,12 +125,6 @@ const ItemReceivingMultipleFilter: React.FC<
 };
 
 export default ItemReceivingMultipleFilter;
-
-const allStatus = [
-  { value: "all-status", label: "All Status" },
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];
 
 const allCategories = [
   { value: "all-category", label: "All Categories" },

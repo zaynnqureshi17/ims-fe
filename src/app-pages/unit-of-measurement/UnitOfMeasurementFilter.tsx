@@ -18,6 +18,7 @@ const UnitOfMeasurementFilter: React.FC = () => {
   const [searchText, setSearchText] = useState<queryParams>("");
   const { setUOM, setLoading } = useUOMContext();
   const { data: uomsData, status } = useGetUOMs({
+    status: selectedStatus,
     category: selectedCategory,
     search: searchText,
   });
@@ -39,7 +40,7 @@ const UnitOfMeasurementFilter: React.FC = () => {
   ) => {
     updateQueryParams({
       router: router,
-      basePath: ProtectedUrls.admin.manageOutlets,
+      basePath: ProtectedUrls.admin.manageuom,
       queryParams: {
         status: status === "all-status" ? "" : status,
         category: category === "all-categories" ? "" : category,

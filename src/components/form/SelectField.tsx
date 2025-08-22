@@ -43,7 +43,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({
           {/* Default empty option */}
           <SelectItem value="__empty__">{placeholder}</SelectItem>
           {options.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value}>
+            <SelectItem
+              className="capitalize"
+              key={opt.value}
+              value={opt.label}
+            >
               {opt.label}
             </SelectItem>
           ))}

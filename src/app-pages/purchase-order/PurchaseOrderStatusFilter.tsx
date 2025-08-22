@@ -1,5 +1,6 @@
 import SelectField from "@/components/form/SelectField";
 import { Button } from "@/components/ui/button";
+import { AllStatus } from "@/constant/status";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React from "react";
@@ -27,7 +28,7 @@ const PurchaseOrderStatusFilter: React.FC<PurchaseOrderStatusFilterProps> = ({
     <div className="inline-flex gap-6">
       <SelectField
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -53,12 +54,6 @@ const PurchaseOrderStatusFilter: React.FC<PurchaseOrderStatusFilterProps> = ({
 };
 
 export default PurchaseOrderStatusFilter;
-
-const allStatus = [
-  { value: "all-status", label: "All Status" },
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];
 
 const allSupplier = [
   { value: "all-suppliers", label: "All Suppliers" },

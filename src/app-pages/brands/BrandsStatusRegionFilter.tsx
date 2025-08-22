@@ -1,5 +1,6 @@
 import IconBg from "@/components/common/IconBg";
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
 import { brandsIconPath } from "@/utils/PublicImageBaseUrl";
 import React from "react";
 interface BrandsStatusRegionFilterProps {
@@ -34,7 +35,7 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
     <div className="inline-flex gap-6">
       <SelectField
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -70,11 +71,6 @@ const BrandsStatusRegionFilter: React.FC<BrandsStatusRegionFilterProps> = ({
 };
 
 export default BrandsStatusRegionFilter;
-
-const allStatus = [
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];
 
 const allRegions = [
   { value: "asia", label: "Asia" },

@@ -19,7 +19,7 @@ export const ProtectedUrls = {
     editOutlet: "/outlets/edit-outlet/:id",
     viewOutlet: "/outlets/view-outlet/:id",
 
-    uom: "/uom",
+    manageuom: "/uom",
     addUom: "/uom/add-uom",
     editUom: "/uom/edit-uom/:id",
     viewUom: "/uom/view-uom/:id",

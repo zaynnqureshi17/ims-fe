@@ -38,6 +38,7 @@ export function NavMain({ roleRoutes }: NavMainProps) {
             startsWith(path, route.path) || currentRoute === route.activeRoute;
           return (
             <div
+              key={key}
               className={`text-sm ${
                 isActive
                   ? " border-l-4 rounded-l-xs border-orange-300 bg-orange-300/20"

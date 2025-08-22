@@ -103,7 +103,7 @@ export const ProtectedRoutes = {
       activeRoute: "manageSuppliers",
     },
     uomManage: {
-      path: ProtectedUrls.admin.uom,
+      path: ProtectedUrls.admin.manageuom,
       title: "Unit of Measurement",
       icon: `${baseNavbarIconPath}suppliers.svg`,
       activeRoute: "uomManage",

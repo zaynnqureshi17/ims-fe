@@ -1,5 +1,7 @@
 "use client";
 import { useOutletContext } from "@/context/OutletContext";
+import { useMultiOptions } from "@/hooks/useMultiOptions";
+import { useGetBrand } from "@/queries/brands/useGetBrand.query";
 import { useGetOutlets } from "@/queries/outlets/useGetOutlets.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
@@ -19,7 +21,10 @@ const OutletsFilter: React.FC = () => {
   const [searchText, setSearchText] = useState<queryParams>("");
   const [selectedBrand, setSelectedBrand] = useState<queryParams>("");
   const { setOutlet, setLoading } = useOutletContext();
-
+  const { data: brand, status: brandStatus } = useGetBrand({});
+  const { brandOptions } = useMultiOptions({
+    brands: brand?.body?.data,
+  });
   const { data: outletsData, status } = useGetOutlets({
     status: selectedStatus,
     region: selectedRegion,
@@ -76,6 +81,7 @@ const OutletsFilter: React.FC = () => {
         }
       />
       <BrandsStatusRegionFilter
+        brandOptions={brandOptions}
         selectedStatus={selectedStatus}
         selectedRegion={selectedRegion}
         setSelectedStatus={setSelectedStatus}

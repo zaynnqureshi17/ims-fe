@@ -1,4 +1,5 @@
 import SelectField from "@/components/form/SelectField";
+import { AllStatus } from "@/constant/status";
 import React from "react";
 interface UnitOfMeasurementStatusCategoryFilterProps {
   selectedStatus?: string;
@@ -22,7 +23,7 @@ const UnitOfMeasurementStatusCategoryFilter: React.FC<
     <div className="inline-flex gap-6">
       <SelectField
         placeholder="All Status"
-        options={allStatus}
+        options={AllStatus}
         value={selectedStatus}
         onValueChange={(val) => {
           setSelectedStatus(val);
@@ -44,14 +45,7 @@ const UnitOfMeasurementStatusCategoryFilter: React.FC<
 
 export default UnitOfMeasurementStatusCategoryFilter;
 
-const allStatus = [
-  { value: "all-status", label: "All Status" },
-  { value: "active", label: "Active" },
-  { value: "inactive", label: "Inactive" },
-];
-
 const allCategories = [
-  { value: "all-category", label: "All Categories" },
   { value: "category-a", label: "Category A" },
   { value: "category-b", label: "Category B" },
   { value: "category-c", label: "Category C" },
