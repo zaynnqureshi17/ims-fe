@@ -1,4 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
+import { CatalogueProvider } from "@/context/CatalogueContext";
 import { Suspense } from "react";
 import CatalogueCartItem from "./CatalogueCartItem";
 import CatalogueFilter from "./CatalogueFilter";
@@ -7,15 +8,17 @@ import CatalogueTopBar from "./CatalogueTopBar";
 
 const Catalogue = () => {
   return (
-    <ProtectedLayoutWrapper topBar={<CatalogueTopBar />}>
-      <CataloguePageHeader />
-      <Suspense fallback={<div>Loading filters...</div>}>
-        <CatalogueFilter />
-      </Suspense>
-      <Suspense fallback={<div>Loading filters...</div>}>
-        <CatalogueCartItem />
-      </Suspense>
-    </ProtectedLayoutWrapper>
+    <CatalogueProvider>
+      <ProtectedLayoutWrapper topBar={<CatalogueTopBar />}>
+        <CataloguePageHeader />
+        <Suspense fallback={<div>Loading filters...</div>}>
+          <CatalogueFilter />
+        </Suspense>
+        <Suspense fallback={<div>Loading filters...</div>}>
+          <CatalogueCartItem />
+        </Suspense>
+      </ProtectedLayoutWrapper>
+    </CatalogueProvider>
   );
 };
 

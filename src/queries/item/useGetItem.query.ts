@@ -13,17 +13,17 @@ type outletFilter = {
   search?: string;
 };
 
-const onGetCatalogue = async (filters: outletFilter): Promise<any> => {
+const onGetItem = async (filters: outletFilter): Promise<any> => {
   const queryString = qs.stringify(filters, { arrayFormat: "comma" });
   return await axiosInstance.get(`item?${queryString}`);
 };
 
-export const useGetCatalogue = (filters: outletFilter) => {
+export const useGetItem = (filters: outletFilter) => {
   const token = Cookies.get("token");
 
   return useQuery({
-    queryKey: ["onGetCatalogue", filters],
-    queryFn: () => onGetCatalogue(filters),
+    queryKey: ["onGetItem", filters],
+    queryFn: () => onGetItem(filters),
     retry: 1,
     enabled: !!token,
     placeholderData: keepPreviousData,

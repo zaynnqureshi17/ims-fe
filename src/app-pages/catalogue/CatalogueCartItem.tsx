@@ -1,62 +1,42 @@
 "use client";
 
 import CatalogueCard from "@/components/card/catalogue/CatalogueCard";
+import StateWrapper from "@/components/wrapper/StateWrapper";
+import { useGetCatalogue } from "@/queries/catalogue/useGetCatalogue.query";
 
 const CatalogueCartItem = () => {
-  // Catalogue data
-  const catalogueItems = [
-    {
-      imageUrl: "/static/catalogue-cart.svg",
-      title: "Olive Oil",
-      description: "Extra virgin - 1L bottle",
-      price: 3.25,
-      unit: "per bottle",
-      stock: 12,
-      supplier: "Local Bakery",
-      inStock: true,
-    },
-    {
-      imageUrl: "/static/catalogue-cart.svg",
-      title: "Artisan Bread",
-      description: "Whole wheat loaf - 800g",
-      price: 3.25,
-      unit: "per loaf",
-      stock: 0,
-      supplier: "Local Bakery",
-      inStock: false,
-    },
-    {
-      imageUrl: "/static/catalogue-cart.svg",
-      title: "Cheddar Cheese",
-      description: "Aged cheddar - 200g block",
-      price: 4.5,
-      unit: "per block",
-      stock: 8,
-      supplier: "Dairy Farm Co.",
-      inStock: true,
-    },
-    {
-      imageUrl: "/static/catalogue-cart.svg",
-      title: "Cheddar Cheese",
-      description: "Aged cheddar - 200g block",
-      price: 4.5,
-      unit: "per block",
-      stock: 8,
-      supplier: "Dairy Farm Co.",
-      inStock: true,
-    },
-  ];
+  const { data: catalogueData, status, error } = useGetCatalogue({});
+
+  const isLoading = status === "pending";
+  const items = catalogueData?.body?.data || [];
+  const isError = status === "error";
+  const notFound = !isLoading && !isError && items.length === 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {catalogueItems.map((item, index) => (
-        <CatalogueCard
-          key={index}
-          {...item}
-          onAddToPO={() => console.log(`Added ${item.title}`)}
-        />
-      ))}
-    </div>
+    <StateWrapper
+      loading={isLoading}
+      error={
+        isError ? ((error as Error)?.message ?? "Failed to load data") : null
+      }
+      notFound={notFound}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {items.map((item: any) => (
+          <CatalogueCard
+            key={item.item_id}
+            imageUrl="/static/catalogue-cart.svg" // static image
+            title={item.item_name}
+            description={item.specification}
+            price={item.unit_price}
+            unit={`per ${item.purchase_unit}`}
+            stock={item.purchase_quantity}
+            supplier={item.brand_name}
+            inStock={item.purchase_quantity > 0}
+            onAddToPO={() => console.log(`Added ${item.item_name}`)}
+          />
+        ))}
+      </div>
+    </StateWrapper>
   );
 };
 

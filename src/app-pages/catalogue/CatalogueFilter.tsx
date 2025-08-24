@@ -1,4 +1,6 @@
 "use client";
+import { useCatalogueContext } from "@/context/CatalogueContext";
+import { useGetCatalogue } from "@/queries/catalogue/useGetCatalogue.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,6 +18,8 @@ const CatalogueFilter: React.FC = () => {
   const [selectedSupplier, setSelectedSupplier] = useState<queryParams>("");
   const [collapsed, setCollapsed] = useState<queryParams>("list");
   const [searchText, setSearchText] = useState<queryParams>("");
+  const { data: catalogueData, status } = useGetCatalogue({});
+  const { setCatalogue, setLoading } = useCatalogueContext();
 
   // Load from URL on page load
   useEffect(() => {
@@ -47,6 +51,13 @@ const CatalogueFilter: React.FC = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (catalogueData) {
+      setCatalogue(catalogueData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [catalogueData]);
 
   return (
     <div className="flex gap-6">
