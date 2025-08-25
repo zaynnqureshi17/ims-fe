@@ -1,75 +1,38 @@
 "use client";
+import { useTransferContext } from "@/context/TransferContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
-import { IRecips } from "@/utils/types/recipe.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
-import RecipesTable from "./TransfersTable";
+import TransfersTable from "./TransfersTable";
 
 const TransfersTableList: React.FC = () => {
   const navigate = usePrefetchNavigate();
+  const { transfer } = useTransferContext();
 
-  const handleEditRecipe = (recipeId: number) => {
+  const handleEditTransfer = (transferId: number) => {
     navigate(
-      ProtectedUrls.common.editRecipe.replace(":id", recipeId.toString()),
+      ProtectedUrls.common.editTransfer.replace(":id", transferId.toString()),
     );
   };
 
-  const handleDeleteRecipe = (recipeId: number) => {
-    console.log("Deleting recipe with ID:", recipeId);
+  const handleDeleteTransfer = (transferId: number) => {
+    console.log("Deleting transfer with ID:", transferId);
   };
 
-  const handleViewRecipe = (recipeId: number) => {
+  const handleViewTransfer = (transferId: number) => {
     navigate(
-      ProtectedUrls.common.viewRecipe.replace(":id", recipeId.toString()),
+      ProtectedUrls.common.viewTransfer.replace(":id", transferId.toString()),
     );
   };
 
   return (
-    <RecipesTable
-      recipes={recipes}
-      onEdit={handleEditRecipe}
-      onDelete={handleDeleteRecipe}
-      onView={handleViewRecipe}
+    <TransfersTable
+      transfers={transfer}
+      onEdit={handleEditTransfer}
+      onDelete={handleDeleteTransfer}
+      onView={handleViewTransfer}
     />
   );
 };
 
 export default memo(TransfersTableList);
-
-const recipes: IRecips[] = [
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Main Course",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Salad",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Dessert",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Main Course",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Beverage",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-];

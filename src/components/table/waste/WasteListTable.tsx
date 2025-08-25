@@ -20,9 +20,6 @@ interface InterfaceWaste {
   onView: (id: number) => void;
 }
 
-const currency = (n: number) =>
-  n.toLocaleString(undefined, { style: "currency", currency: "USD" });
-
 const reasonClass: Record<NonNullable<IWaste["reason"]>, string> = {
   Expired: "bg-rose-100 text-rose-700",
   Damaged: "bg-orange-100 text-orange-700",
@@ -67,14 +64,12 @@ const WasteListTable = ({
 
               <TableCell>{item.item}</TableCell>
 
-              <TableCell className="text-gray">{item.category}</TableCell>
+              <TableCell className="text-gray">{item.quantity}</TableCell>
 
-              <TableCell className="text-gray">{item.qty}</TableCell>
-
-              <TableCell>{currency(item.unit_cost)}</TableCell>
+              <TableCell>${item.cost}</TableCell>
 
               <TableCell className="text-red-500 font-medium">
-                {currency(item.total_value)}
+                ${Number(item.cost) * Number(item.quantity)}
               </TableCell>
 
               <TableCell>
@@ -83,10 +78,6 @@ const WasteListTable = ({
                 >
                   {item.reason}
                 </span>
-              </TableCell>
-
-              <TableCell>
-                <span>{item.staff}</span>
               </TableCell>
 
               <TableCell>

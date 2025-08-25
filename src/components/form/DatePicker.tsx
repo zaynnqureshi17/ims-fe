@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { CalendarIcon } from "lucide-react";
+import { Controller } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -14,10 +15,7 @@ import {
 } from "@/components/ui/popover";
 
 function formatDate(date: Date | undefined) {
-  if (!date) {
-    return "";
-  }
-
+  if (!date) return "";
   return date.toLocaleDateString("en-US", {
     day: "2-digit",
     month: "long",
@@ -26,78 +24,92 @@ function formatDate(date: Date | undefined) {
 }
 
 function isValidDate(date: Date | undefined) {
-  if (!date) {
-    return false;
-  }
-  return !isNaN(date.getTime());
+  return !!date && !isNaN(date.getTime());
 }
 
-export function Calendar28() {
+type Calendar28Props = {
+  name: string;
+  label?: string;
+  control: any;
+};
+
+export function Calendar28({ name, label, control }: Calendar28Props) {
   const [open, setOpen] = React.useState(false);
-  const [date, setDate] = React.useState<Date | undefined>(
-    new Date("2025-06-01"),
-  );
-  const [month, setMonth] = React.useState<Date | undefined>(date);
-  const [value, setValue] = React.useState(formatDate(date));
 
   return (
-    <div className="flex flex-col gap-3">
-      <Label htmlFor="date" className="px-1">
-        Subscription Date
-      </Label>
-      <div className="relative flex gap-2">
-        <Input
-          id="date"
-          value={value}
-          placeholder="June 01, 2025"
-          className="bg-background pr-10"
-          onChange={(e) => {
-            const date = new Date(e.target.value);
-            setValue(e.target.value);
-            if (isValidDate(date)) {
-              setDate(date);
-              setMonth(date);
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === "ArrowDown") {
-              e.preventDefault();
-              setOpen(true);
-            }
-          }}
-        />
-        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger asChild>
-            <Button
-              id="date-picker"
-              variant="ghost"
-              className="absolute top-1/2 right-2 size-6 -translate-y-1/2"
-            >
-              <CalendarIcon className="size-3.5" />
-              <span className="sr-only">Select date</span>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent
-            className="w-auto overflow-hidden p-0"
-            align="end"
-            alignOffset={-8}
-            sideOffset={10}
-          >
-            <Calendar
-              mode="single"
-              selected={date}
-              captionLayout="dropdown"
-              month={month}
-              onMonthChange={setMonth}
-              onSelect={(date) => {
-                setDate(date);
-                setValue(formatDate(date));
-                setOpen(false);
-              }}
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-    </div>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => {
+        const dateValue = field.value ? new Date(field.value) : undefined;
+        const [month, setMonth] = React.useState<Date | undefined>(dateValue);
+        const [value, setValue] = React.useState(formatDate(dateValue));
+
+        return (
+          <div className="flex flex-col gap-3">
+            {label && (
+              <Label htmlFor={name} className="px-1">
+                {label}
+              </Label>
+            )}
+            <div className="relative flex gap-2">
+              <Input
+                id={name}
+                value={value}
+                placeholder="Select date"
+                className="bg-background pr-10"
+                onChange={(e) => {
+                  const d = new Date(e.target.value);
+                  setValue(e.target.value);
+                  if (isValidDate(d)) {
+                    field.onChange(d.toISOString());
+                    setMonth(d);
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setOpen(true);
+                  }
+                }}
+              />
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    id={`${name}-picker`}
+                    variant="ghost"
+                    className="absolute top-1/2 right-2 size-6 -translate-y-1/2"
+                  >
+                    <CalendarIcon className="size-3.5" />
+                    <span className="sr-only">Select date</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-auto overflow-hidden p-0"
+                  align="end"
+                  alignOffset={-8}
+                  sideOffset={10}
+                >
+                  <Calendar
+                    mode="single"
+                    selected={dateValue}
+                    captionLayout="dropdown"
+                    month={month}
+                    onMonthChange={setMonth}
+                    onSelect={(d) => {
+                      if (d) {
+                        field.onChange(d.toISOString());
+                        setValue(formatDate(d));
+                      }
+                      setOpen(false);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+          </div>
+        );
+      }}
+    />
   );
 }

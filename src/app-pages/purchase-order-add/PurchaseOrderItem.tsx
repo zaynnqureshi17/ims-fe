@@ -1,5 +1,6 @@
-import IconBg from "@/components/common/IconBg";
-import Loader from "@/components/common/loader";
+"use client";
+import ControllerSelect from "@/components/form/ControllerSelect";
+import FormInputField from "@/components/form/FormInputField";
 import {
   Table,
   TableBody,
@@ -8,78 +9,84 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { brandsActions } from "@/utils/PublicImageBaseUrl";
+import { optionsType } from "@/utils/types/common.type";
+import { Trash2 } from "lucide-react";
+import { useFormContext } from "react-hook-form";
 
-type PurchaseOrderItemProps = {
+interface PurchaseOrderItemProps {
+  itemOptions: optionsType[];
   headtable: string[];
-  POItem: Array<{
-    item_id: number;
-    unit: string;
-    quantity: number;
-    item_name: string;
-    unit_price: string;
-    total: string;
-  }>;
-  onDelete?: (itemId: number) => void;
+  POItem: any[];
+  remove: (index: number) => void;
   loading?: boolean;
-};
+}
 
-const PurchaseOrderItem: React.FC<PurchaseOrderItemProps> = ({
+const PurchaseOrderItem = ({
+  itemOptions,
   headtable,
   POItem,
-  loading = false,
-  onDelete,
-}) => {
+  remove,
+}: PurchaseOrderItemProps) => {
+  const { control, watch } = useFormContext();
+
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          {headtable?.map((head, index) => (
+          {headtable.map((head, index) => (
             <TableHead key={index}>{head}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
       <TableBody>
-        {loading ? (
-          <TableRow>
-            <TableCell colSpan={headtable?.length || 1}>
-              <div className="w-full flex flex-col justify-center items-center gap-4">
-                <Loader />
-                <p>Loading items...</p>
-              </div>
-            </TableCell>
-          </TableRow>
-        ) : POItem.length === 0 ? (
-          <TableRow>
-            <TableCell colSpan={headtable?.length || 1}>
-              <div className="w-full flex flex-col justify-center items-center gap-4">
-                <p>No Item available</p>
-              </div>
-            </TableCell>
-          </TableRow>
-        ) : (
-          POItem.map((item, index) => (
-            <TableRow key={index} className="hover:bg-white my-4">
-              <TableCell>{item.item_name}</TableCell>
-              <TableCell className="text-gray">{item.unit}</TableCell>
-              <TableCell className="text-left text-gray">
-                {item.quantity}
-              </TableCell>
-              <TableCell>{item.unit_price}</TableCell>
-              <TableCell className="text-left">{item.total}</TableCell>
-              <TableCell className="text-center flex justify-start items-center !py-4 gap-x-3">
-                <IconBg
-                  icon={`${brandsActions}delete-red.svg`}
-                  title="Delete"
-                  width={16}
-                  height={16}
-                  className="!p-0 cursor-pointer"
-                  onClick={() => onDelete?.(item.item_id)}
+        {POItem.map((field, index) => {
+          const quantity = watch(`po_items.${index}.quantity`) || 0;
+          const unit_price = watch(`po_items.${index}.unit_price`) || 0;
+          const total = quantity * parseFloat(unit_price || 0);
+
+          return (
+            <TableRow key={field.id}>
+              <TableCell>
+                <ControllerSelect
+                  label=""
+                  name={`po_items.${index}.item_id`}
+                  control={control}
+                  options={itemOptions}
+                  placeholder="Select Item"
+                  rules={{ required: "Item is required" }}
                 />
               </TableCell>
+              <TableCell>
+                <FormInputField
+                  label=""
+                  name={`po_items.${index}.quantity`}
+                  type="number"
+                  placeholder="0"
+                  rules={{ required: "Quantity is required", min: 1 }}
+                />
+              </TableCell>
+              <TableCell>
+                <FormInputField
+                  label=""
+                  name={`po_items.${index}.unit_price`}
+                  type="number"
+                  placeholder="0.00"
+                  rules={{ required: "Unit Price is required", min: 0 }}
+                />
+              </TableCell>
+              <TableCell>${total.toFixed(2)}</TableCell>
+              <TableCell>
+                <button
+                  type="button"
+                  onClick={() => remove(index)}
+                  className="text-red-500 hover:text-red-700"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </TableCell>
             </TableRow>
-          ))
-        )}
+          );
+        })}
       </TableBody>
     </Table>
   );

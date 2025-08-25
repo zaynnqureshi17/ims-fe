@@ -1,4 +1,6 @@
 "use client";
+import { useWasteContext } from "@/context/WasteContext";
+import { useGetWaste } from "@/queries/waste/useGetWaste.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +12,8 @@ type queryParams = string;
 const WasteFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setWaste, setLoading } = useWasteContext();
+  const { data: wasteData, status } = useGetWaste({});
   const today = new Date().toISOString().split("T")[0];
   const [startDate, setStartDate] = useState<queryParams>(today);
   const [endDate, setEndDate] = useState<queryParams>(today);
@@ -44,7 +48,12 @@ const WasteFilter: React.FC = () => {
       },
     });
   };
-
+  useEffect(() => {
+    if (wasteData) {
+      setWaste(wasteData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [wasteData]);
   return (
     <div className="flex gap-6">
       <WasteMultipleFilter

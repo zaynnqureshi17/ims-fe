@@ -1,4 +1,4 @@
-import PurchaseOrderAdd from "@/app-pages/recipes-add/RecipesAdd";
+import PurchaseOrderAdd from "@/app-pages/purchase-order-add/PurchaseOrderAdd";
 
 const page = () => {
   return <PurchaseOrderAdd />;

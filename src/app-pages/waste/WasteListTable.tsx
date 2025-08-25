@@ -1,23 +1,31 @@
 "use client";
 import SectionWrapper from "@/components/wrapper/SectionWrapper";
+import { useWasteContext } from "@/context/WasteContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
-import { IWaste } from "@/utils/types/waste.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
 import WasteTable from "./WasteTable";
 
 const WasteListTable: React.FC = () => {
   const navigate = usePrefetchNavigate();
+  const { waste, loading } = useWasteContext();
 
-  const handleEditUser = (userId: number) => {
-    navigate(ProtectedUrls.common.editUser.replace(":id", String(userId)));
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  console.log(waste);
+
+  const handleEditWaste = (wasteId: number) => {
+    navigate(ProtectedUrls.common.editWaste.replace(":id", String(wasteId)));
   };
 
-  const handleDeleteUser = (userId: number) => {};
+  const handleDeleteWaste = (wasteId: number) => {};
 
-  const handleViewUser = (userId: number) => {
-    navigate(ProtectedUrls.common.viewUser.replace(":id", String(userId)));
+  const handleViewWaste = (wasteId: number) => {
+    navigate(ProtectedUrls.common.viewWaste.replace(":id", String(wasteId)));
   };
+
+  console.log(waste);
 
   return (
     <SectionWrapper
@@ -26,69 +34,12 @@ const WasteListTable: React.FC = () => {
     >
       <WasteTable
         waste={waste}
-        onEdit={handleEditUser}
-        onDelete={handleDeleteUser}
-        onView={handleViewUser}
+        onEdit={handleEditWaste}
+        onDelete={handleDeleteWaste}
+        onView={handleViewWaste}
       />
     </SectionWrapper>
   );
 };
 
 export default memo(WasteListTable);
-const waste: IWaste[] = [
-  {
-    waste_id: 1,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Expired",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 2,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Expired",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 3,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Damaged",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 4,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Overproduction",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 5,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Spillage",
-    staff: "John Smith",
-  },
-];

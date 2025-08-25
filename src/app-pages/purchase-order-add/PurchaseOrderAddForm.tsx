@@ -1,9 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { FormWrapper } from "@/components/wrapper/FormWrapper";
+import { useCreatePO } from "@/queries/purchaseOrder/useCreatePO.query";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const PurchaseOrderAddForm = ({ children }: { children: React.ReactNode }) => {
+  const { mutate: createPO, status } = useCreatePO();
+
   const methods = useForm({
     defaultValues: {
       po_number: "",
@@ -24,6 +28,15 @@ const PurchaseOrderAddForm = ({ children }: { children: React.ReactNode }) => {
 
   const handleSubmitOrder = (data: any) => {
     console.log("Submitting order:", data);
+    createPO(
+      { body: data },
+      {
+        onSuccess: () => {
+          reset();
+          toast.success("Order created successfully");
+        },
+      },
+    );
     // API call to save order
   };
 

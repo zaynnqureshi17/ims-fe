@@ -1,12 +1,11 @@
 "use client";
 import PurchaseOrderListTable from "@/components/table/purchase-order/PurchaseOrderListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
-import { IBrand } from "@/utils/types/brand.type";
-import { PurchaseOrder } from "@/utils/types/po.type";
+import { IPurchaseOrder } from "@/utils/types/po.type";
 import { useState } from "react";
 
 interface PurchaseOrderTableProps {
-  purchaseOrders: PurchaseOrder[];
+  purchaseOrders: IPurchaseOrder[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
@@ -39,12 +38,4 @@ const PurchaseOrderTable = ({
 
 export default PurchaseOrderTable;
 
-const headtable = [
-  "PO#",
-  "Supplier",
-  "Items",
-  "Cost",
-  "Date",
-  "Status",
-  "Actions",
-];
+const headtable = ["PO#", "Supplier", "Items", "Date", "Actions"];

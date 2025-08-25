@@ -3,64 +3,87 @@ import ControllerSelect from "@/components/form/ControllerSelect";
 import { Calendar28 } from "@/components/form/DatePicker";
 import FormInputField from "@/components/form/FormInputField";
 import GridWrapper from "@/components/wrapper/GridWrapper";
+import { optionsType } from "@/utils/types/common.type";
 import { useFormContext } from "react-hook-form";
 
-const locationOptions = [
-  { value: "main-kitchen", label: "Main Kitchen" },
-  { value: "bar-station", label: "Bar Station" },
-  { value: "storage-room", label: "Storage Room" },
+const inOutOptions = [
+  { value: "IN", label: "IN" },
+  { value: "OUT", label: "OUT" },
 ];
+
+// TODO: Replace with API fetched outlets + categories
 
 const transferReasonOptions = [
-  { value: "stock-replenishment", label: "Stock Replenishment" },
-  { value: "internal-transfer", label: "Internal Transfer" },
-  { value: "damaged-items", label: "Damaged Items" },
+  { value: "event", label: "Event" },
+  { value: "r&d", label: "R&D" },
+  { value: "staff-meal", label: "Staff Meal" },
+  { value: "contra", label: "Contra" },
 ];
 
-const TransferField = () => {
+const TransferField = ({
+  outletOptions,
+  departmentOptions,
+}: {
+  outletOptions: optionsType[];
+  departmentOptions: optionsType[];
+}) => {
   const { control } = useFormContext();
 
   return (
-    <GridWrapper className="grid-cols-1 md:grid-cols-2 ">
-      <FormInputField
-        name="transfer_id"
-        label="Transfer ID"
-        placeholder="TRF-2024-001"
-        type="text"
-        rules={{ required: "Transfer ID is required" }}
-      />
-      <Calendar28 />
+    <GridWrapper className="grid-cols-1 md:grid-cols-2">
+      {/* Date */}
+      <Calendar28 name="date" label="Transfer Date" control={control} />
 
+      {/* In / Out */}
       <ControllerSelect
-        name="source_location"
+        name="in_out"
         control={control}
-        label="Source Location"
-        placeholder="Select Source Location"
-        options={locationOptions}
-        rules={{ required: "Source Location is required" }}
+        label="Transfer Type"
+        placeholder="Select IN / OUT"
+        options={inOutOptions}
+        rules={{ required: "Transfer type is required" }}
       />
+
+      {/* Source Outlet */}
       <ControllerSelect
-        name="destination_location"
+        name="outlet_id"
         control={control}
-        label="Destination Location"
-        placeholder="Select Destination Location"
-        options={locationOptions}
-        rules={{ required: "Destination Location is required" }}
+        label="Source Outlet"
+        placeholder="Select Source Outlet"
+        options={outletOptions}
+        rules={{ required: "Source Outlet is required" }}
       />
 
-      <FormInputField
-        name="do_number"
-        label="DO Number"
-        placeholder="Enter Delivery Order Number"
-        type="text"
-      />
-      <FormInputField
-        name="invoice_no"
-        label="Invoice No"
-        placeholder="Enter Invoice Number"
-        type="text"
+      {/* Destination Outlet */}
+      <ControllerSelect
+        name="transfer_to_from_outlet_id"
+        control={control}
+        label="Destination Outlet"
+        placeholder="Select Destination Outlet"
+        options={outletOptions}
+        rules={{ required: "Destination Outlet is required" }}
       />
 
+      {/* Category */}
+      <ControllerSelect
+        name="category_id"
+        control={control}
+        label="Category"
+        placeholder="Select Category"
+        options={departmentOptions}
+        rules={{ required: "Category is required" }}
+      />
+
+      {/* Reason / DO / Invoice Number */}
+      <FormInputField
+        name="reason_do_invoice_number"
+        label="Reason / DO / Invoice Number"
+        placeholder="Enter reason or DO/Invoice number"
+        type="text"
+        rules={{ required: "This field is required" }}
+      />
+
+      {/* Transfer Reason */}
       <div className="md:col-span-2">
         <ControllerSelect
           name="transfer_reason"

@@ -2,10 +2,11 @@ export interface IWaste {
   waste_id: number;
   date: string;
   item: string;
-  category: string;
-  qty: string;
-  unit_cost: number;
-  total_value: number;
-  reason: "Expired" | "Damaged" | "Overproduction" | "Spillage";
-  staff: string;
+  outlet: string;
+  department: string;
+  reason: string; // allow free text from backend
+  quantity: string;
+  uom: string;
+  total_value: string | number;
+  cost: string;
 }

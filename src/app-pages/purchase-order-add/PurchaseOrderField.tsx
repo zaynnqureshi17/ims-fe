@@ -1,18 +1,18 @@
 "use client";
 import ControllerSelect from "@/components/form/ControllerSelect";
-import { DateRangePicker } from "@/components/form/DateRangePicker";
+import { Calendar28 } from "@/components/form/DatePicker";
 import FormInputField from "@/components/form/FormInputField";
 import GridWrapper from "@/components/wrapper/GridWrapper";
+import { optionsType } from "@/utils/types/common.type";
 import { useFormContext } from "react-hook-form";
 
 // Example supplier options (replace with API data if needed)
-const supplierOptions = [
-  { value: "1", label: "Supplier A" },
-  { value: "2", label: "Supplier B" },
-  { value: "3", label: "Supplier C" },
-];
 
-const PurchaseOrderField = () => {
+const PurchaseOrderField = ({
+  supplierOptions,
+}: {
+  supplierOptions: optionsType[];
+}) => {
   const { control } = useFormContext();
 
   return (
@@ -34,7 +34,12 @@ const PurchaseOrderField = () => {
         options={supplierOptions}
         rules={{ required: "Supplier is required" }}
       />
-      <DateRangePicker />
+      <Calendar28
+        name="delivery_date"
+        label="Delivery Date"
+        control={control}
+      />
+      <Calendar28 name="order_date" label="Order Date" control={control} />
     </GridWrapper>
   );
 };

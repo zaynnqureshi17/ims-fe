@@ -1,5 +1,13 @@
+"use client";
 import IconBg from "@/components/common/IconBg";
-import Loader from "@/components/common/loader";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -9,27 +17,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
-
-type TransferItemRow = {
-  item_id: number;
-  item_name: string;
-  current_stock: string;
-  transfer_qty: number;
-  unit_cost: string;
-  total_cost: string;
-};
+import { optionsType } from "@/utils/types/common.type";
+import { Controller } from "react-hook-form";
 
 type TransferItemsProps = {
+  itemOptions: optionsType[];
   headtable: string[];
-  TransferItem: TransferItemRow[];
-  onDelete?: (itemId: number) => void;
-  loading?: boolean;
+  fields: any[];
+  control: any;
+  onDelete: (index: number) => void;
 };
 
 const TransferItems: React.FC<TransferItemsProps> = ({
+  itemOptions,
   headtable,
-  TransferItem,
-  loading = false,
+  fields,
+  control,
   onDelete,
 }) => {
   return (
@@ -43,43 +46,108 @@ const TransferItems: React.FC<TransferItemsProps> = ({
       </TableHeader>
 
       <TableBody>
-        {loading ? (
+        {fields.length === 0 ? (
           <TableRow>
-            <TableCell colSpan={headtable?.length || 1}>
-              <div className="w-full flex flex-col justify-center items-center gap-4">
-                <Loader />
-                <p>Loading items...</p>
-              </div>
-            </TableCell>
-          </TableRow>
-        ) : TransferItem.length === 0 ? (
-          <TableRow>
-            <TableCell colSpan={headtable?.length || 1}>
-              <div className="w-full flex flex-col justify-center items-center gap-4">
-                <p>No Item available</p>
-              </div>
+            <TableCell colSpan={headtable.length} className="text-center py-4">
+              No Item available
             </TableCell>
           </TableRow>
         ) : (
-          TransferItem.map((item, index) => (
-            <TableRow key={index} className="hover:bg-white my-4">
-              <TableCell>{item.item_name}</TableCell>
-              <TableCell className="text-gray">{item.current_stock}</TableCell>
-              <TableCell className="text-left text-gray">
-                {item.transfer_qty}
+          fields.map((field, index) => (
+            <TableRow key={field.id} className="hover:bg-white my-4">
+              {/* Item ID */}
+              <TableCell>
+                <Controller
+                  name={`transfer_items.${index}.item_id`}
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      onValueChange={(v) => field.onChange(Number(v))}
+                      value={field.value ? field.value.toString() : ""}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Item" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {itemOptions.map((opt) => (
+                          <SelectItem
+                            key={opt.value}
+                            value={opt.value.toString()}
+                          >
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </TableCell>
-              <TableCell className="text-left text-gray">
-                {item.unit_cost}
+
+              {/* Transfer Qty */}
+              <TableCell>
+                <Controller
+                  control={control}
+                  name={`transfer_items.${index}.transfer_qty`}
+                  render={({ field }) => (
+                    <Input {...field} type="number" placeholder="Qty" />
+                  )}
+                />
               </TableCell>
-              <TableCell className="text-left">{item.total_cost}</TableCell>
-              <TableCell className="text-center flex justify-start items-center !py-4 gap-x-3">
+
+              {/* UOM */}
+              <TableCell>
+                <Controller
+                  name={`transfer_items.${index}.uom`} // ✅ FIXED
+                  control={control}
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select UOM" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="kg">KG</SelectItem>
+                        <SelectItem value="g">Gram</SelectItem>
+                        <SelectItem value="pcs">PCS</SelectItem>
+                        <SelectItem value="ltr">Litre</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </TableCell>
+
+              {/* Unit Cost */}
+              <TableCell>
+                <Controller
+                  control={control}
+                  name={`transfer_items.${index}.unit_cost`}
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      type="number"
+                      step="0.01"
+                      placeholder="Cost"
+                    />
+                  )}
+                />
+              </TableCell>
+
+              {/* Total Cost (calculated) */}
+              <TableCell className="font-semibold">
+                {(
+                  (parseFloat(field.transfer_qty) || 0) *
+                  (parseFloat(field.unit_cost) || 0)
+                ).toFixed(2)}
+              </TableCell>
+
+              {/* Action */}
+              <TableCell>
                 <IconBg
                   icon={`${brandsActions}delete-red.svg`}
                   title="Delete"
                   width={16}
                   height={16}
                   className="!p-0 cursor-pointer"
-                  onClick={() => onDelete?.(item.item_id)}
+                  onClick={() => onDelete(index)}
                 />
               </TableCell>
             </TableRow>

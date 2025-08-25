@@ -30,7 +30,7 @@ const ProductionField = () => {
         type="text"
         rules={{ required: "Produced By is required" }}
       />
-      <Calendar28 />
+      <Calendar28 name="date" label="Transfer Date" control={control} />
 
       <ControllerSelect
         name="recipe"

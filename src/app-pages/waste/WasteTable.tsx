@@ -13,6 +13,16 @@ interface WasteTableProps {
 
 const WasteTable = ({ waste, onEdit, onDelete, onView }: WasteTableProps) => {
   const [page, setPage] = useState(1);
+
+  const headtable = [
+    "Date",
+    "Item",
+    "Qty",
+    "Unit Cost",
+    "Total Cost",
+    "reason",
+    "Actions",
+  ];
   return (
     <TableWrapper
       totalItems={waste.length > 0 ? waste.length : 0}
@@ -32,15 +42,3 @@ const WasteTable = ({ waste, onEdit, onDelete, onView }: WasteTableProps) => {
 };
 
 export default WasteTable;
-
-const headtable = [
-  "ID",
-  "Name & Email",
-  "Role",
-  "Brand",
-  "Outlet",
-  "Department",
-  "Created Date",
-  "Status",
-  "Actions",
-];

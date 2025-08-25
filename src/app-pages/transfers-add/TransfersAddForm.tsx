@@ -1,14 +1,21 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { FormWrapper } from "@/components/wrapper/FormWrapper";
+import { useCreateTransfer } from "@/queries/transfer/useCreateTransfer.query";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const TransfersAddForm = ({ children }: { children: React.ReactNode }) => {
+  const { mutate: createTransfer, status } = useCreateTransfer();
   const methods = useForm({
     defaultValues: {
-      po_number: "",
-      supplier_id: "",
-      additional_notes: "",
+      outlet_id: "",
+      transfer_to_from_outlet_id: "",
+      category_id: "",
+      date: "",
+      in_out: "",
+      reason_do_invoice_number: "",
+      transfer_items: [],
     },
   });
 
@@ -16,21 +23,29 @@ const TransfersAddForm = ({ children }: { children: React.ReactNode }) => {
 
   const handleSaveToDraft = () => {
     console.log("Saving draft...");
-    // add API call or logic here
-  };
-
-  const handlePreviewOrder = () => {
-    console.log("Previewing order...");
+    // API call for draft save
   };
 
   const handleSubmitOrder = (data: any) => {
-    console.log("Submitting order:", data);
-    // API call to save order
+    console.log("Submitting transfer:", data);
+    createTransfer(
+      { body: data },
+      {
+        onSuccess: () => {
+          reset();
+          toast.success("Transfer created successfully");
+        },
+      },
+    );
+    // API call for final submit
   };
 
   return (
     <FormProvider {...methods}>
-      <FormWrapper onSubmit={handleSubmit(handleSubmitOrder)}>
+      <FormWrapper
+        onSubmit={handleSubmit(handleSubmitOrder)}
+        disabled={status === "pending"}
+      >
         <div className="flex flex-col justify-between gap-6">
           {children}
           <div className="flex justify-end items-end gap-4">
@@ -42,16 +57,8 @@ const TransfersAddForm = ({ children }: { children: React.ReactNode }) => {
             >
               Cancel
             </Button>
-            <Button
-              variant="secondary"
-              className="w-auto"
-              type="button"
-              onClick={handlePreviewOrder}
-            >
-              Save as Draft
-            </Button>
             <Button variant="secondary" className="w-auto" type="submit">
-              Update
+              Submit Transfer
             </Button>
           </div>
         </div>

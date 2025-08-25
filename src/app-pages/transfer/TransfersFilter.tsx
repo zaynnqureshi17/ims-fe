@@ -1,4 +1,6 @@
 "use client";
+import { useTransferContext } from "@/context/TransferContext";
+import { useGetTransfer } from "@/queries/transfer/useGetTransfer.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -11,6 +13,9 @@ type queryParams = string;
 const TransfersFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setTransfer, setLoading } = useTransferContext();
+  const { data: transferData, status } = useGetTransfer({});
+
   const [selectedCategory, setSelectedCategory] = useState<queryParams>("");
   const [selectedCostRange, setSelectedCostRange] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
@@ -39,7 +44,12 @@ const TransfersFilter: React.FC = () => {
       },
     });
   };
-
+  useEffect(() => {
+    if (transferData) {
+      setTransfer(transferData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [transferData]);
   return (
     <div className="flex gap-6">
       <RecipesSearch

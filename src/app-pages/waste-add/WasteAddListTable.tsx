@@ -1,94 +1,57 @@
 "use client";
+import WasteListTable from "@/components/table/waste/WasteListTable";
 import SectionWrapper from "@/components/wrapper/SectionWrapper";
+import { TableWrapper } from "@/components/wrapper/TableWrapper";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
 import { IWaste } from "@/utils/types/waste.type";
 import { ProtectedUrls } from "@/utils/urls/urls";
-import React, { memo } from "react";
-import WasteAddTable from "./WasteAddTable";
+import { useState } from "react";
 
-const WasteAddListTable: React.FC = () => {
+const WasteAddListTable = ({ waste }: { waste: IWaste[] }) => {
+  const [page, setPage] = useState(1);
   const navigate = usePrefetchNavigate();
 
-  const handleEditUser = (userId: number) => {
-    navigate(ProtectedUrls.common.editUser.replace(":id", String(userId)));
+  const handleEditWaste = (wasteId: number) => {
+    navigate(ProtectedUrls.common.editWaste.replace(":id", String(wasteId)));
   };
 
-  const handleDeleteUser = (userId: number) => {};
+  const handleDeleteWaste = (wasteId: number) => {};
 
-  const handleViewUser = (userId: number) => {
-    navigate(ProtectedUrls.common.viewUser.replace(":id", String(userId)));
+  const handleViewWaste = (wasteId: number) => {
+    navigate(ProtectedUrls.common.viewUser.replace(":id", String(wasteId)));
   };
+
+  const headtable = [
+    "Date",
+    "Item",
+    "Qty",
+    "Unit Cost",
+    "Total Cost",
+    "reason",
+    "Actions",
+  ];
 
   return (
     <SectionWrapper
       title="Recent Waste Entries"
       className="mt-4 !border-none  !bg-transparent !p-0"
     >
-      <WasteAddTable
-        waste={waste}
-        onEdit={handleEditUser}
-        onDelete={handleDeleteUser}
-        onView={handleViewUser}
-      />
+      <TableWrapper
+        totalItems={waste.length > 0 ? waste.length : 0}
+        currentPage={page}
+        itemsPerPage={3}
+        onPageChange={(page) => setPage(page)}
+      >
+        <WasteListTable
+          headtable={headtable}
+          WasteData={waste}
+          onEdit={handleEditWaste}
+          onDelete={handleDeleteWaste}
+          onView={handleViewWaste}
+        />
+      </TableWrapper>
     </SectionWrapper>
   );
 };
 
-export default memo(WasteAddListTable);
-const waste: IWaste[] = [
-  {
-    waste_id: 1,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Expired",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 2,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Expired",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 3,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Damaged",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 4,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Overproduction",
-    staff: "John Smith",
-  },
-  {
-    waste_id: 5,
-    date: "2024-01-15",
-    item: "Fresh Salmon Fillet",
-    category: "Seafood",
-    qty: "2.5 kg",
-    unit_cost: 24.6,
-    total_value: 60,
-    reason: "Spillage",
-    staff: "John Smith",
-  },
-];
+export default WasteAddListTable;

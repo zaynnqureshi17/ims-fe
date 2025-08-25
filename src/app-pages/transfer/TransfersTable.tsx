@@ -1,33 +1,34 @@
 "use client";
-import RecipesListTable from "@/components/table/recips/RecipesListTable";
+import TransfersListTable from "@/components/table/transfer/TransferListTable";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
-import { IRecips } from "@/utils/types/recipe.type";
+import { ITransfer } from "@/utils/types/transfer.type";
 import { useState } from "react";
 
 interface TransfersTableProps {
-  recipes: IRecips[];
+  transfers: ITransfer[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
   onView: (id: number) => void;
 }
 
 const TransfersTable = ({
-  recipes,
+  transfers,
   onEdit,
   onDelete,
   onView,
 }: TransfersTableProps) => {
   const [page, setPage] = useState(1);
+
   return (
     <TableWrapper
-      totalItems={recipes.length}
+      totalItems={transfers.length}
       currentPage={page}
       itemsPerPage={10}
       onPageChange={(page) => setPage(page)}
     >
-      <RecipesListTable
+      <TransfersListTable
         headtable={headtable}
-        recipes={recipes}
+        transfers={transfers}
         onEdit={onEdit}
         onDelete={onDelete}
         onView={onView}
@@ -39,10 +40,11 @@ const TransfersTable = ({
 export default TransfersTable;
 
 const headtable = [
-  "Recipe",
-  "Category",
-  "Ingredients Count",
-  "Cost",
-  "Version",
+  "Transfer ID",
+  "From",
+  "To",
+  "Date",
+  "Items",
+  "Status",
   "Actions",
 ];

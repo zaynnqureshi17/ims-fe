@@ -1,8 +1,10 @@
-export interface PurchaseOrder {
+export interface IPurchaseOrder {
   po_id: number;
-  supplier: string;
+  deliver_date: string;
+  order_date: string;
+  po_supplier: any;
+  supplier_id: string | number;
+  po_number: string | number;
   items: number;
-  cost: number;
   created_at: string;
-  status: string;
 }

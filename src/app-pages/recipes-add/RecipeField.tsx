@@ -47,7 +47,7 @@ const RecipeField = () => {
         placeholder="Select Sub-category"
         options={subCategoryOptions}
       />
-      <Calendar28 />
+      <Calendar28 name="date" control={control} />
     </GridWrapper>
   );
 };

@@ -1,15 +1,20 @@
 import { useMemo } from "react";
 
+import { ISupplier } from "@/utils/types/supplier.type";
+
 type Role = { role_id: string; role_name: string };
 type Outlet = { outlet_id: string; outlet_name: string };
 type Department = { department_id: string; department_name: string };
 type Brand = { brand_id: string; brand_name: string };
+type Item = { item_id: string; item_name: string };
 
 type UseOptionsInput = {
   roles?: Role[];
   outlets?: Outlet[];
   departments?: Department[];
   brands?: Brand[];
+  items?: Item[];
+  suppliers?: ISupplier[];
 };
 
 type Options = {
@@ -17,6 +22,8 @@ type Options = {
   outletOptions: { label: string; value: string }[];
   departmentOptions: { label: string; value: string }[];
   brandOptions: { label: string; value: string }[];
+  itemOptions: { label: string; value: string }[];
+  supplierOptions: { label: string; value: string }[];
 };
 
 export function useMultiOptions({
@@ -24,6 +31,8 @@ export function useMultiOptions({
   outlets,
   departments,
   brands,
+  items,
+  suppliers,
 }: UseOptionsInput): Options {
   const roleOptions = useMemo(() => {
     if (!roles) return [];
@@ -57,5 +66,28 @@ export function useMultiOptions({
     }));
   }, [brands]);
 
-  return { roleOptions, outletOptions, departmentOptions, brandOptions };
+  const itemOptions = useMemo(() => {
+    if (!items) return [];
+    return items.map((item) => ({
+      label: item.item_name,
+      value: item.item_id,
+    }));
+  }, [items]);
+
+  const supplierOptions = useMemo(() => {
+    if (!suppliers) return [];
+    return suppliers.map((supplier) => ({
+      label: supplier.company_name,
+      value: String(supplier.supplier_id),
+    }));
+  }, [suppliers]);
+
+  return {
+    roleOptions,
+    outletOptions,
+    departmentOptions,
+    brandOptions,
+    itemOptions,
+    supplierOptions,
+  };
 }

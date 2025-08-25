@@ -1,17 +1,20 @@
 "use client";
+import { usePOContext } from "@/context/POContext";
+import { useGetPOs } from "@/queries/purchaseOrder/useGetPO.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { memo, useEffect, useState } from "react";
-import BrandsSearch from "./PurchaseOrderSearch";
-import PurchaseOrderStatusFilter from "./PurchaseOrderStatusFilter";
 import PurchaseOrderSearch from "./PurchaseOrderSearch";
+import PurchaseOrderStatusFilter from "./PurchaseOrderStatusFilter";
 
 type queryParams = string;
 
 const PurchaseOrderFilter: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setPO, setLoading } = usePOContext();
+  const { data: POData, status } = useGetPOs({});
   const [selectedStatus, setSelectedStatus] = useState<queryParams>("");
   const [selectedSupplier, setSelectedSupplier] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
@@ -42,6 +45,13 @@ const PurchaseOrderFilter: React.FC = () => {
       },
     });
   };
+
+  useEffect(() => {
+    if (POData) {
+      setPO(POData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [POData]);
 
   return (
     <div className="flex gap-6">

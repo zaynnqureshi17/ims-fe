@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { brandsActions } from "@/utils/PublicImageBaseUrl";
+import { optionsType } from "@/utils/types/common.type";
 
 type WasteRow = {
   id: string;
@@ -33,6 +34,7 @@ type WasteRow = {
 };
 
 type WasteAddItemTableProps = {
+  itemOptions: optionsType[];
   headtable: string[];
   wasteItem: WasteRow[];
   loading?: boolean;
@@ -47,6 +49,7 @@ const currency = (n: number) =>
   }).format(n || 0);
 
 const WasteAddItemTable: React.FC<WasteAddItemTableProps> = ({
+  itemOptions,
   headtable,
   wasteItem,
   loading = false,
