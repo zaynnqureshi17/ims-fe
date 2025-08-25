@@ -153,251 +153,247 @@ const WasteAddItem = ({
             +Add Another Waste Item
           </Button>
         </div>
-        <div className="overflow-x-auto bg-white w-[1380px]">
-          <Table className="bg-white ">
-            <TableHeader>
-              <TableRow>
-                {headtable.map((head, index) => (
-                  <TableHead key={index}>{head}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-
-            <TableBody className="bg-white">
-              {fields.map((field, index) => (
-                <TableRow key={field.id}>
-                  {/* Date */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.date`}
-                      control={control}
-                      render={({ field }) => <Input type="date" {...field} />}
-                    />
-                  </TableCell>
-
-                  {/* Outlet */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.outlet_id`}
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={(v) => field.onChange(Number(v))}
-                          value={field.value ? field.value.toString() : ""}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Outlet" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {outletOptions.map((opt) => (
-                              <SelectItem
-                                key={opt.value}
-                                value={opt.value.toString()}
-                              >
-                                {opt.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Department */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.department_id`}
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={(v) => field.onChange(Number(v))}
-                          value={field.value ? field.value.toString() : ""}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Department" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {departmentOptions.map((opt) => (
-                              <SelectItem
-                                key={opt.value}
-                                value={opt.value.toString()}
-                              >
-                                {opt.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Item */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.item_id`}
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={(v) => field.onChange(Number(v))}
-                          value={field.value ? field.value.toString() : ""}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Item" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {itemOptions.map((opt) => (
-                              <SelectItem
-                                key={opt.value}
-                                value={opt.value.toString()}
-                              >
-                                {opt.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Quantity */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.quantity`}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          {...field}
-                          onChange={(e) => {
-                            const qty = Number(e.target.value);
-                            field.onChange(qty);
-                            const unit = methods.getValues(
-                              `wastes.${index}.unit_cost`,
-                            );
-                            methods.setValue(
-                              `wastes.${index}.total_cost`,
-                              Number((qty * unit).toFixed(2)),
-                            );
-                          }}
-                        />
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* UOM */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.uom`}
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select UOM" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="kg">KG</SelectItem>
-                            <SelectItem value="g">Gram</SelectItem>
-                            <SelectItem value="pcs">PCS</SelectItem>
-                            <SelectItem value="ltr">Litre</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Reason */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.reason`}
-                      control={control}
-                      render={({ field }) => (
-                        <Select
-                          onValueChange={field.onChange}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Reason" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="SPOIL">Spoil</SelectItem>
-                            <SelectItem value="EXPIRED">Expired</SelectItem>
-                            <SelectItem value="TRIMMING">Trimming</SelectItem>
-                            <SelectItem value="WRONGLY MAKE ITEM">
-                              Wrongly Made
-                            </SelectItem>
-                            <SelectItem value="OVER COOKED">
-                              Overcooked
-                            </SelectItem>
-                            <SelectItem value="QUALITY NOT GOOD">
-                              Quality Not Good
-                            </SelectItem>
-                            <SelectItem value="PHOTOSHOOT">
-                              Photoshoot
-                            </SelectItem>
-                            <SelectItem value="R&D">R&D</SelectItem>
-                            <SelectItem value="SERVICE">Service</SelectItem>
-                            <SelectItem value="TRAINING">Training</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Unit Cost */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.unit_cost`}
-                      control={control}
-                      render={({ field }) => (
-                        <Input
-                          type="number"
-                          {...field}
-                          onChange={(e) => {
-                            const val = Number(e.target.value);
-                            field.onChange(val);
-                            const qty = methods.getValues(
-                              `wastes.${index}.quantity`,
-                            );
-                            methods.setValue(
-                              `wastes.${index}.total_cost`,
-                              Number((qty * val).toFixed(2)),
-                            );
-                          }}
-                        />
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Total Cost */}
-                  <TableCell>
-                    <Controller
-                      name={`wastes.${index}.total_cost`}
-                      control={control}
-                      render={({ field }) => (
-                        <span className="text-sm">{currency(field.value)}</span>
-                      )}
-                    />
-                  </TableCell>
-
-                  {/* Delete */}
-                  <TableCell>
-                    <IconBg
-                      icon={`${brandsActions}delete-red.svg`}
-                      title="Delete"
-                      width={16}
-                      height={16}
-                      className="!p-0 cursor-pointer"
-                      onClick={() => remove(index)}
-                    />
-                  </TableCell>
-                </TableRow>
+        <Table className="bg-white ">
+          <TableHeader>
+            <TableRow>
+              {headtable.map((head, index) => (
+                <TableHead key={index}>{head}</TableHead>
               ))}
-            </TableBody>
-          </Table>
-        </div>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody className="bg-white">
+            {fields.map((field, index) => (
+              <TableRow key={field.id}>
+                {/* Date */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.date`}
+                    control={control}
+                    render={({ field }) => <Input type="date" {...field} />}
+                  />
+                </TableCell>
+
+                {/* Outlet */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.outlet_id`}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={(v) => field.onChange(Number(v))}
+                        value={field.value ? field.value.toString() : ""}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Outlet" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {outletOptions.map((opt) => (
+                            <SelectItem
+                              key={opt.value}
+                              value={opt.value.toString()}
+                            >
+                              {opt.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Department */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.department_id`}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={(v) => field.onChange(Number(v))}
+                        value={field.value ? field.value.toString() : ""}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Department" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {departmentOptions.map((opt) => (
+                            <SelectItem
+                              key={opt.value}
+                              value={opt.value.toString()}
+                            >
+                              {opt.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Item */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.item_id`}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={(v) => field.onChange(Number(v))}
+                        value={field.value ? field.value.toString() : ""}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Item" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {itemOptions.map((opt) => (
+                            <SelectItem
+                              key={opt.value}
+                              value={opt.value.toString()}
+                            >
+                              {opt.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Quantity */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.quantity`}
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => {
+                          const qty = Number(e.target.value);
+                          field.onChange(qty);
+                          const unit = methods.getValues(
+                            `wastes.${index}.unit_cost`,
+                          );
+                          methods.setValue(
+                            `wastes.${index}.total_cost`,
+                            Number((qty * unit).toFixed(2)),
+                          );
+                        }}
+                      />
+                    )}
+                  />
+                </TableCell>
+
+                {/* UOM */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.uom`}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select UOM" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="kg">KG</SelectItem>
+                          <SelectItem value="g">Gram</SelectItem>
+                          <SelectItem value="pcs">PCS</SelectItem>
+                          <SelectItem value="ltr">Litre</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Reason */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.reason`}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Reason" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="SPOIL">Spoil</SelectItem>
+                          <SelectItem value="EXPIRED">Expired</SelectItem>
+                          <SelectItem value="TRIMMING">Trimming</SelectItem>
+                          <SelectItem value="WRONGLY MAKE ITEM">
+                            Wrongly Made
+                          </SelectItem>
+                          <SelectItem value="OVER COOKED">
+                            Overcooked
+                          </SelectItem>
+                          <SelectItem value="QUALITY NOT GOOD">
+                            Quality Not Good
+                          </SelectItem>
+                          <SelectItem value="PHOTOSHOOT">Photoshoot</SelectItem>
+                          <SelectItem value="R&D">R&D</SelectItem>
+                          <SelectItem value="SERVICE">Service</SelectItem>
+                          <SelectItem value="TRAINING">Training</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Unit Cost */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.unit_cost`}
+                    control={control}
+                    render={({ field }) => (
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          field.onChange(val);
+                          const qty = methods.getValues(
+                            `wastes.${index}.quantity`,
+                          );
+                          methods.setValue(
+                            `wastes.${index}.total_cost`,
+                            Number((qty * val).toFixed(2)),
+                          );
+                        }}
+                      />
+                    )}
+                  />
+                </TableCell>
+
+                {/* Total Cost */}
+                <TableCell>
+                  <Controller
+                    name={`wastes.${index}.total_cost`}
+                    control={control}
+                    render={({ field }) => (
+                      <span className="text-sm">{currency(field.value)}</span>
+                    )}
+                  />
+                </TableCell>
+
+                {/* Delete */}
+                <TableCell>
+                  <IconBg
+                    icon={`${brandsActions}delete-red.svg`}
+                    title="Delete"
+                    width={16}
+                    height={16}
+                    className="!p-0 cursor-pointer"
+                    onClick={() => remove(index)}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
         <WasteCostImpact />
         <div className="flex justify-end mt-4 gap-6">
           <Button type="button" variant="cancel" className="w-fit">

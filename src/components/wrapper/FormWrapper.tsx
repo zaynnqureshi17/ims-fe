@@ -1,7 +1,7 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "@/lib/utils";
+import * as React from "react";
 
 type FormWrapperProps = React.FormHTMLAttributes<HTMLFormElement> & {
   disabled?: boolean;
@@ -20,15 +20,14 @@ export function FormWrapper({
     <form
       ref={formRef}
       onSubmit={onSubmit}
-      className={cn("space-y-4", className)}
+      className={cn(
+        disabled && "opacity-50 pointer-events-none",
+        "space-y-4",
+        className,
+      )}
       {...props}
     >
-      <fieldset
-        disabled={disabled}
-        className={cn("", disabled && "opacity-50 pointer-events-none")}
-      >
-        {children}
-      </fieldset>
+      {children}
     </form>
   );
 }
