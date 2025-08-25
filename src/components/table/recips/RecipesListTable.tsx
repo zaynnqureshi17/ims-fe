@@ -49,57 +49,60 @@ const RecipesListTable = ({
             </TableCell>
           </TableRow>
         ) : (
-          recipes.map((item, index) => (
-            <TableRow key={index} className="hover:bg-white">
-              {/* Recipe Name */}
-              <TableCell className="min-w-[220px]">
-                <div className="flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-md bg-orange-50 flex items-center justify-center">
-                    <span className="text-lg">🍽️</span>
+          recipes.map((item) => {
+            const latestVersion = item.versions?.[0]; // hamesha pehla version dikhana
+            return (
+              <TableRow key={item.recipe_id} className="hover:bg-white">
+                {/* Recipe Name */}
+                <TableCell className="min-w-[220px] font-medium text-gray-900">
+                  {item.recipe_name}
+                </TableCell>
+
+                {/* Category / Subcategories */}
+                <TableCell className="whitespace-nowrap">
+                  <CategoryBadge category={item.recipe_category} />
+                  <div className="text-xs text-gray-500">
+                    {item.recipe_subcategory_1}
+                    {item.recipe_subcategory_2
+                      ? ` / ${item.recipe_subcategory_2}`
+                      : ""}
                   </div>
-                  <div className="flex flex-col">
-                    <span className="font-medium text-gray-900">
-                      {item.recipe_name}
-                    </span>
-                    {/* subtitle omitted: not in IRecips */}
-                    <span className="text-xs text-muted-foreground">
-                      {/* With lemon herb sauce */}
-                    </span>
+                </TableCell>
+
+                {/* Ingredients Count */}
+                <TableCell className="text-gray-600">
+                  {item.ingredients?.length || 0}
+                </TableCell>
+
+                {/* Cost (from latest version) */}
+                <TableCell className="text-gray-900">
+                  {latestVersion?.cost ? `$${latestVersion.cost}` : "-"}
+                </TableCell>
+
+                {/* Version ID */}
+                <TableCell className="text-gray-600">
+                  v{latestVersion?.recipe_version_id || "-"}
+                </TableCell>
+
+                {/* Production Flag */}
+                <TableCell>
+                  <StatusBadge status={item.is_production ? "Yes" : "No"} />
+                </TableCell>
+
+                {/* Actions */}
+                <TableCell className="!py-4">
+                  <div className="flex items-center gap-x-3">
+                    <ActionButtons
+                      itemId={item.recipe_id}
+                      onEdit={onEdit}
+                      onDelete={onDelete}
+                      onView={onView}
+                    />
                   </div>
-                </div>
-              </TableCell>
-
-              {/* Category pill */}
-              <TableCell className="whitespace-nowrap">
-                <CategoryBadge category={item.category} />
-              </TableCell>
-
-              {/* Ingredients Count */}
-              <TableCell className="text-gray-600">
-                {item.ingrediants_count}
-              </TableCell>
-
-              {/* Cost */}
-              <TableCell className="text-gray-900">
-                {item.cost.startsWith("$") ? item.cost : `$${item.cost}`}
-              </TableCell>
-
-              {/* Version */}
-              <TableCell className="text-gray-600">{item.version}</TableCell>
-
-              {/* Actions */}
-              <TableCell className="!py-4">
-                <div className="flex items-center gap-x-3">
-                  <ActionButtons
-                    itemId={index} // IRecips has no id; using row index
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                    onView={onView}
-                  />
-                </div>
-              </TableCell>
-            </TableRow>
-          ))
+                </TableCell>
+              </TableRow>
+            );
+          })
         )}
       </TableBody>
     </Table>

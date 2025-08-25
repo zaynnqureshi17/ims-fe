@@ -39,10 +39,11 @@ const RecipesTable = ({
 export default RecipesTable;
 
 const headtable = [
-  "Recipe",
-  "Category",
+  "Recipe Name",
+  "Category / Subcategory",
   "Ingredients Count",
-  "Cost",
+  "Cost / Unit",
   "Version",
+  "Production",
   "Actions",
 ];

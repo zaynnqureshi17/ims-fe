@@ -1,4 +1,5 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
+import { RecipeProvider } from "@/context/RecipeContext";
 import { Suspense } from "react";
 import RecipesFilter from "./RecipesFilter";
 import RecipesPageHeader from "./RecipesPageHeader";
@@ -7,15 +8,17 @@ import RecipesTopBar from "./RecipesTopBar";
 
 const Recipes = () => {
   return (
-    <ProtectedLayoutWrapper topBar={<RecipesTopBar />}>
-      <RecipesPageHeader />
-      <Suspense fallback={<div>Loading filters...</div>}>
-        <RecipesFilter />
-      </Suspense>
-      <Suspense fallback={<div>Loading filters...</div>}>
-        <RecipesTableList />
-      </Suspense>
-    </ProtectedLayoutWrapper>
+    <RecipeProvider>
+      <ProtectedLayoutWrapper topBar={<RecipesTopBar />}>
+        <RecipesPageHeader />
+        <Suspense fallback={<div>Loading filters...</div>}>
+          <RecipesFilter />
+        </Suspense>
+        <Suspense fallback={<div>Loading filters...</div>}>
+          <RecipesTableList />
+        </Suspense>
+      </ProtectedLayoutWrapper>
+    </RecipeProvider>
   );
 };
 

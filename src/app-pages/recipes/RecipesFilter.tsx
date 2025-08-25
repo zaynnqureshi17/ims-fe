@@ -1,5 +1,6 @@
-// components/recipes/RecipesFilter.tsx
 "use client";
+import { useRecipeContext } from "@/context/RecipeContext";
+import { useGetRecipe } from "@/queries/recipe/useGetRecipe.query";
 import { updateQueryParams } from "@/utils/UpdateQueryParams";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,6 +16,8 @@ const RecipesFilter: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<queryParams>("");
   const [selectedCostRange, setSelectedCostRange] = useState<queryParams>("");
   const [searchText, setSearchText] = useState<queryParams>("");
+  const { setRecipe, setLoading } = useRecipeContext();
+  const { data: recipeData, status } = useGetRecipe({});
 
   useEffect(() => {
     const category = searchParams.get("category") || "";
@@ -24,6 +27,13 @@ const RecipesFilter: React.FC = () => {
     setSelectedCostRange(costRange);
     setSearchText(search);
   }, [searchParams]);
+
+  useEffect(() => {
+    if (recipeData) {
+      setRecipe(recipeData.body.data);
+      setLoading(status === "pending");
+    }
+  }, [recipeData]);
 
   const handleUpdateQuery = (
     category?: string,

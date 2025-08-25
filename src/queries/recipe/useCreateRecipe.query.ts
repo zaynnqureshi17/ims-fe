@@ -4,18 +4,18 @@ import { toast } from "react-toastify";
 import axiosInstance from "@/services/axiosInstance";
 import { ErrorResponseType } from "@/utils/types/api.types";
 
-const onDeleteWaste = async (id: string) => {
-  return await axiosInstance.delete(`user/${id}`);
+const onCreateRecipe = async (body: any) => {
+  return await axiosInstance.post(`recipe`, body);
 };
 
-export const useDeleteWaste = () => {
+export const useCreateRecipe = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["onDeleteWaste"],
-    mutationFn: ({ id }: any) => onDeleteWaste(id),
+    mutationKey: ["onCreateRecipe"],
+    mutationFn: ({ body }: any) => onCreateRecipe(body),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["onGetWaste"] });
+      queryClient.invalidateQueries({ queryKey: ["onGetRecipe"] });
     },
     onError: (error: ErrorResponseType) => {
       toast.error(error?.data?.message || "Some error occurred");

@@ -12,7 +12,7 @@ export enum TransferStatus {
 }
 
 export interface ITransfer {
-  transfer_id: string | number;
+  transfer_id: number;
   sourceOutlet: string;
   destinationOutlet: string;
   department: string | undefined;

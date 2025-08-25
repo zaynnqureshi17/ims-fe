@@ -1,12 +1,16 @@
 "use client";
+import { useRecipeContext } from "@/context/RecipeContext";
 import { usePrefetchNavigate } from "@/hooks/usePrefetchNavigate";
-import { IRecips } from "@/utils/types/recipe.type";
+import { useDeleteRecipe } from "@/queries/recipe/useDeleteRecipe.query";
 import { ProtectedUrls } from "@/utils/urls/urls";
 import React, { memo } from "react";
+import { toast } from "react-toastify";
 import RecipesTable from "./RecipesTable";
 
 const RecipesTableList: React.FC = () => {
   const navigate = usePrefetchNavigate();
+  const { recipe } = useRecipeContext();
+  const { mutate: deleteRecipe } = useDeleteRecipe();
 
   const handleEditRecipe = (recipeId: number) => {
     navigate(
@@ -16,6 +20,15 @@ const RecipesTableList: React.FC = () => {
 
   const handleDeleteRecipe = (recipeId: number) => {
     console.log("Deleting recipe with ID:", recipeId);
+    deleteRecipe(
+      { id: recipeId },
+      {
+        onSuccess: () => {
+          toast.success("Recipe deleted successfully");
+          console.log("Recipe deleted successfully");
+        },
+      },
+    );
   };
 
   const handleViewRecipe = (recipeId: number) => {
@@ -26,7 +39,7 @@ const RecipesTableList: React.FC = () => {
 
   return (
     <RecipesTable
-      recipes={recipes}
+      recipes={recipe}
       onEdit={handleEditRecipe}
       onDelete={handleDeleteRecipe}
       onView={handleViewRecipe}
@@ -35,41 +48,3 @@ const RecipesTableList: React.FC = () => {
 };
 
 export default memo(RecipesTableList);
-
-const recipes: IRecips[] = [
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Main Course",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Salad",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Dessert",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Main Course",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-  {
-    recipe_name: "Grilled Salmon",
-    category: "Beverage",
-    ingrediants_count: 12,
-    cost: "18.50",
-    version: "v2.1",
-  },
-];

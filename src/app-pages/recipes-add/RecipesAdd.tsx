@@ -1,5 +1,4 @@
 import ProtectedLayoutWrapper from "@/components/layout/ProtectedLayout";
-import IngredientItemForm from "./IngredientItemForm";
 import ProductionActive from "./ProductionActive";
 import RecipeAddTopBar from "./RecipeAddTopBar";
 import RecipeField from "./RecipeField";
@@ -15,7 +14,6 @@ const RecipesAdd = () => {
         <RecipeField />
         <ProductionActive />
         <RecipesAddNew />
-        <IngredientItemForm />
       </RecipesAddForm>
     </ProtectedLayoutWrapper>
   );

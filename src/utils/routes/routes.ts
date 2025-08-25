@@ -105,13 +105,13 @@ export const ProtectedRoutes = {
     uomManage: {
       path: ProtectedUrls.admin.manageuom,
       title: "Unit of Measurement",
-      icon: `${baseNavbarIconPath}suppliers.svg`,
+      icon: `${baseNavbarIconPath}uom.svg`,
       activeRoute: "uomManage",
     },
     manageStorage: {
       path: ProtectedUrls.common.manageStorage,
       title: "Storage",
-      icon: `${baseNavbarIconPath}ingredients.svg`,
+      icon: `${baseNavbarIconPath}storage.svg`,
       activeRoute: "manageStorage",
     },
     ingredients: {

@@ -77,7 +77,7 @@ const TransfersListTable = ({
               <TableCell className="!py-4">
                 <div className="flex items-center gap-x-3">
                   <ActionButtons
-                    itemId={index} // using row index since no numeric id in ITransfer
+                    itemId={item.transfer_id} // using transfer_id from item
                     onEdit={onEdit}
                     onDelete={onDelete}
                     onView={onView}

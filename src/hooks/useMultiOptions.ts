@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 
+import { IIngredient } from "@/utils/types/ingredient.type";
 import { ISupplier } from "@/utils/types/supplier.type";
 
 type Role = { role_id: string; role_name: string };
@@ -15,6 +16,7 @@ type UseOptionsInput = {
   brands?: Brand[];
   items?: Item[];
   suppliers?: ISupplier[];
+  ingredients?: IIngredient[];
 };
 
 type Options = {
@@ -24,6 +26,7 @@ type Options = {
   brandOptions: { label: string; value: string }[];
   itemOptions: { label: string; value: string }[];
   supplierOptions: { label: string; value: string }[];
+  ingredientOptions: { label: string; value: string }[];
 };
 
 export function useMultiOptions({
@@ -33,6 +36,7 @@ export function useMultiOptions({
   brands,
   items,
   suppliers,
+  ingredients,
 }: UseOptionsInput): Options {
   const roleOptions = useMemo(() => {
     if (!roles) return [];
@@ -82,6 +86,14 @@ export function useMultiOptions({
     }));
   }, [suppliers]);
 
+  const ingredientOptions = useMemo(() => {
+    if (!ingredients) return [];
+    return ingredients.map((ingredient) => ({
+      label: ingredient.item_name,
+      value: String(ingredient.ingredient_id),
+    }));
+  }, [ingredients]);
+
   return {
     roleOptions,
     outletOptions,
@@ -89,5 +101,6 @@ export function useMultiOptions({
     brandOptions,
     itemOptions,
     supplierOptions,
+    ingredientOptions,
   };
 }
