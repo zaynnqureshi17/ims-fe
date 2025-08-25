@@ -7,18 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { IPurchaseOrderItem } from "@/utils/types/po.type";
 
 type PurchaseOrderViewItemProps = {
   headtable: string[];
-  POItem: Array<{
-    item_code: string;
-    item_name: string;
-    category: string;
-    unit: string;
-    qty: number;
-    unit_price: string;
-    total: string;
-  }>;
+  POItem: IPurchaseOrderItem[];
   loading?: boolean;
 };
 
@@ -57,13 +50,13 @@ const PurchaseOrderViewItem: React.FC<PurchaseOrderViewItemProps> = ({
         ) : (
           POItem.map((item, index) => (
             <TableRow key={index} className="hover:bg-white my-4">
-              <TableCell>{item.item_code}</TableCell>
-              <TableCell>{item.item_name}</TableCell>
+              <TableCell>{item.item.item_code}</TableCell>
+              <TableCell>{item.item.item_name}</TableCell>
               <TableCell>{item.category}</TableCell>
-              <TableCell>{item.unit}</TableCell>
-              <TableCell>{item.qty}</TableCell>
+              <TableCell>{item.item.unit_uom}</TableCell>
+              <TableCell>{item.quantity}</TableCell>
               <TableCell>{item.unit_price}</TableCell>
-              <TableCell>{item.total}</TableCell>
+              <TableCell>{item.total_cost}</TableCell>
             </TableRow>
           ))
         )}

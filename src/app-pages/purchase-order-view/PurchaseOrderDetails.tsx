@@ -3,48 +3,39 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { IPurchaseOrderSummary } from "@/utils/types/po.type";
+import { ISupplier } from "@/utils/types/supplier.type";
 
-const purchaseOrder = {
-  id: "PO-2024-001",
-  status: "Pending Approval",
-  createdDate: "Jan 15, 2024",
-  supplier: {
-    name: "Fresh Foods Suppliers Ltd.",
-    address: "123 Market Street, Downtown, City 12345",
-    phone: "+1 (555) 123-4567",
-    email: "orders@freshfoods.com",
-  },
-  delivery: {
-    outlet: "Downtown Outlet",
-    address: "456 Main St, Downtown",
-    requestedDate: "Jan 18, 2024",
-    contact: "Sarah Johnson I",
-    phone: "+1 (555) 987-6543",
-  },
-  summary: {
-    totalItems: 12,
-    subtotal: 1245.5,
-    tax: 99.64,
-    deliveryFee: 25,
-    total: 1370.14,
-  },
-};
+const PurchaseOrderDetails = ({
+  poSupplier,
+  summary,
+  poNumber,
+  status,
+  createdAt,
+}: {
+  poSupplier: ISupplier;
+  summary: IPurchaseOrderSummary;
+  poNumber: string;
+  status: string;
+  createdAt: string;
+}) => {
+  console.log(poSupplier);
+  console.log(summary);
 
-const PurchaseOrderDetails = () => {
   return (
     <Card className="w-full shadow-sm">
       <CardHeader className="flex flex-row justify-between items-center">
         <div className="space-y-1">
-          <CardTitle>PO #{purchaseOrder.id}</CardTitle>
+          <CardTitle>PO #{poNumber}</CardTitle>
           <div className="flex items-center gap-2">
             <Badge
               variant="secondary"
               className="bg-yellow-200 text-yellow-800"
             >
-              {purchaseOrder.status}
+              {status}
             </Badge>
             <span className="text-sm text-gray-500">
-              Created: {purchaseOrder.createdDate}
+              Created: {new Date(createdAt).toLocaleDateString()}
             </span>
           </div>
         </div>
@@ -62,31 +53,31 @@ const PurchaseOrderDetails = () => {
         {/* Supplier Info */}
         <div className="space-y-1">
           <h3 className="font-semibold">Supplier Information</h3>
-          <p>{purchaseOrder.supplier.name}</p>
-          <p>{purchaseOrder.supplier.address}</p>
-          <p>Phone: {purchaseOrder.supplier.phone}</p>
-          <p>Email: {purchaseOrder.supplier.email}</p>
+          <p>{poSupplier.company_name}</p>
+          <p>Code: {poSupplier.supplier_code}</p>
+          <p>Phone: {poSupplier.contact_number}</p>
+          <p>Email: {poSupplier.email}</p>
         </div>
 
-        {/* Delivery Info */}
+        {/* Delivery Info (Static) */}
         <div className="space-y-1">
           <h3 className="font-semibold">Delivery Information</h3>
-          <p>Outlet: {purchaseOrder.delivery.outlet}</p>
-          <p>Address: {purchaseOrder.delivery.address}</p>
-          <p>Requested Date: {purchaseOrder.delivery.requestedDate}</p>
-          <p>Contact: {purchaseOrder.delivery.contact}</p>
-          <p>Phone: {purchaseOrder.delivery.phone}</p>
+          <p>Outlet: Downtown Outlet</p>
+          <p>Address: 456 Main St, Downtown</p>
+          <p>Requested Date: Jan 18, 2024</p>
+          <p>Contact: Sarah Johnson</p>
+          <p>Phone: +1 (555) 987-6543</p>
         </div>
 
         {/* Order Summary */}
         <div className="space-y-1">
           <h3 className="font-semibold">Order Summary</h3>
-          <p>Total Items: {purchaseOrder.summary.totalItems}</p>
-          <p>Subtotal: ${purchaseOrder.summary.subtotal.toFixed(2)}</p>
-          <p>Tax (8%): ${purchaseOrder.summary.tax.toFixed(2)}</p>
-          <p>Delivery Fee: ${purchaseOrder.summary.deliveryFee.toFixed(2)}</p>
+          <p>Total Items: {summary.items_count}</p>
+          <p>Subtotal: ${summary.subtotal.toFixed(2)}</p>
+          <p>Tax: ${summary.tax.toFixed(2)}</p>
+          <p>Delivery Fee: ${summary.delivery_fee.toFixed(2)}</p>
           <p className="font-bold text-lg">
-            Total: ${purchaseOrder.summary.total.toFixed(2)}
+            Total: ${summary.total.toFixed(2)}
           </p>
         </div>
       </CardContent>

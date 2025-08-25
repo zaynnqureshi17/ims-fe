@@ -57,7 +57,7 @@ const PurchaseOrderListTable = ({
 
               {/* Items list */}
               <TableCell className="text-left text-gray">
-                {item.items}
+                {item.items} Items
               </TableCell>
 
               {/* Order Date */}

@@ -1,7 +1,9 @@
 "use client";
 import { TableWrapper } from "@/components/wrapper/TableWrapper";
-import { useMemo, useState } from "react";
+import { IItem } from "@/utils/types/item.types";
+import { useState } from "react";
 import PurchaseOrderViewItem from "./PurchaseOrderViewItem";
+import { IPurchaseOrderItem } from "@/utils/types/po.type";
 
 const headtable = [
   "Item Code",
@@ -10,42 +12,20 @@ const headtable = [
   "Unit",
   "Qty",
   "Unit Price",
-  "Total",
+  "Total Cost",
 ];
 
-const POItem = [
-  {
-    item_code: "FV0001",
-    item_name: "Item 1",
-    category: "Category 1",
-    unit: "pcs",
-    qty: 1,
-    unit_price: "85.50",
-    total: "85.50",
-  },
-  {
-    item_code: "FV001",
-    item_name: "Item 2",
-    category: "Category 2",
-    unit: "pcs",
-    qty: 1,
-    unit_price: "85.50",
-    total: "85.50",
-  },
-];
-
-const PurchaseOrderViewItemForm = () => {
+const PurchaseOrderViewItemForm = ({
+  poItems,
+}: {
+  poItems: IPurchaseOrderItem[];
+}) => {
   const [page, setPage] = useState(1);
-
-  // ✅ Apply pagination
-  const paginatedItems = useMemo(() => {
-    const start = (page - 1) * 10;
-    return POItem.slice(start, start + 10);
-  }, [page]);
+  console.log(poItems);
 
   return (
     <TableWrapper
-      totalItems={POItem.length}
+      totalItems={poItems.length}
       currentPage={page}
       itemsPerPage={10}
       onPageChange={(page) => setPage(page)}
@@ -53,7 +33,7 @@ const PurchaseOrderViewItemForm = () => {
       {/* Table Data */}
       <PurchaseOrderViewItem
         headtable={headtable}
-        POItem={paginatedItems}
+        POItem={poItems}
         loading={false}
       />
     </TableWrapper>

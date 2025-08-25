@@ -3,7 +3,7 @@ import TopBar from "@/components/topbar";
 
 const PurchaseOrderViewTopBar = () => {
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: "Purchase Order" },
+    { label: "Purchase Order", href: "/purchase-order" },
     { label: "PO View", active: true },
   ];
 

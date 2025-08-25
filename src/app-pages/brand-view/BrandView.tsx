@@ -19,7 +19,6 @@ const BrandView = ({ id }: IdProps) => {
   const brand = brandData?.body?.data;
   const isError = status === "error";
   const notFound = !isLoading && !isError && !brand;
-  console.log(brand);
 
   return (
     <BrandViewProvider brandView={brand} setBrandView={setBrandView}>
